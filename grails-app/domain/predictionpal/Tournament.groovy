@@ -2,8 +2,7 @@ package predictionpal
 
 class Tournament {
 	String id  //id for URL
-	//static hasMany = [matches:Match]
-	static hasMany = [predictions:Prediction]
+	static hasMany = [matches:Match, predictions:Prediction]
 	int state // 1 - open, 2 - running, 3 - finished
 	String title 
 	String owner
