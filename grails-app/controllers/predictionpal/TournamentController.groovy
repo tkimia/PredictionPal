@@ -10,6 +10,8 @@ class TournamentController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+	def scaffold = Tournament
+
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Tournament.list(params), model:[tournamentInstanceCount: Tournament.count()]

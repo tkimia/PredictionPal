@@ -11,6 +11,7 @@ class Match {
 
     static constraints = {
     	nextMatch nullable: true
+		winner nullable: true
     }
 
 }
