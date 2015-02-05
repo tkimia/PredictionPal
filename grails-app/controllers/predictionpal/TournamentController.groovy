@@ -35,6 +35,9 @@ class TournamentController {
             return
         }
 
+        /* updated code */
+        //tournamentInstance.matches.clear()
+        tournamentInstance.properties = params
         tournamentInstance.save flush:true
 
         request.withFormat {
@@ -62,7 +65,11 @@ class TournamentController {
             return
         }
 
+        tournamentInstance.matches.clear()
+        tournamentInstance.properties = params
         tournamentInstance.save flush:true
+
+
 
         request.withFormat {
             form multipartForm {

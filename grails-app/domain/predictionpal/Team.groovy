@@ -7,5 +7,6 @@ class Team {
 	static belongsTo = [match: Match]
 	
     static constraints = {
+    	
     }
 }
