@@ -13,5 +13,6 @@ class Tournament {
     	title blank: false
     	owner blank: false
     	id unique: true, blank: false
+    	matches cascade:"all-delete-orphan"
     }
 }
