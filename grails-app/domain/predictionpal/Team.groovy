@@ -5,7 +5,7 @@ class Team {
 	int score
 	int seed
 	static belongsTo = [match: Match]
-	
+
     static constraints = {
     }
 }
