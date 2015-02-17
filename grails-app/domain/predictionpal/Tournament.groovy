@@ -1,5 +1,7 @@
 package predictionpal
 
+import java.util.UUID
+
 class Tournament {
 	String sid  //id for URL
 	static hasMany = [matches:Match, predictions:Prediction]
@@ -16,4 +18,6 @@ class Tournament {
     	sid unique: true, blank: false
     	matches cascade:"all-delete-orphan"
     }
+
+
 }

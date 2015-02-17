@@ -27,6 +27,7 @@
 			<g:submitButton name="post" value="Create Tournament" /> 
 		</fieldset>
 
+		<a> Add match </a>
 
 	</g:form>
 
