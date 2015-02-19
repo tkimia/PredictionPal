@@ -81,8 +81,6 @@
 			var remove_button = $(".removeMatch");
 			var hidden_num_matches = $("#numMatches");
 			var matches = 1;
-			var teams = 0;
-
 
 			$(add_button).click(function(e) {
 				e.preventDefault();
@@ -113,10 +111,16 @@
 
 			$(form_ref).on("click", ".addTeam", function(e) {
 				e.preventDefault();
-				teams++;
 
 				var mLetter = $(this).parent('fieldset').attr('id').slice(-1);
+				
+				//make sure there aren't too many teams
+				var teams = $("#match" + mLetter + "Teams").val();
+				if (teams == max_teams) return;
 
+				//update the number of teams
+				teams++;
+				$("#match" + mLetter + "Teams").val(teams);
 
 				$(this).parent('fieldset').append(
 					'<div> \
@@ -128,13 +132,22 @@
 
 			$(form_ref).on("click", ".removeTeam", function(e) {
 				e.preventDefault();
-				teams--;
 
+				//get letter identifier of the match
+				var mLetter = $(this).parent('fieldset').attr('id').slice(-1);
+
+				//get number of teams on this match
+				var teams = $("#match" + mLetter + "Teams").val();
+				if (teams == 0) return;
+
+				//update the number of teams
+				teams--;
+				$("#match" + mLetter + "Teams").val(teams);
+
+				//remove last team
 				$(this).parent('fieldset').children().last().remove();
 
 			}); //end remove_team click
-
-
 
 		} ); //end script
 
