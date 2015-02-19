@@ -85,16 +85,21 @@
 			$(add_button).click(function(e) {
 				e.preventDefault();
 				var matchChar = String.fromCharCode(65+matches);
+				var newTextBox = $(document.createElement('div')).attr("id", 'Match' + matchChar)
 				matches++;
-
 				$(form_ref).append(
 					'<fieldset id="match'+ matchChar +'">' +
 						'<legend> Match '+ matchChar +' </legend>' +
 						'<label for="match'+ matchChar + 'Next">Next Match Letter</label>' +
-						'<g:textField name="match'+ matchChar +'Next" />' +
+						'<input id = "match' + matchChar + 'Next" type="text" value="" name="match' + matchChar + 'Next"></input>'	+
+						'<br />' +
+						'<a class="addTeam"> Add Team </a>'+
+						'<span>  |  </span>'+
+						'<a class="removeTeam">Remove Team </a>' +
 					'</fieldset>'
 					);
 
+				newTextBox.appendTo(form_ref);
 				$(hidden_num_matches).val(matches);
 			}); //end add_button click
 
