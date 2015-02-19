@@ -52,12 +52,13 @@
 
 			<fieldset id="matchA">
 				<legend> Match A </legend>
+				<g:hiddenField name="matchATeams" value="0"/> 
 				<label for="matchANext">Next Match Letter</label>
 				<g:textField name="matchANext" />
-				<div>
-					<a class="addTeam"> Add Team </a>
-					<a class="removeTeam">Remove Team </a>
-				</div>
+				<br />
+				<a class="addTeam"> Add Team </a>
+				<span>  |  </span>
+				<a class="removeTeam">Remove Team </a>
 			</fieldset>
 
 		</div>
@@ -80,6 +81,7 @@
 			var remove_button = $(".removeMatch");
 			var hidden_num_matches = $("#numMatches");
 			var matches = 1;
+			var teams = 0;
 
 
 			$(add_button).click(function(e) {
@@ -109,7 +111,22 @@
 			}); //end remove_button click
 
 
-			$(add)
+			$(form_ref).on("click", ".addTeam", function(e) {
+				e.preventDefault();
+				teams++;
+
+				$(this).parent('fieldset').attr('id')
+
+
+				$(this).parent('fieldset').append(
+					'<div> \
+						<input name="matchTeam'+teams+'" value="" id="matchTeam'+teams+'" type="text"> \
+					</div>'
+					);
+			}); //end add_team click
+
+
+
 		} ); //end script
 
 	</script>
