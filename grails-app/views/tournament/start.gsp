@@ -25,7 +25,7 @@
 			<g:checkBox name="hasScores" />
 			<br />
 			
-			<g:hiddenField name="numMatches" value="0" />
+			<g:hiddenField name="numMatches" value="1" />
 		</fieldset>
 
 		<div id="formMatches">
@@ -55,7 +55,7 @@
 			var form_ref = $("#formMatches");
 			var add_button = $(".addNewMatch");
 			var remove_button = $(".removeMatch");
-			
+			var hidden_num_matches = $("#numMatches");
 			var matches = 1;
 
 
@@ -72,6 +72,7 @@
 					'</fieldset>'
 					);
 
+				$(hidden_num_matches).val(matches);
 			}); //end add_button click
 
 
@@ -81,9 +82,11 @@
 				matches--;
 
 				$("#formMatches fieldset:last-child").remove();
+				$(hidden_num_matches).val(matches);
 			}); //end remove_button click
 
-		} );
+		} ); //end script
+
 	</script>
 
 </body>
