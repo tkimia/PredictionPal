@@ -115,15 +115,24 @@
 				e.preventDefault();
 				teams++;
 
-				$(this).parent('fieldset').attr('id')
+				var mLetter = $(this).parent('fieldset').attr('id').slice(-1);
 
 
 				$(this).parent('fieldset').append(
 					'<div> \
-						<input name="matchTeam'+teams+'" value="" id="matchTeam'+teams+'" type="text"> \
+						<input name="match'+mLetter+'Team'+teams+'" value="" id="match'+mLetter+'Team'+teams+'" type="text"> \
 					</div>'
 					);
 			}); //end add_team click
+
+
+			$(form_ref).on("click", ".removeTeam", function(e) {
+				e.preventDefault();
+				teams--;
+
+				$(this).parent('fieldset').children().last().remove();
+
+			}); //end remove_team click
 
 
 
