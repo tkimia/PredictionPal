@@ -2,6 +2,26 @@
 <head>
 	<title> Create a new Tournamnet </title>
 	<meta name="layout" content="main" />
+	<!-- TODO: Move this externally -->
+	<style>
+		fieldset {
+		    font-family: sans-serif;
+		    border: 5px solid #abbf78;
+		    background: #ddd;
+		    border-radius: 5px;
+		    padding: 15px;
+		}
+
+		fieldset legend {
+		    background: #abbf78;
+		    color: #fff;
+		    padding: 5px 10px ;
+		    font-size: 32px;
+		    border-radius: 5px;
+		    box-shadow: 0 0 0 5px #aaa;
+		    margin-left: 20px;
+		}
+	</style>
 </head>
 
 <body>
@@ -34,12 +54,15 @@
 				<legend> Match A </legend>
 				<label for="matchANext">Next Match Letter</label>
 				<g:textField name="matchANext" />
-
+				<div>
+					<a class="addTeam"> Add Team </a>
+					<a class="removeTeam">Remove Team </a>
+				</div>
 			</fieldset>
 
 		</div>
 
-		<div id="matchButtons">
+		<div id="add-remove-match-buttons">
 			<a class="addNewMatch"> Add match </a>
 			<span>  |  </span>
 			<a class="removeMatch"> Remove match </a>
@@ -85,6 +108,8 @@
 				$(hidden_num_matches).val(matches);
 			}); //end remove_button click
 
+
+			$(add)
 		} ); //end script
 
 	</script>
