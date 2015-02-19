@@ -24,7 +24,7 @@
 			<g:if test="${match.prevMatches.isEmpty()}">
 				<g:each var="team" in="${match.teams.sort {it.id}}">	
 					<input type="radio" name="${match.id}" 
-						value="${team.name}">${team.name}<br/>
+						value="${team.name}" />${team.name}<br/>
 				</g:each>
 				<br/>
 			</g:if>		
