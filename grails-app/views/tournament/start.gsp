@@ -92,6 +92,7 @@
 				$(form_ref).append(
 					'<fieldset id="match'+ matchChar +'">' +
 						'<legend> Match '+ matchChar +' </legend>' +
+						'<g:hiddenField name="matchATeams" value="0"/>' +
 						'<label for="match'+ matchChar + 'Next">Next Match Letter</label>' +
 						'<input id = "match' + matchChar + 'Next" type="text" value="" name="match' + matchChar + 'Next"></input>'	+
 						'<br />' +
