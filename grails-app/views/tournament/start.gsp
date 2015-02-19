@@ -39,17 +39,25 @@
 
 		</div>
 
+		<div id="matchButtons">
+			<a class="addNewMatch"> Add match </a>
+			<span>  |  </span>
+			<a class="removeMatch"> Remove match </a>
+		<div>
+		<br />
 		<g:submitButton name="post" value="Create Tournament" />
 	</g:form>
-	<a class="addNewMatch"> Add match </a>
+	
 
 	<script type="text/javascript">
 		jQuery(document).ready( function() {
 			var max_teams	= 10;
 			var form_ref = $("#formMatches");
 			var add_button = $(".addNewMatch");
+			var remove_button = $(".removeMatch");
 			
 			var matches = 1;
+
 
 			$(add_button).click(function(e) {
 				e.preventDefault();
@@ -65,6 +73,15 @@
 					);
 
 			}); //end add_button click
+
+
+			$(remove_button).click(function(e) {
+				e.preventDefault();
+				if (matches == 1) return;
+				matches--;
+
+				$("#formMatches fieldset:last-child").remove();
+			}); //end remove_button click
 
 		} );
 	</script>
