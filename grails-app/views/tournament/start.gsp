@@ -85,7 +85,7 @@
 			$(add_button).click(function(e) {
 				e.preventDefault();
 				var matchChar = String.fromCharCode(65+matches);
-				var newTextBox = $(document.createElement('div')).attr("id", 'Match' + matchChar)
+				//var newTextBox = $(document.createElement('div')).attr("id", 'Match' + matchChar)
 				matches++;
 				$(form_ref).append(
 					'<fieldset id="match'+ matchChar +'">' +
@@ -100,7 +100,7 @@
 					'</fieldset>'
 					);
 
-				newTextBox.appendTo(form_ref);
+				//newTextBox.appendTo(form_ref);
 				$(hidden_num_matches).val(matches);
 			}); //end add_button click
 
