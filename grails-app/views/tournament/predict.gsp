@@ -9,29 +9,28 @@
 	<h1>Predict for ${ tournament.title } </h1>
 
 	<div id="formMatches">
-	<formset>
+	<fieldset>
 		<g:form method="post" action="addPrediction">
 		<legend>Enter a Prediction</legend>
 		<g:each var="match" in="${tournament.matches.sort {it.id}}">
-			<g:if test="${match.prevMatches.isEmpty()}">
-				<div id="${match.id}A">
-					<p class="nextinfo"> put next info here </p>
+			<div id="Match${match.id}">
+				<g:if test="${match.nextMatch}">
+					<p style="visiblity:hidden" class="nextinfo">${match.nextMatch.id}</p>
+				</g:if>
+				<g:else>
+					<p style="visiblity:hidden" class="nextinfo">NULL</p>
+				</g:else>
 				<g:each var="team" in="${match.teams.sort {it.id}}">	
 					<input type="radio" name="${match.id}" 
-						value="${team.name}" />${team.name}<br/>
+						value="${team.name}"/>${team.name}<br/>
 				</g:each>
 				<br/>
-				</div>
-			</g:if>	
-			<g:else>
-					<input type="radio" name="${match.id}"
-					checked="${false}" disabled="${true}"/><br/>
-			</g:else>
+			</div>
 			<br/>
 		</g:each>
 		<g:submitButton name="addPredictions" value="Make Predictions"/>
 		</g:form>
-	</formset>
+	</fieldset>
 </div>
 
 
@@ -44,13 +43,17 @@
 			var hidden_num_matches = $("#numMatches");
 			var matches = 1;
 
-			$("input:radio").click(function(e) {
-				e.preventDefault();
-
+			$("input:radio").change(function(e) {
+				//e.preventDefault();
+				
 				var parentMatch = $(this).parent("div");
-				parentMatch.child(".nextinfo").value()
-
-			})
+				var child = parentMatch.find(".nextinfo").text();
+				if(child!="NULL"){
+					//console.log($(this).clone());
+					var teamName = this.value;
+					$("#Match"+child).append($(this).clone())+'<p>'+teamName+'</p>'+'<br/>';
+				}
+			});
 //end remove_button click
 		});
 	</script>
