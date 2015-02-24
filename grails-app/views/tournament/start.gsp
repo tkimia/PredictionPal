@@ -83,6 +83,7 @@
 			var matches = 1;
 
 			$("#matchATeams").val(0); //fixed saved value bug
+			$("#numMatches").val(1);
 
 			$(add_button).click(function(e) {
 				e.preventDefault();
