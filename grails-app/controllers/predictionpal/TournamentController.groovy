@@ -18,19 +18,20 @@ class TournamentController {
  		newTourny.hasScores =  (params.hasScores) ? true : false;
 
 
- 		//TODO: implement numMatches loop (HAS TO HAVE HASHMAP INSTEAD)
+ 		//TODO: implement numMatches loop
         Match[] newMatches = new Match[params.numMatches];
- 		for (int i = 0; i < params["numMatches"]; i++) {
+ 		for (int i = 0; i < params.int("numMatches"); i++) {
             char matchId = 65 + i
-            int numTeams = params["match"+(char)matchId+"Teams"]
+            int numTeams = params.int("match"+(char)matchId+"Teams");
+            log.error "num teams is " + numTeams
             newMatches[i] = new Match()
-
+            
             for(int j = 1; j <= numTeams; j++) {
                 newMatches[i].addToTeams(new Team(name: params["match"+matchId+"Team"+j]))
             }
         }
 
-        for(int i = 0; i < params.numMatches; i++)
+        for(int i = 0; i < params.int("numMatches"); i++)
             newTourny.addToMatches(newMatches[i])
 
  		newTourny.save(flush: true, failOnError:true)
