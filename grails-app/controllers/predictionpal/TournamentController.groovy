@@ -16,14 +16,14 @@ class TournamentController {
  		
  		newTourny.hasSeeds = (params.hasSeeds) ? true : false;
  		newTourny.hasScores =  (params.hasScores) ? true : false;
-
-
- 		//TODO: implement numMatches loop
         Match[] newMatches = new Match[params.numMatches];
+
+        //this loop initializes all of the matches to be put into the
+        //new tournament
  		for (int i = 0; i < params.int("numMatches"); i++) {
             char matchId = 65 + i
             int numTeams = params.int("match"+(char)matchId+"Teams");
-            log.error "num teams is " + numTeams
+            
             newMatches[i] = new Match()
             
             for(int j = 1; j <= numTeams; j++) {
@@ -31,11 +31,28 @@ class TournamentController {
             }
         }
 
-        for(int i = 0; i < params.int("numMatches"); i++)
+        //this loop sets the nextMatch attribute on each of the
+        //matches, then adds them to the tournament
+        for(int i = 0; i < params.int("numMatches"); i++) {
+            //get match next info
+            char matchId = 65 + i
+            def nextId = params["match"+(char)matchId+"Next"]
+            
+            //if match has next, assign it
+            if (nextId) {
+                int nextIndex = (nextId as char) - ('A' as char);
+                log.error nextIndex;
+                newMatches[i].nextMatch = newMatches[nextIndex]
+            }
+
             newTourny.addToMatches(newMatches[i])
+        }
+
+        params.each() { key, value ->
+            log.error key + ": " + value
+        }
 
  		newTourny.save(flush: true, failOnError:true)
- 		flash.message = params["numMatches"]
     	redirect(action: 'index')
     }
 
