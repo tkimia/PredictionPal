@@ -6,6 +6,8 @@ class Team {
 	int seed
 	static belongsTo = [match: Match]
 
+	String toString() { return name }
+	
     static constraints = {
     }
 }
