@@ -43,16 +43,22 @@
 			var hidden_num_matches = $("#numMatches");
 			var matches = 1;
 
-			$("input:radio").change(function(e) {
-				//e.preventDefault();
-				
+			$("input:radio").click(function(e) {
+				e.preventDefault();
+				$(this).prop('checked',true)
 				var parentMatch = $(this).parent("div");
+				var curname = $(this).attr('name');
+				console.log(curname)
 				var child = parentMatch.find(".nextinfo").text();
+				var clo = $(this).clone();
+				clo.attr('name', child);
+				$(this).prop('checked',true)
 				if(child!="NULL"){
-					//console.log($(this).clone());
-					var teamName = this.value;
-					$("#Match"+child).append($(this).clone())+'<p>'+teamName+'</p>'+'<br/>';
+					var teamName = $(this).val();
+					$("#Match"+child).append(clo);
+					$("#Match"+child).append(teamName+'<br/>');
 				}
+
 			});
 //end remove_button click
 		});
