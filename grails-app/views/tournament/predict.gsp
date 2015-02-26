@@ -6,7 +6,7 @@
 	<meta name="layout" content="main"/>
 </head>
 <body>
-	<g:form method="post" action="packPredictions">
+	<g:form action="packPredictions" id="predictionForm">
 		<fieldset id="general-details">
 			<g:hiddenField name="tournamentName" value="${tournament.title}"/>
 			<legend>Predict for ${ tournament.title }</legend>
@@ -41,10 +41,10 @@
 			</div>
 			<br/>
 		</g:each>
-		<g:submitButton name="packPredictions" value="Make Predictions"/>
+		<g:submitButton name="post" value="Make Predictions"/>
 
 		</fieldset>
-	</div>
+		</div>
 	</g:form>
 
 	<script type="text/javascript">
