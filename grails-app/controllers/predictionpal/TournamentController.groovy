@@ -10,10 +10,10 @@ class TournamentController {
     }
 
     def packTournament() {
- 		def newTourny = new Tournament(sid: generateSid(), 
- 			owner: params.owner, title: params.title, 
+ 		def newTourny = new Tournament(sid: generateSid(),
+ 			owner: params.owner, title: params.title,
  			state: 1, acceptingPredictions: true);
- 		
+
  		newTourny.hasSeeds = (params.hasSeeds) ? true : false;
  		newTourny.hasScores =  (params.hasScores) ? true : false;
         Match[] newMatches = new Match[params.numMatches];
@@ -23,9 +23,9 @@ class TournamentController {
  		for (int i = 0; i < params.int("numMatches"); i++) {
             char matchId = 65 + i
             int numTeams = params.int("match"+(char)matchId+"Teams");
-            
+
             newMatches[i] = new Match()
-            
+
             for(int j = 1; j <= numTeams; j++) {
                 newMatches[i].addToTeams(new Team(name: params["match"+matchId+"Team"+j]))
             }
@@ -37,7 +37,7 @@ class TournamentController {
             //get match next info
             char matchId = 65 + i
             def nextId = params["match"+(char)matchId+"Next"]
-            
+
             //if match has next, assign it
             if (nextId) {
                 int nextIndex = (nextId as char) - ('A' as char);
@@ -64,6 +64,19 @@ class TournamentController {
     		[tournament : tournament]
     }
 
+    def packPredictions() {
+        def t = Tournament.findByTitle(params.tournamentName)
+        def newPrediction = new Prediction(tournament: t,
+            name: params.name, email: params.email);
+
+
+       MatchPrediction[] matches = new MatchPrediction[t.matches.size()];
+
+       //TODO:Implement matchPrediction loop
+
+       newPrediction.save(flush: true, failOnError:true)
+       //redirect(action: 'index')
+    }
 
     def generateSid() {
     	return UUID.randomUUID().toString().substring(0,8);

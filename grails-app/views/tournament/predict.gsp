@@ -1,16 +1,29 @@
 <html>
 <head>
 	<title>
-	Predict for ${ tournament.title } 
+	Predict for ${ tournament.title }
 	</title>
 	<meta name="layout" content="main"/>
 </head>
 <body>
-	<h1>Predict for ${ tournament.title } </h1>
+	<g:form method="post" action="packPredictions">
+		<fieldset id="general-details">
+			<g:hiddenField name="tournamentName" value="${tournament.title}"/>
+			<legend>Predict for ${ tournament.title }</legend>
 
-	<div id="formMatches">
-	<fieldset>
-		<g:form method="post" action="addPrediction">
+			<label for="name">Name</label>
+			<g:textField name="name" />
+			<br />
+
+			<label for="email">Email</label>
+			<g:textField name="email" />
+			<br />
+
+		</fieldset>
+
+		<div id="formMatches">
+		<fieldset>
+
 		<legend>Enter a Prediction</legend>
 		<g:each var="match" in="${tournament.matches.sort {it.id}}">
 			<div id="Match${match.id}">
@@ -20,19 +33,19 @@
 				<g:else>
 					<p style="visiblity:hidden" class="nextinfo">NULL</p>
 				</g:else>
-				<g:each var="team" in="${match.teams.sort {it.id}}">	
-					<input type="radio" name="${match.id}" 
+				<g:each var="team" in="${match.teams.sort {it.id}}">
+					<input type="radio" name="${match.id}"
 						value="${team.name}"/>${team.name}<br/>
 				</g:each>
 				<br/>
 			</div>
 			<br/>
 		</g:each>
-		<g:submitButton name="addPredictions" value="Make Predictions"/>
-		</g:form>
-	</fieldset>
-</div>
+		<g:submitButton name="packPredictions" value="Make Predictions"/>
 
+		</fieldset>
+	</div>
+	</g:form>
 
 	<script type="text/javascript">
 		jQuery(document).ready( function() {
