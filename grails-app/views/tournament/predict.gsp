@@ -35,7 +35,7 @@
 				</g:else>
 				<g:each var="team" in="${match.teams.sort {it.id}}">
 					<input type="radio" name="${match.id}"
-						value="${team.name}"/>${team.name}<br/>
+						value="${team.name}">${team.name}<br/>
 				</g:each>
 				<br/>
 			</div>
@@ -49,31 +49,28 @@
 
 	<script type="text/javascript">
 		jQuery(document).ready( function() {
-			var max_teams	= 10;
-			var form_ref = $("#formMatches");
-			var add_button = $(".addNewMatch");
-			var remove_button = $(".removeMatch");
-			var hidden_num_matches = $("#numMatches");
-			var matches = 1;
 
-			$("input:radio").click(function(e) {
-				e.preventDefault();
-				$(this).prop('checked',true)
+			$('body').on('click', 'input:radio', function() {
+    			var team_name_str = $(this).attr('value');
 				var parentMatch = $(this).parent("div");
 				var curname = $(this).attr('name');
+
 				console.log(curname)
 				var child = parentMatch.find(".nextinfo").text();
-				var clo = $(this).clone();
-				clo.attr('name', child);
-				$(this).prop('checked',true)
+				
+
+
 				if(child!="NULL"){
 					var teamName = $(this).val();
-					$("#Match"+child).append(clo);
-					$("#Match"+child).append(teamName+'<br/>');
-				}
+					$("#Match"+child).append(
+						'<input name="'+curname+'" value="'+team_name_str+'" type="radio">' +
+						team_name_str +
+						'</input>'
 
+					);
+				}
 			});
-//end remove_button click
+
 		});
 	</script>
 </body>
