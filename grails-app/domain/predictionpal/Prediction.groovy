@@ -7,6 +7,8 @@ class Prediction {
 	String email
 	int predPoints //to be implemented
 
+	String toString() { return name }
+	
     static constraints = {
     	email email: true, blank: true
     	predPoints nullable: true

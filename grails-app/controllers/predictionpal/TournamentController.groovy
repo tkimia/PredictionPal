@@ -69,13 +69,21 @@ class TournamentController {
         def newPrediction = new Prediction(tournament: t,
             name: params.name, email: params.email);
 
+        for (Match m: t.matches){
+            var radioButtons = params.m.id;
+            for (int i = 0; i < radioButtons.length; i++) {
+                if (radioButtons[i].checked) {
+                    TeamPrediction tp = new TeamPrediction(name: radioButtons[i].value)
+                    MatchPrediction mp = new MatchPrediction(correspondingMatch: m, predictedWinner: tp)
+                    newPrediction.addToMatchPredictions(mp)
+                }
+            }
+        }
+        t.addToPredictions(newPrediction);
 
-       MatchPrediction[] matches = new MatchPrediction[t.matches.size()];
 
-       //TODO:Implement matchPrediction loop
-
-       newPrediction.save(flush: true, failOnError:true)
-       //redirect(action: 'index')
+       t.save(flush: true, failOnError:true)
+       redirect(action: 'index')
     }
 
     def generateSid() {
