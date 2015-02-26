@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title> Create a new Tournamnet </title>
+	<title> Create a new Tournament </title>
 	<meta name="layout" content="main" />
 	<!-- TODO: Move this externally -->
 	<style>

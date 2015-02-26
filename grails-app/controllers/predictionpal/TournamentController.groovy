@@ -91,7 +91,23 @@ class TournamentController {
        t.save(flush: true, failOnError:true)
        redirect(action: 'index')
     }
-
+	
+	def predictions(){
+		def tournament = Tournament.findBySid(params.id);
+		if(!tournament)
+			response.sendError(404)
+		else
+			[tournament : tournament]
+	}
+	
+	def lookAtPredictions(){
+		def tourn = Tournament.findBySid(params.sid);
+		def remov = tourn.predictions.findBySid(params.toBeRemoved);
+		remov.delete();
+		tourn.save();
+		redirect(action:'predictions)');
+	}
+	
     def generateSid() {
     	return UUID.randomUUID().toString().substring(0,8);
     }
