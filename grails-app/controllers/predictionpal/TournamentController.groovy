@@ -94,6 +94,14 @@ class TournamentController {
 			[tournament : tournament]
 	}
 	
+	def lookAtPredictions(){
+		def tourn = Tournament.findBySid(params.sid);
+		def remov = tourn.predictions.findBySid(params.toBeRemoved);
+		remov.delete();
+		tourn.save();
+		redirect(action:'predictions)');
+	}
+	
     def generateSid() {
     	return UUID.randomUUID().toString().substring(0,8);
     }

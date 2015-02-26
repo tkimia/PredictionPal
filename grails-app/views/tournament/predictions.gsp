@@ -11,8 +11,8 @@
 		<fieldset id="general-details">
 			<g:hiddenField name="tournamentName" value="${tournament.title}"/>
 			<legend>Current Predictions For ${ tournament.title }</legend>
-			<g:hiddenField name="sid" value=${tournament.sid}/>
-			<g:hiddenField name="toBeRemoved" value=0/>
+			<g:hiddenField name="sid" value="${tournament.sid}"/>
+			<g:hiddenField name="toBeRemoved" value="0"/>
 			<br />
 
 		</fieldset>
@@ -24,6 +24,7 @@
 			<g:each var="Preds" in="${tournament.predictions.sort {it.id}}">
 				<div id="Pred${Preds.id}">
 				${Preds.name} <a class="removePred">Remove Prediction</a>
+				<p hidden=true class="predId">${Preds.id}</p>
 				</div>
 			</g:each>
 			</fieldset>
@@ -37,8 +38,11 @@
 
 			$(remove_button).click(function(e) {
 				e.preventDefault();
-				
-
+				var parentDiv = $(this).parent("div");
+				var predictionId = parentDiv.find(".predId").text();
+				console.log(predictionId)
+				$("#BeRemoved").val(predictionId)
+				jQuery.post();
 			}); //End remove button
 				
 		}); //End script
