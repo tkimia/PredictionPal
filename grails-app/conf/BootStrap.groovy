@@ -73,6 +73,16 @@ class BootStrap {
 			.addToMatches(match14)
 			.addToMatches(match15)
 			.save(flush:true, failOnError:true)
+
+		/* one match tournament */
+		Match rpsMatch = new Match()
+			.addToTeams(new Team(name: "Julian"))
+			.addToTeams(new Team(name: "Ricky"))
+		Tournament rps = new Tournament(sid: "rps", title: "Rock Paper Scissors", owner: "Me", hasSeeds:false, hasScores:false, state: 1)
+			.addToMatches(rpsMatch)
+			.save(flush: true, failOnError: true)
+
+
     }
 
     def destroy = {
