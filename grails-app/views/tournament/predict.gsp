@@ -63,9 +63,9 @@
 				if(child!="NULL"){
 					var teamName = $(this).val();
 					$("#Match"+child).append(
-						'<input name="'+curname+'" value="'+team_name_str+'" type="radio">' +
+						'<input name="'+child+'" value="'+team_name_str+'" type="radio">' +
 						team_name_str +
-						'</input>'
+						'<br/>'
 
 					);
 				}
