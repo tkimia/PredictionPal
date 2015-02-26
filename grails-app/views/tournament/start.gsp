@@ -81,9 +81,12 @@
 			var remove_button = $(".removeMatch");
 			var hidden_num_matches = $("#numMatches");
 			var matches = 1;
+			var hasSeeds = false;
+
 
 			$("#matchATeams").val(0); //fixed saved value bug
 			$("#numMatches").val(1);
+			$("#hasSeeds").prop('checked', false);
 
 			$(add_button).click(function(e) {
 				e.preventDefault();
@@ -131,11 +134,22 @@
 				teams++;
 				$("#match" + mLetter + "Teams").val(teams);
 
-				$(this).parent('fieldset').append(
-					'<div> \
-						<input name="match'+mLetter+'Team'+teams+'" value="" id="match'+mLetter+'Team'+teams+'" type="text"> \
-					</div>'
+
+				if (hasSeeds) {
+					$(this).parent('fieldset').append(
+						'<div> \
+							<input name="match'+mLetter+'Team'+teams+'seed" value="" id="match'+mLetter+'Team'+teams+'seed" type="number"> \
+							<input name="match'+mLetter+'Team'+teams+'" value="" id="match'+mLetter+'Team'+teams+'" type="text"> \
+						</div>'
+						 );
+				}
+				else {
+					$(this).parent('fieldset').append(
+						'<div> \
+							<input name="match'+mLetter+'Team'+teams+'" value="" id="match'+mLetter+'Team'+teams+'" type="text"> \
+						</div>'
 					);
+				}
 			}); //end add_team click
 
 
@@ -155,8 +169,24 @@
 
 				//remove last team
 				$(this).parent('fieldset').children().last().remove();
+			
 
 			}); //end remove_team click
+
+			$("#hasSeeds").click( function(e) {
+				hasSeeds = this.checked;
+				if (hasSeeds) {
+					$("input:text").filter(function() {
+        				return this.id.match(/match[A-Z]Team[0-9]*/);
+    				}).before(
+    					'<input name="'+$(this).prop('name')+'seed" value="" id="'+$(this).prop('name')+'seed" type="number" size="4" style="font-family:monospace">'
+    				);
+				} else {
+					$("input:text").filter(function() {
+        				return this.id.match(/match[A-Z]Team[0-9]*/);
+    				}).prev().remove();
+				}
+			});
 
 		} ); //end script
 
