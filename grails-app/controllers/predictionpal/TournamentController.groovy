@@ -26,8 +26,14 @@ class TournamentController {
 
             newMatches[i] = new Match()
 
-            for(int j = 1; j <= numTeams; j++) {
-                newMatches[i].addToTeams(new Team(name: params["match"+matchId+"Team"+j]))
+            if(newTourny.hasSeeds == true){
+                for(int j = 1; j <= numTeams; j++) {
+                    newMatches[i].addToTeams(new Team(name: params["match"+matchId+"Team"+j], seed: params["match"+matchId+"Team"+j+"seed"]))
+                }
+            }else {
+                for(int j = 1; j <= numTeams; j++) {
+                    newMatches[i].addToTeams(new Team(name: params["match"+matchId+"Team"+j]))
+                }
             }
         }
 
