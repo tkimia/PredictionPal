@@ -25,6 +25,7 @@
 				<div id="Pred${Preds.id}">
 				${Preds.name} <a class="removePred">Remove Prediction</a>
 				<p hidden=true class="predId">${Preds.id}</p>
+				<p hidden=true class="TournSid">${tournament.sid}</p>
 				</div>
 			</g:each>
 			</fieldset>
@@ -36,13 +37,14 @@
 			var form_ref = $("#listPreds");
 			var remove_button = $(".removePred");
 
+
 			$(remove_button).click(function(e) {
-				e.preventDefault();
+				//e.preventDefault();
 				var parentDiv = $(this).parent("div");
 				var predictionId = parentDiv.find(".predId").text();
-				console.log(predictionId)
-				$("#BeRemoved").val(predictionId)
-				jQuery.post();
+				var tournamentSid = parentDiv.find(".TournSid").text();
+				console.log("here");
+				jQuery.post("http://localhost:8080/PredictionPal/prediction/delPred?id="+predictionId+"&tou="+tournamentSid);
 			}); //End remove button
 				
 		}); //End script

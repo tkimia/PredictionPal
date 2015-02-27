@@ -99,13 +99,13 @@ class TournamentController {
 			[tournament : tournament]
 	}
 
-	def lookAtPredictions(){
-		def tourn = Tournament.findBySid(params.sid);
-		def remov = tourn.predictions.findBySid(params.toBeRemoved);
+	/*def lookAtPredictions(){
+		def dat = params.sid;
+		def tourn = Tournament.findBySid("rps");
+		def remov = tourn.findPredictionById(1);
 		remov.delete();
-		tourn.save();
-		redirect(action:'predictions)');
-	}
+		redirect(action:'predictions');
+	}*/
 
     def generateSid() {
     	return UUID.randomUUID().toString().substring(0,8);
