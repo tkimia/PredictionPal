@@ -35,7 +35,11 @@
 				</g:else>
 				<g:each var="team" in="${match.teams.sort {it.id}}">
 					<input type="radio" name="${match.id}"
-						value="${team.name}">${team.name}<br/>
+						value="${team.name}">${team.name}
+					<g:if test="${tournament.hasScores}">
+						<g:textField name="scores${match.id}" />
+					<br/>
+					</g:if>
 				</g:each>
 				<br/>
 			</div>
