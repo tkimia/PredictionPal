@@ -45,6 +45,7 @@
 				var tournamentSid = parentDiv.find(".TournSid").text();
 				console.log("here");
 				jQuery.post("../../prediction/delPred?id="+predictionId+"&tou="+tournamentSid);
+				parentDiv.fadeOut();
 			}); //End remove button
 				
 		}); //End script

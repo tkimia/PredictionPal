@@ -66,8 +66,15 @@ class TournamentController {
     	def tournament = Tournament.findBySid(params.id);
     	if (!tournament)
     		response.sendError(404)
-    	else
-    		[tournament : tournament]
+    	else {
+            if (tournament.state > 1 || !tournament.acceptingPredictions)
+            {
+                flash.message = "Tournament not taking predictions"
+                redirect(action: "show")
+            }
+            [tournament : tournament]
+        }
+    		
     }
 
     def packPredictions() {
