@@ -6,6 +6,7 @@
 	<meta name="layout" content="main"/>
 </head>
 <body>
+	<g:if test="${tournament.state == 1}">
 	<g:form action="packPredictions" id="predictionForm">
 		<fieldset id="general-details">
 			<g:hiddenField name="tournamentName" value="${tournament.title}"/>
@@ -50,7 +51,10 @@
 		</fieldset>
 		</div>
 	</g:form>
-
+	</g:if>
+	<g:else>
+	<h1>Sorry! This tournament is no longer accepting predictions.</h1>
+	</g:else>
 	<script type="text/javascript">
 		jQuery(document).ready( function() {
 

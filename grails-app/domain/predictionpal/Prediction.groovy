@@ -10,7 +10,7 @@ class Prediction {
 	String toString() { return name }
 	
     static constraints = {
-    	email email: true, blank: true
+    	email email: true, blank: true, nullable:true
     	predPoints nullable: true
     }
 }

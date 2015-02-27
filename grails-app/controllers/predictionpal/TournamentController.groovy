@@ -79,6 +79,12 @@ class TournamentController {
 
     def packPredictions() {
         def t = Tournament.findByTitle(params.tournamentName)
+        if (t.state != 1){
+            //The prediction is no longer accepting predictions, show an error to the user
+            return;
+        }
+
+
         def newPrediction = new Prediction(tournament: t,
             name: params.name, email: params.email);
 
