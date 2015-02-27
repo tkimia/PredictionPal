@@ -75,11 +75,9 @@ class TournamentController {
         def newPrediction = new Prediction(tournament: t,
             name: params.name, email: params.email);
 
-
-
         for (Match m: t.matches){
-            def id = m.id;
-            def matchWinner = params.id
+    
+            def matchWinner = params.String(m.id.toString())
 
             TeamPrediction tp = new TeamPrediction(name: matchWinner)
             MatchPrediction mp = new MatchPrediction(correspondingMatch: m, predictedWinner: tp)
