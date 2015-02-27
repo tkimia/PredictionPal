@@ -76,22 +76,26 @@ class TournamentController {
             name: params.name, email: params.email);
 
         for (Match m: t.matches){
-            var radioButtons = params.m.id;
+            //get the RadioButtons for the match.
+            //def radioButtons = ??
+
+            //Parse the radio buttons, the values of the checked ones represent a winning team
+            /*
             for (int i = 0; i < radioButtons.length; i++) {
                 if (radioButtons[i].checked) {
                     TeamPrediction tp = new TeamPrediction(name: radioButtons[i].value)
                     MatchPrediction mp = new MatchPrediction(correspondingMatch: m, predictedWinner: tp)
                     newPrediction.addToMatchPredictions(mp)
                 }
-            }
+            }*/
         }
         t.addToPredictions(newPrediction);
 
 
        t.save(flush: true, failOnError:true)
-       redirect(action: 'index')
+       redirect(action: 'predictions/${t.sid}')
     }
-	
+
 	def predictions(){
 		def tournament = Tournament.findBySid(params.id);
 		if(!tournament)
@@ -99,7 +103,7 @@ class TournamentController {
 		else
 			[tournament : tournament]
 	}
-	
+
 	def lookAtPredictions(){
 		def tourn = Tournament.findBySid(params.sid);
 		def remov = tourn.predictions.findBySid(params.toBeRemoved);
@@ -107,7 +111,7 @@ class TournamentController {
 		tourn.save();
 		redirect(action:'predictions)');
 	}
-	
+
     def generateSid() {
     	return UUID.randomUUID().toString().substring(0,8);
     }
