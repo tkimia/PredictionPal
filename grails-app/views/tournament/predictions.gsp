@@ -44,7 +44,7 @@
 				var predictionId = parentDiv.find(".predId").text();
 				var tournamentSid = parentDiv.find(".TournSid").text();
 				console.log("here");
-				jQuery.post("http://localhost:8080/PredictionPal/prediction/delPred?id="+predictionId+"&tou="+tournamentSid);
+				jQuery.post("../../prediction/delPred?id="+predictionId+"&tou="+tournamentSid);
 			}); //End remove button
 				
 		}); //End script
