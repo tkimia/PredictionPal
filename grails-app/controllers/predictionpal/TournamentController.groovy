@@ -75,25 +75,22 @@ class TournamentController {
         def newPrediction = new Prediction(tournament: t,
             name: params.name, email: params.email);
 
-        for (Match m: t.matches){
-            //get the RadioButtons for the match.
-            //def radioButtons = ??
 
-            //Parse the radio buttons, the values of the checked ones represent a winning team
-            /*
-            for (int i = 0; i < radioButtons.length; i++) {
-                if (radioButtons[i].checked) {
-                    TeamPrediction tp = new TeamPrediction(name: radioButtons[i].value)
-                    MatchPrediction mp = new MatchPrediction(correspondingMatch: m, predictedWinner: tp)
-                    newPrediction.addToMatchPredictions(mp)
-                }
-            }*/
+
+        for (Match m: t.matches){
+            def id = m.id;
+            def matchWinner = params.id
+
+            TeamPrediction tp = new TeamPrediction(name: matchWinner)
+            MatchPrediction mp = new MatchPrediction(correspondingMatch: m, predictedWinner: tp)
+            newPrediction.addToMatchPredictions(mp)
+
         }
         t.addToPredictions(newPrediction);
 
 
        t.save(flush: true, failOnError:true)
-       redirect(action: 'predictions/${t.sid}')
+       redirect(action: 'index')
     }
 
 	def predictions(){
