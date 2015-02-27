@@ -77,7 +77,7 @@ class TournamentController {
 
         for (Match m: t.matches){
     
-            def matchWinner = params.String(m.id.toString())
+            def matchWinner = params[m.id.toString()]
 
             TeamPrediction tp = new TeamPrediction(name: matchWinner)
             MatchPrediction mp = new MatchPrediction(correspondingMatch: m, predictedWinner: tp)
@@ -87,8 +87,8 @@ class TournamentController {
         t.addToPredictions(newPrediction);
 
 
-       t.save(flush: true, failOnError:true)
-       redirect(action: 'index')
+        t.save(flush: true, failOnError:true)
+        redirect(action: 'index')
     }
 
 	def predictions(){
