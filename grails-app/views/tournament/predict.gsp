@@ -35,7 +35,7 @@
 				</g:else>
 				<g:each var="team" in="${match.teams.sort {it.id}}">
 					<input type="radio" name="${match.id}"
-						value="${team.name}">${team.name}
+						value="${team.name}">${team.name}<br/>
 					<g:if test="${tournament.hasScores}">
 						<g:textField name="scores${match.id}" />
 					<br/>
@@ -61,17 +61,25 @@
 
 				console.log(curname)
 				var child = parentMatch.find(".nextinfo").text();
-				
-
 
 				if(child!="NULL"){
 					var teamName = $(this).val();
+					if(${tournament.hasScores} == true){
+					$("#Match"+child).append(
+						'<input name="'+child+'" value="'+team_name_str+'" type="radio">' +
+						team_name_str + '<br/>' +
+						'<input name= scores'+child+'" value="'+""+ '"type="text">'+
+						'<br/>'
+
+					);
+				}else{
 					$("#Match"+child).append(
 						'<input name="'+child+'" value="'+team_name_str+'" type="radio">' +
 						team_name_str +
 						'<br/>'
 
 					);
+				}
 				}
 			});
 
