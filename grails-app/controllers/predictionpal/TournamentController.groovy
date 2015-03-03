@@ -151,4 +151,26 @@ class TournamentController {
     def generateSid() {
     	return UUID.randomUUID().toString().substring(0,8);
     }
+    def mailService
+
+    def emailParticipants(Tournament t) {
+        def emailSubject = "Tournament ${t.title} complete"
+
+        for (Prediction p : t.predictions){  
+            if (p.email != null){
+                def emailBody = """\
+                    Hello ${p.name}!  Thank you for participating in the ${t.title} tournament. 
+                    Please find a link below with statistics and match results.
+                    """
+                mailService.serviceMethod(p.email, emailSubject, emailBody)/* {
+                    async true
+                    to "${p.email}"
+                    from "predictionpal@gmail.com"
+                    subject "${emailSubject}"
+                    body "${emailBody}" 
+                }*/
+                println "Email sent"
+            }
+        }
+    }
 }
