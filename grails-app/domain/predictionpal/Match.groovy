@@ -4,10 +4,11 @@ class Match {
 	static belongsTo = [tournament: Tournament]
 	static hasMany = [prevMatches: Match, teams: Team, matchPredictions: MatchPrediction]
 	Match nextMatch
-
+	WinTeam winner
+	
 	static mappedBy = [ prevMatches: "nextMatch"] //prevmatches on this obj defined by next on other obj
 
-	Team winner
+
 	
 	String toString() {
 		String result = "";
