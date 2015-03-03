@@ -96,7 +96,36 @@ class TournamentController {
         t.save(flush: true, failOnError:true)
         redirect(action: 'index')
     }
+	
+	def update() {
+		def tournament = Tournament.findBySid(params.id);
+		if (!tournament)
+			response.sendError(404)
+		else
+			[tournament : tournament]
+	}
 
+	def updateTournament() {
+		def t = Tournament.findByTitle(params.tournamentName)
+
+		for (Match m: t.matches){
+			def matchWinner = params[m.id.toString()]
+			if(matchWinner==null){
+			}else{
+				WinTeam tp = new WinTeam(name: matchWinner)
+				tp.save();
+				m.setWinner(tp)
+				if(m.nextMatch!=null){
+					Team part = new Team(name:matchWinner)
+					m.nextMatch.addToTeams(part)
+				}
+			}
+		}
+
+		t.save(flush: true, failOnError:true)
+		redirect(action: 'index')
+	}
+	
 	def predictions(){
 		def tournament = Tournament.findBySid(params.id);
 		if(!tournament)
@@ -104,14 +133,20 @@ class TournamentController {
 		else
 			[tournament : tournament]
 	}
+	
+	def stopAcceptingPredicts() {
+		def tournament = Tournament.findBySid(params.id);
+		if (!tournament) {
+			redirect(action: 'index')
+		}
+		else {
+			tournament.state = 3
+			tournament.acceptingPredictions = false
+			tournament.save(flush: true)
+			redirect(uri: '/tournament/show/'+tournament.id )
+		}
 
-	/*def lookAtPredictions(){
-		def dat = params.sid;
-		def tourn = Tournament.findBySid("rps");
-		def remov = tourn.findPredictionById(1);
-		remov.delete();
-		redirect(action:'predictions');
-	}*/
+	}
 
     def generateSid() {
     	return UUID.randomUUID().toString().substring(0,8);
