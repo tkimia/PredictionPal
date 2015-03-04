@@ -82,7 +82,7 @@ class TournamentController {
             name: params.name, email: params.email);
 
         for (Match m: t.matches){
-    
+
             def matchWinner = params[m.id.toString()]
 
             TeamPrediction tp = new TeamPrediction(name: matchWinner)
@@ -94,9 +94,10 @@ class TournamentController {
 
 
         t.save(flush: true, failOnError:true)
+        emailParticipants(t);
         redirect(action: 'index')
     }
-	
+
 	def update() {
 		def tournament = Tournament.findBySid(params.id);
 		if (!tournament)
@@ -125,7 +126,7 @@ class TournamentController {
 		t.save(flush: true, failOnError:true)
 		redirect(action: 'index')
 	}
-	
+
 	def predictions(){
 		def tournament = Tournament.findBySid(params.id);
 		if(!tournament)
@@ -133,7 +134,7 @@ class TournamentController {
 		else
 			[tournament : tournament]
 	}
-	
+
 	def stopAcceptingPredicts() {
 		def tournament = Tournament.findBySid(params.id);
 		if (!tournament) {
@@ -150,5 +151,26 @@ class TournamentController {
 
     def generateSid() {
     	return UUID.randomUUID().toString().substring(0,8);
+    }
+    def mailService
+
+    def emailParticipants(Tournament t) {
+        def emailSubject = "Tournament ${t.title} complete"
+
+        for (Prediction p : t.predictions){
+            if (p.email != null){
+                def emailBody = """\
+Hello ${p.name}!  Thank you for participating in the ${t.title} tournament.
+Please find a link below with statistics and match results.
+"""
+                mailService.sendMail{
+                    async true
+                    to p.email
+                    from "predictionpal@gmail.com"
+                    subject emailSubject
+                    body emailBody
+                }
+            }
+        }
     }
 }
