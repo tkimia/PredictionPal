@@ -31,14 +31,14 @@
 			</fieldset>
 		</div>
 	</g:form>
-	
-	<g:form action="stopAcceptingPredicts" id="${tournament.sid}">
+
+	<!--g:form action="stopAcceptingPredicts" id="${tournament.sid}">
 		<br/>
 		<g:if test="${tournament.state == 1}">
 			<g:submitButton name="post" value="Close Tournament" />
 		</g:if>
-	</g:form>
-	
+	</g:form-->
+
 	<script type="text/javascript">
 		jQuery(document).ready(function(){
 			var form_ref = $("#listPreds");
@@ -53,7 +53,7 @@
 				console.log("here");
 				jQuery.post("../../prediction/delPred?id="+predictionId+"&tou="+tournamentSid);
 			}); //End remove button
-				
+
 		}); //End script
 
 	</script>

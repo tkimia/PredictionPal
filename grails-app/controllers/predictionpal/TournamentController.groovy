@@ -94,7 +94,6 @@ class TournamentController {
 
 
         t.save(flush: true, failOnError:true)
-        emailParticipants(t);
         redirect(action: 'index')
     }
 
@@ -116,10 +115,20 @@ class TournamentController {
 				WinTeam tp = new WinTeam(name: matchWinner)
 				tp.save();
 				m.setWinner(tp)
+
+                //Since the owner has submitted the first winner, stop accepting predictions
+                if (t.state == 1){
+                    t.state = 2
+                }
+
 				if(m.nextMatch!=null){
 					Team part = new Team(name:matchWinner)
 					m.nextMatch.addToTeams(part)
 				}
+                else { //if the next match is null, then it is the final match
+                    t.state = 3
+                    emailParticipants(t);
+                }
 			}
 		}
 
@@ -141,7 +150,8 @@ class TournamentController {
 			redirect(action: 'index')
 		}
 		else {
-			tournament.state = 3
+            //Stop accepting predictions with state 2
+			tournament.state = 2
 			tournament.acceptingPredictions = false
 			tournament.save(flush: true)
 			redirect(uri: '/tournament/show/'+tournament.id )
@@ -160,9 +170,10 @@ class TournamentController {
         for (Prediction p : t.predictions){
             if (p.email != null){
                 def emailBody = """\
-Hello ${p.name}!  Thank you for participating in the ${t.title} tournament.
-Please find a link below with statistics and match results.
-"""
+                Hello ${p.name}!
+                Thank you for participating in the ${t.title} tournament.
+                please find a link below with statistics and match results."""
+
                 mailService.sendMail{
                     async true
                     to p.email
