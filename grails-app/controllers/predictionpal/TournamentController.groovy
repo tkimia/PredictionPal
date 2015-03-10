@@ -127,6 +127,15 @@ class TournamentController {
 				}
 			}
 		}
+		for(Prediction p: t.predictions){
+			int score = 0;
+			for(MatchPrediction m: p.matchPredictions){
+				if(m.predictedWinner.name==m.correspondingMatch.winner.name){
+					score++
+				}
+			}
+			p.predPoints = score
+		}
 		for(Match m: t.matches){ //Look at all matches for completion.
 			if(m.getWinner()==null){ //If any match has not completed
 				t.save(flush: true, failOnError:true)
@@ -189,4 +198,12 @@ class TournamentController {
             }
         }
     }
+	
+	def results() {
+		def tournament = Tournament.findBySid(params.id);
+		if (!tournament)
+			response.sendError(404)
+		else
+			[tournament : tournament]
+	}
 }
