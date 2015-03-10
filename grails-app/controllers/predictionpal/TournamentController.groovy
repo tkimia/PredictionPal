@@ -112,6 +112,14 @@ class TournamentController {
 			[tournament : tournament]
 	}
 
+    def viewPrediction() {
+        def prediction = Prediction.findById(params.id);
+        if (!prediction)
+            response.sendError(404)
+        else 
+            [prediction : prediction]
+    }
+
 	def updateTournament() {
 		def t = Tournament.findByTitle(params.tournamentName)
 
@@ -132,13 +140,27 @@ class TournamentController {
 					Team part = new Team(name:matchWinner)
 					m.nextMatch.addToTeams(part)
 				}
-                else { //if the next match is null, then it is the final match
-                    t.state = 3
-                    emailParticipants(t);
-                }
 			}
 		}
-
+		for(Prediction p: t.predictions){
+			int score = 0;
+			for(MatchPrediction m: p.matchPredictions){
+				if(m.predictedWinner.name==m.correspondingMatch.winner.name){
+					score++
+				}
+			}
+			p.predPoints = score
+		}
+		for(Match m: t.matches){ //Look at all matches for completion.
+			if(m.getWinner()==null){ //If any match has not completed
+				t.save(flush: true, failOnError:true)
+				redirect(action: 'index')
+				return;
+			}
+		}
+		//If every match has a winner
+		t.state = 3;
+		emailParticipants(t);
 		t.save(flush: true, failOnError:true)
 		redirect(action: 'index')
 	}
@@ -191,4 +213,12 @@ class TournamentController {
             }
         }
     }
+	
+	def results() {
+		def tournament = Tournament.findBySid(params.id);
+		if (!tournament)
+			response.sendError(404)
+		else
+			[tournament : tournament]
+	}
 }

@@ -1,18 +1,18 @@
 <html>
 <head>
 	<title>
-	Predict for ${ tournament.title }
+	${ tournament.title } Results
 	</title>
 	<meta name="layout" content="main"/>
 </head>
 
 <body>
-	<g:form action="lookAtPredictions" id="currentPredicionsForm">
+	<g:form action="getResults" id="ResultsForm">
 		<fieldset id="general-details">
 			<g:hiddenField name="tournamentName" value="${tournament.title}"/>
-			<legend>Current Predictions For ${ tournament.title }</legend>
+			<legend>Results for ${ tournament.title }</legend>
 			<g:hiddenField name="sid" value="${tournament.sid}"/>
-			<g:hiddenField name="toBeRemoved" value="0"/>
+			<g:hiddenField name="toLookAt" value="0"/>
 			<br />
 
 		</fieldset>
@@ -21,9 +21,9 @@
 		<fieldset>
 
 			<legend>Participants</legend>
-			<g:each var="Preds" in="${tournament.predictions.sort {it.id}}">
+			<g:each var="Preds" in="${tournament.predictions.sort {it.predPoints}}">
 				<div id="Pred${Preds.id}">
-				${Preds.name} <a class="removePred">Remove Prediction</a>
+				<a class="goTo">${Preds.name}</a> ${Preds.predPoints}
 				<p hidden=true class="predId">${Preds.id}</p>
 				<p hidden=true class="TournSid">${tournament.sid}</p>
 				</div>
@@ -35,17 +35,15 @@
 	<script type="text/javascript">
 		jQuery(document).ready(function(){
 			var form_ref = $("#listPreds");
-			var remove_button = $(".removePred");
+			var view_button = $(".goTo");
 
 
-			$(remove_button).click(function(e) {
+			$(view_button).click(function(e) {
 				//e.preventDefault();
 				var parentDiv = $(this).parent("div");
 				var predictionId = parentDiv.find(".predId").text();
-				var tournamentSid = parentDiv.find(".TournSid").text();
-				console.log("here");
-				jQuery.post("../../prediction/delPred?id="+predictionId+"&tou="+tournamentSid);
-				parentDiv.fadeOut();
+				var url = "http://localhost:8080/PredictionPal/tournament/viewPrediction/" + predictionId;
+				window.location = url;
 			}); //End remove button
 
 		}); //End script
