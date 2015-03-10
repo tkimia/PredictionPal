@@ -61,9 +61,11 @@ grails.project.dependency.resolution = {
         compile ":scaffolding:2.1.2"
         compile ':cache:1.1.8'
         compile ":asset-pipeline:1.9.9"
+        compile ":mail:1.0.7"
+
 
         // plugins needed at runtime but not for compilation
-        runtime ":hibernate:3.6.10.18" // or ":hibernate4:4.3.6.1" 
+        runtime ":hibernate:3.6.10.18" // or ":hibernate4:4.3.6.1"
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
         runtime ":console:1.5.3"
@@ -73,5 +75,6 @@ grails.project.dependency.resolution = {
         //compile ":less-asset-pipeline:1.10.0"
         //compile ":coffee-asset-pipeline:1.8.0"
         //compile ":handlebars-asset-pipeline:1.3.0.3"
+
     }
 }

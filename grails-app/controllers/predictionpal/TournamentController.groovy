@@ -89,7 +89,7 @@ class TournamentController {
             name: params.name, email: params.email);
 
         for (Match m: t.matches){
-    
+
             def matchWinner = params[m.id.toString()]
 
             TeamPrediction tp = new TeamPrediction(name: matchWinner)
@@ -104,6 +104,45 @@ class TournamentController {
         redirect(action: 'index')
     }
 
+	def update() {
+		def tournament = Tournament.findBySid(params.id);
+		if (!tournament)
+			response.sendError(404)
+		else
+			[tournament : tournament]
+	}
+
+	def updateTournament() {
+		def t = Tournament.findByTitle(params.tournamentName)
+
+		for (Match m: t.matches){
+			def matchWinner = params[m.id.toString()]
+			if(matchWinner==null){
+			}else{
+				WinTeam tp = new WinTeam(name: matchWinner)
+				tp.save();
+				m.setWinner(tp)
+
+                //Since the owner has submitted the first winner, stop accepting predictions
+                if (t.state == 1){
+                    t.state = 2
+                }
+
+				if(m.nextMatch!=null){
+					Team part = new Team(name:matchWinner)
+					m.nextMatch.addToTeams(part)
+				}
+                else { //if the next match is null, then it is the final match
+                    t.state = 3
+                    emailParticipants(t);
+                }
+			}
+		}
+
+		t.save(flush: true, failOnError:true)
+		redirect(action: 'index')
+	}
+
 	def predictions(){
 		def tournament = Tournament.findBySid(params.id);
 		if(!tournament)
@@ -112,15 +151,44 @@ class TournamentController {
 			[tournament : tournament]
 	}
 
-	/*def lookAtPredictions(){
-		def dat = params.sid;
-		def tourn = Tournament.findBySid("rps");
-		def remov = tourn.findPredictionById(1);
-		remov.delete();
-		redirect(action:'predictions');
-	}*/
+	def stopAcceptingPredicts() {
+		def tournament = Tournament.findBySid(params.id);
+		if (!tournament) {
+			redirect(action: 'index')
+		}
+		else {
+            //Stop accepting predictions with state 2
+			tournament.state = 2
+			tournament.acceptingPredictions = false
+			tournament.save(flush: true)
+			redirect(uri: '/tournament/show/'+tournament.id )
+		}
+
+	}
 
     def generateSid() {
     	return UUID.randomUUID().toString().substring(0,8);
+    }
+    def mailService
+
+    def emailParticipants(Tournament t) {
+        def emailSubject = "Tournament ${t.title} complete"
+
+        for (Prediction p : t.predictions){
+            if (p.email != null){
+                def emailBody = """\
+                Hello ${p.name}!
+                Thank you for participating in the ${t.title} tournament.
+                please find a link below with statistics and match results."""
+
+                mailService.sendMail{
+                    async true
+                    to p.email
+                    from "predictionpal@gmail.com"
+                    subject emailSubject
+                    body emailBody
+                }
+            }
+        }
     }
 }
