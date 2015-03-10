@@ -125,13 +125,18 @@ class TournamentController {
 					Team part = new Team(name:matchWinner)
 					m.nextMatch.addToTeams(part)
 				}
-                else { //if the next match is null, then it is the final match
-                    t.state = 3
-                    emailParticipants(t);
-                }
 			}
 		}
-
+		for(Match m: t.matches){ //Look at all matches for completion.
+			if(m.getWinner()==null){ //If any match has not completed
+				t.save(flush: true, failOnError:true)
+				redirect(action: 'index')
+				return;
+			}
+		}
+		//If every match has a winner
+		t.state = 3;
+		emailParticipants(t);
 		t.save(flush: true, failOnError:true)
 		redirect(action: 'index')
 	}
