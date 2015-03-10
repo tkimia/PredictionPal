@@ -42,8 +42,8 @@
 				//e.preventDefault();
 				var parentDiv = $(this).parent("div");
 				var predictionId = parentDiv.find(".predId").text();
-				var tournamentSid = parentDiv.find(".TournSid").text();
-				//jQuery.post("../../prediction/delPred?id="+predictionId+"&tou="+tournamentSid);
+				var url = "http://localhost:8080/PredictionPal/prediction/show/" + predictionId;
+				window.location = url;
 			}); //End remove button
 
 		}); //End script
