@@ -42,7 +42,7 @@
 				//e.preventDefault();
 				var parentDiv = $(this).parent("div");
 				var predictionId = parentDiv.find(".predId").text();
-				var url = "http://localhost:8080/PredictionPal/prediction/show/" + predictionId;
+				var url = "http://localhost:8080/PredictionPal/tournament/viewPrediction/" + predictionId;
 				window.location = url;
 			}); //End remove button
 

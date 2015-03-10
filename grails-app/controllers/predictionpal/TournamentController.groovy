@@ -105,6 +105,14 @@ class TournamentController {
 			[tournament : tournament]
 	}
 
+    def viewPrediction() {
+        def prediction = Prediction.findById(params.id);
+        if (!prediction)
+            response.sendError(404)
+        else 
+            [prediction : prediction]
+    }
+
 	def updateTournament() {
 		def t = Tournament.findByTitle(params.tournamentName)
 
