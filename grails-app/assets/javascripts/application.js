@@ -6,6 +6,7 @@
 // to create separate JavaScript files as needed.
 //
 //= require jquery
+//= require js/jquery-ui-1.10.4.custom
 //= require_tree .
 //= require_self
 

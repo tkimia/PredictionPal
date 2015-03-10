@@ -13,7 +13,9 @@
 		<link rel="pPicon" href="${assetPath(src: 'predictionPal_icon.png')}">
 		<link rel="pPicon" sizes="114x114" href="${assetPath(src: 'predictionPal_icon.png')}">
   		<asset:stylesheet src="application.css"/>
+  		<asset:stylesheet src="jquery-ui.css"/>
 		<asset:javascript src="application.js"/>
+		
 		<g:layoutHead/>
 	</head>
 	<body>

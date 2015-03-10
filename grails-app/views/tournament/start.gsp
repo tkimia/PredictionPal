@@ -2,6 +2,7 @@
 <head>
 	<title> Create a new Tournament </title>
 	<meta name="layout" content="main" />
+	
 	<!-- TODO: Move this externally -->
 	<style>
 		fieldset {
@@ -22,9 +23,15 @@
 		    margin-left: 20px;
 		}
 	</style>
+	 <script>
+		$(function() {
+			$( "#dialog" ).dialog();
+		});
+	</script>	
 </head>
 
 <body>
+	<div id="dialog"><p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p></div>
 	<h1> Create a new tournament </h1>
 
 	<g:form action="packTournament" id="tournamentForm">
@@ -67,7 +74,7 @@
 			<a class="addNewMatch"> Add match </a>
 			<span>  |  </span>
 			<a class="removeMatch"> Remove match </a>
-		<div>
+		</div>
 		<br />
 		<g:submitButton name="post" value="Create Tournament" />
 	</g:form>
@@ -82,7 +89,6 @@
 			var hidden_num_matches = $("#numMatches");
 			var matches = 1;
 			var hasSeeds = false;
-
 
 			$("#matchATeams").val(0); //fixed saved value bug
 			$("#numMatches").val(1);
