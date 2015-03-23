@@ -22,12 +22,15 @@
 		}
 	</style>
 	 <script>
-		$(function() {
-			$( "#dialog" ).dialog();
+		$( "#debug" ).click(function() {
+		$( this ).slideUp();
 		});
 	</script>	
 </head>
 <body>
-		<div id="dialog"><p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p></div>
+	<div id="debug"><a href="/PredictionPal/"><p>Debug</p></a></div>
+	<div id="tournament"><a href="/PredictionPal/tournament/index"><p>Tournament</p></a></div>
+	
+
 </body>
 </html>

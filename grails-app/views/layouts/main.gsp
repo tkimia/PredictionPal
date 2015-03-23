@@ -19,7 +19,7 @@
 		<g:layoutHead/>
 	</head>
 	<body>
-		<div id="pPLogo" role="banner"><a href="/PredictionPal/"><asset:image src="pPLogo3.png" alt="Grails"/></a></div>
+		<div id="pPLogo" role="banner"><a href="/PredictionPal/tournament/frontpage"><asset:image src="pPLogo3.png" alt="Grails"/></a></div>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
