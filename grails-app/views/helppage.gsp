@@ -26,10 +26,7 @@
 	</script>	
 </head>
 <body>
-	<div id="pPLogo"><a href="/PredictionPal/tournament/frontpage"><asset:image src="predictionPal.png"/></a></div>
-	<div id="debug"><a href="/PredictionPal/">Debug</a></div>
-	<div id="helpPage"><a href="/PredictionPal/help">help</a></div>
-	<div id="tournament"><a href="/PredictionPal/tournament/index">Tournament</a></div>
+	<p>This is an empty help page.</p>
 	
 	
 

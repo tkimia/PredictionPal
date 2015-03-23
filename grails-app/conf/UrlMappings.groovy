@@ -8,6 +8,7 @@ class UrlMappings {
         }
 
         "/"(view:"/index")
+		"/help"(view:"/helppage")
         "500"(view:'/error')
 		"/tournament/frontpage"(view:'/tournament/frontpage')
         "/tournament/create"(redirect:'/tournament/start')
