@@ -67,11 +67,12 @@ class TournamentController {
     	if (!tournament)
     		response.sendError(404)
     	else {
-            if (tournament.state > 1 || !tournament.acceptingPredictions)
+            //this is handled on view side
+            /*if (tournament.state > 1 || !tournament.acceptingPredictions)
             {
                 flash.message = "Tournament not taking predictions"
                 redirect(action: "show")
-            }
+            }*/
             [tournament : tournament]
         }
     		
@@ -198,17 +199,13 @@ class TournamentController {
 
         for (Prediction p : t.predictions){
             if (p.email != null){
-                def emailBody = """\
-                Hello ${p.name}!
-                Thank you for participating in the ${t.title} tournament.
-                please find a link below with statistics and match results."""
 
                 mailService.sendMail{
                     async true
                     to p.email
                     from "predictionpal@gmail.com"
                     subject emailSubject
-                    body emailBody
+                    html g.render(template:'/tournament/mail', model:[p: p, t: t])
                 }
             }
         }
