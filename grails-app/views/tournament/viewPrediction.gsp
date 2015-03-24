@@ -4,6 +4,7 @@
 	<meta name="layout" content="main"/>
 </head>
 <body>
+	<h1>${prediction.name}'s Predictions</h1>
 	<g:each var="matchPrediction" in="${prediction.matchPredictions.sort {it.id}}">
 		<g:set var="match" value="${matchPrediction.correspondingMatch}"/>
 		<g:each var="team" in="${match.teams}">
@@ -11,7 +12,7 @@
 			<b>${team.name}</b>
 			</g:if>
 			<g:else>
-   				${team.name}
+   				"${team.name}"	"${matchPrediction.predictedWinner.name}"	"${matchPrediction.id}"
 			</g:else>
 
 			<br />

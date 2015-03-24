@@ -66,15 +66,8 @@ class TournamentController {
     	def tournament = Tournament.findBySid(params.id);
     	if (!tournament)
     		response.sendError(404)
-    	else {
-            //this is handled on view side
-            /*if (tournament.state > 1 || !tournament.acceptingPredictions)
-            {
-                flash.message = "Tournament not taking predictions"
-                redirect(action: "show")
-            }*/
+    	else
             [tournament : tournament]
-        }
     		
     }
 
@@ -85,7 +78,9 @@ class TournamentController {
             return;
         }
 
-
+        params.each() { key, value ->
+            println key + ": " + value
+        }
         def newPrediction = new Prediction(tournament: t,
             name: params.name, email: params.email);
 
