@@ -28,9 +28,9 @@
 <body>
 	<div id="pPLogo"><a href="/PredictionPal/tournament/frontpage"><asset:image src="predictionPal.png"/></a></div>
 	<div id="debug"><a href="/PredictionPal/">Debug</a></div>
-	<div id="helpPage"><a href="/PredictionPal/help">help</a></div>
-	<div id="tournament"><a href="/PredictionPal/tournament/index">Tournament</a></div>
-	
+	<div id="helpPage"><a href="/PredictionPal/help">Help</a></div>
+	<div id="CreateTournament"><a href="/PredictionPal/tournament/create">Create Tournament</a></div>
+	<div>Please enter the ssid: <input type="text" name="ssidInput" id="ssidInput" value="color"><input type="button" value="Submit" onclick="location.href='/PredictionPal/tournament/predict/'+document.getElementById('ssidInput').value"></div>
 	
 
 </body>
