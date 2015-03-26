@@ -11,6 +11,7 @@
 		<fieldset id="general-details">
 			<g:hiddenField name="tournamentName" value="${tournament.title}"/>
 			<legend>Results for ${ tournament.title }</legend>
+			<a href="http://localhost:8080/PredictionPal/tournament/tournamentResults/${tournament.sid}">Tournament Results</a>
 			<g:hiddenField name="sid" value="${tournament.sid}"/>
 			<g:hiddenField name="toLookAt" value="0"/>
 			<br />

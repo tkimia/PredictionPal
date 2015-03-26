@@ -78,9 +78,6 @@ class TournamentController {
             return;
         }
 
-        params.each() { key, value ->
-            println key + ": " + value
-        }
         def newPrediction = new Prediction(tournament: t,
             name: params.name, email: params.email);
 
@@ -213,4 +210,12 @@ class TournamentController {
 		else
 			[tournament : tournament]
 	}
+
+    def tournamentResults() {
+        def tournament = Tournament.findBySid(params.id);
+        if (!tournament)
+            response.sendError(404)
+        else
+            [tournament : tournament]
+    }
 }
