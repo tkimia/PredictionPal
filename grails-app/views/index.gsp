@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-		<title>Welcome to Grails</title>
+		<title>Prediction Pal</title>
 		<style type="text/css" media="screen">
 			#status {
 				background-color: #eee;
@@ -83,6 +83,37 @@
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div id="status" role="complementary">
+			<h1>Where to?</h1>
+			<ul>
+				<li class="controller"><g:link controller="tournament" action="start">Make a new Tournament</g:link></li>
+				<li class="controller"><g:link controller="tournament">View existing Tournaments</g:link></li>
+				<li class="controller"><g:link controller="prediction">View existing Predictions</g:link></li>
+			</ul>
+		</div>
+		<div id="page-body" role="main">
+			<h1>Welcome to Prediction Pal!</h1>
+			<p>Prediction Pal is a website dedicated to making tournament based predictions. 
+			Currently a variety of tournaments can be made, from basketball tournaments to the
+			Grammy awards. Once created a tournament can be shared with friends for some friendly
+			competition. As the tournament progresses, the owner is able to easily update the
+			winners, and anybody who participated automatically has their prediction updated as
+			well. </p>
+			<br></br>
+			<h1>Why did we make Prediction Pal?</h1>
+			<p>We decided to make prediction Pal because currently there is no easy to use
+			alternative. Every year many sports fans sign up for March Madness as the NCAA
+			tournament progresses, however the bracket used for that tournament is fixed
+			and anybody wanting to host a similar style of prediction game for any other
+			event would have to do it by hand. By creating Prediction Pal we have given
+			the players the ability to make their own, with more freedom than a pre-existing
+			grid could offer.</p>
+		</div>
+	</body>
+</html>
+
+<!-- <body>
+		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		<div id="status" role="complementary">
 			<h1>Application Status</h1>
 			<ul>
 				<li>App version: <g:meta name="app.version"/></li>
@@ -120,3 +151,4 @@
 		</div>
 	</body>
 </html>
+*/-->
