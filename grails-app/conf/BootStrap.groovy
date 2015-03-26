@@ -82,7 +82,7 @@ class BootStrap {
 			.addToMatches(rpsMatch)
 			.save(flush: true, failOnError: true)
 		
-		Prediction rpsPred = new Prediction(name: "Bobby", email:"rickyBobby@yahoo.com")
+		Prediction rpsPred = new Prediction(name: "Bobby", email:"flashexe3@yahoo.com.hk")
 		TeamPrediction win = new TeamPrediction(name: "Ricky")
 		MatchPrediction mPred = new MatchPrediction(correspondingMatch: rpsMatch, predictedWinner: win)
 		rpsPred.addToMatchPredictions(mPred)
