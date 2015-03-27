@@ -220,7 +220,7 @@ class TournamentController {
     }
 
     def personalResult(){
-        prediction = Prediction.findById(params.id);
+        def prediction = Prediction.findById(params.id);
         if (!prediction)
             response.sendError(404)
         else 

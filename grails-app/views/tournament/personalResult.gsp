@@ -12,7 +12,7 @@
 			<b>The Winner you predicted for this match: ${team.name}</b>
 			</g:if>
 			<g:else>
-   				Match: "${matchPrediction.id}"  <br> "${team.name}" VS.	"${matchPrediction.predictedWinner.name}"
+   				"${team.name}" VS.	"${matchPrediction.predictedWinner.name}"
 			</g:else>
 
 			<br />
