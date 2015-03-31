@@ -26,12 +26,13 @@
 	</script>	
 </head>
 <body>
-	
-	<div id="debug"><a href="/PredictionPal/">Debug</a></div>
-	<div id="helpPage"><a href="/PredictionPal/help">Help</a></div>
-	<div id="CreateTournament"><a href="/PredictionPal/tournament/create">Create Tournament</a></div>
-	<div>Please enter the ssid to predict: <input type="text" name="ssidInput" id="ssidInput" value="color"><input type="button" value="Submit" onclick="location.href='/PredictionPal/tournament/predict/'+document.getElementById('ssidInput').value"></div>
-	
+	<div id="frontpagePic" align=center <a href="/PredictionPal/tournament/frontpage"><asset:image src="frontpagePic.jpg" alt="Grails"/></a></div>
+	<div id="debug" align=center><a href="/PredictionPal/">Debug</a></div>
+	<div id="helpPage" align=center><a href="/PredictionPal/help">Help</a></div>
+	<div id="CreateTournament" align=center><a href="/PredictionPal/tournament/create">Create Tournament</a></div>
+	<div align=center>Please enter the ssid to predict: <input type="text" name="ssidInput" id="ssidInput" value="color"><input type="button" value="Submit" onclick="location.href='/PredictionPal/tournament/predict/'+document.getElementById('ssidInput').value"></div>
+
+<footer><br><br><br><br><br><div align=right> graphic original source: http://freedesignfile.com/upload/2012/09/champion-2.jpg</div></footer>
 
 </body>
 </html>
