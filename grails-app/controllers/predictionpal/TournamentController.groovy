@@ -35,6 +35,10 @@ class TournamentController {
                     newMatches[i].addToTeams(new Team(name: params["match"+matchId+"Team"+j]))
                 }
             }
+            if (params["match"+(char)matchId+"PosX"] && params["match"+(char)matchId+"PosY"]) {
+                newMatches[i].posX = params.int("match"+(char)matchId+"PosX")
+                newMatches[i].posY = params.int("match"+(char)matchId+"PosY")
+            }
         }
 
         //this loop sets the nextMatch attribute on each of the

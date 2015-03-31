@@ -13,7 +13,7 @@
 		    padding: 15px;
 		}
 
-		fieldset legend {
+		#overview-fieldset legend {
 		    background: #000;
 		    color: #fff;
 		    padding: 5px 10px ;
@@ -22,16 +22,52 @@
 		    box-shadow: 0 0 0 5px #a34949;
 		    margin-left: 20px;
 		}
+
+		#formMatches fieldset{
+			width: 250px;
+			border: 3px solid #a34949;
+		    padding: 10px;
+		    height: 75px;
+		    margin: 5px;
+		}
+
+		#formMatches fieldset legend{
+			background: #000;
+		    color: #fff;
+		    box-shadow: 0 0 0 3px #a34949;
+		}
+
+		#matches-container {
+			overflow-x: scroll;
+			padding: 5px;
+
+		}
+
+		#formMatches {
+			height: 550px;
+			width: 750px;
+			background: #fff;
+			border: 5px black;
+		}
+
 	</style>
 	 <script>
 		$(function() {
-			$( "#dialog" ).dialog();
+			$( "#formMatches fieldset" ).draggable({ containment: "parent", snap: true, grid: [20,20],
+				 stop: function() {
+					var mLetter = $(this).attr('id').slice(-1);
+					var pos = $("#match"+mLetter).position();
+					$("#match"+mLetter+"PosY").attr("value", pos.top);
+					$("#match"+mLetter+"PosX").attr("value", pos.left);
+					
+				}
+			 });
 		});
 	</script>	
 </head>
 
 <body>
-	<div id="dialog"><p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p></div>
+
 	<h1> Create a new tournament </h1>
 
 	<g:form action="packTournament" id="tournamentForm">
@@ -55,13 +91,21 @@
 			<g:hiddenField name="numMatches" value="1" />
 		</fieldset>
 
-		<div id="formMatches">
+		<div id="add-remove-match-buttons">
+			<a class="addNewMatch"> Add match </a>
+			<span>  |  </span>
+			<a class="removeMatch"> Remove match </a>
+		</div>
 
+		<div id="matches-container">
+		<div id="formMatches">
 			<fieldset id="matchA">
 				<legend> Match A </legend>
-				<g:hiddenField name="matchATeams" value="0"/> 
+				<g:hiddenField name="matchATeams" value="0"/>
+				<g:hiddenField name="matchAPosX" value="20"/> 
+				<g:hiddenField name="matchAPosY" value="5"/>  
 				<label for="matchANext">Next Match Letter</label>
-				<g:textField name="matchANext" />
+				<g:textField name="matchANext" size="1" maxlength="1" />
 				<br />
 				<a class="addTeam"> Add Team </a>
 				<span>  |  </span>
@@ -69,12 +113,9 @@
 			</fieldset>
 
 		</div>
-
-		<div id="add-remove-match-buttons">
-			<a class="addNewMatch"> Add match </a>
-			<span>  |  </span>
-			<a class="removeMatch"> Remove match </a>
 		</div>
+
+
 		<br />
 		<g:submitButton name="post" value="Create Tournament" />
 	</g:form>
@@ -99,12 +140,15 @@
 				var matchChar = String.fromCharCode(65+matches);
 				//var newTextBox = $(document.createElement('div')).attr("id", 'Match' + matchChar)
 				matches++;
+				
 				$(form_ref).append(
 					'<fieldset id="match'+ matchChar +'">' +
 						'<legend> Match '+ matchChar +' </legend>' +
 						'<input id = "match' + matchChar + 'Teams" type="hidden" value="0" name="match' + matchChar + 'Teams"></input>' +
+						'<input name="match' + matchChar + 'PosX" value="20" id="match' + matchChar + 'PosX" type="hidden">' +
+						'<input name="match' + matchChar + 'PosY" value="20" id="match' + matchChar + 'PosY" type="hidden">' +
 						'<label for="match'+ matchChar + 'Next">Next Match Letter</label>' +
-						'<input id = "match' + matchChar + 'Next" type="text" value="" name="match' + matchChar + 'Next"></input>'	+
+						'<input id = "match' + matchChar + 'Next" size="1" maxlength="1" type="text" value="" name="match' + matchChar + 'Next"></input>'	+
 						'<br />' +
 						'<a class="addTeam"> Add Team </a>'+
 						'<span>  |  </span>'+
@@ -114,6 +158,15 @@
 
 				//newTextBox.appendTo(form_ref);
 				$(hidden_num_matches).val(matches);
+				
+			$( "#formMatches fieldset" ).draggable({ containment: "parent", snap: true, grid: [20,20],
+				 stop: function() {
+					var mLetter = $(this).attr('id').slice(-1);
+					var pos = $("#match"+mLetter).position();
+					$("#match"+mLetter+"PosY").attr("value", pos.top);
+					$("#match"+mLetter+"PosX").attr("value", pos.left);
+					
+				} });
 			}); //end add_button click
 
 
@@ -140,11 +193,12 @@
 				teams++;
 				$("#match" + mLetter + "Teams").val(teams);
 
+				$(this).parent('fieldset').height($(this).parent('fieldset').height() + 25);
 
 				if (hasSeeds) {
 					$(this).parent('fieldset').append(
 						'<div> \
-							<input name="match'+mLetter+'Team'+teams+'seed" value="" id="match'+mLetter+'Team'+teams+'seed" type="number"> \
+							<input name="match'+mLetter+'Team'+teams+'seed" value="" id="match'+mLetter+'Team'+teams+'seed" type="number" placeholder="Team name"> \
 							<input name="match'+mLetter+'Team'+teams+'" value="" id="match'+mLetter+'Team'+teams+'" type="text"> \
 						</div>'
 						 );
@@ -152,7 +206,7 @@
 				else {
 					$(this).parent('fieldset').append(
 						'<div> \
-							<input name="match'+mLetter+'Team'+teams+'" value="" id="match'+mLetter+'Team'+teams+'" type="text"> \
+							<input name="match'+mLetter+'Team'+teams+'" value="" id="match'+mLetter+'Team'+teams+'" type="text" placeholder="Team name"> \
 						</div>'
 					);
 				}
@@ -175,6 +229,8 @@
 
 				//remove last team
 				$(this).parent('fieldset').children().last().remove();
+
+				$(this).parent('fieldset').height($(this).parent('fieldset').height() -25);
 			
 
 			}); //end remove_team click

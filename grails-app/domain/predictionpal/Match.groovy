@@ -5,6 +5,7 @@ class Match {
 	static hasMany = [prevMatches: Match, teams: Team, matchPredictions: MatchPrediction]
 	Match nextMatch
 	WinTeam winner
+	int posX, posY
 	
 	static mappedBy = [ prevMatches: "nextMatch"] //prevmatches on this obj defined by next on other obj
 
@@ -37,6 +38,8 @@ class Match {
     	nextMatch nullable: true
 		winner nullable: true
 		matchPredictions nullable: true
+		posX nullable: true
+		posY nullable: true
     }
 
 }
