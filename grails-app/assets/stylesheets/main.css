@@ -11,10 +11,8 @@ h1, h2, h3, h4, h5, h6 {
 /* BASE LAYOUT */
 
 html {
-	background-color: #ddd;
-	background-image: -moz-linear-gradient(center top, #aaa, #ddd);
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #aaa), color-stop(1, #ddd));
-	background-image: linear-gradient(top, #aaa, #ddd);
+	background-color: #636363;
+
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#aaaaaa', EndColorStr = '#dddddd');
 	background-repeat: no-repeat;
 	height: 100%;
@@ -40,15 +38,17 @@ body {
 	background: #7c88a7;
 	color: #333333;
 	margin: 0 auto;
-	max-width: 960px;
+	max-width: 1240px;
 	overflow-x: hidden; /* prevents box-shadow causing a horizontal scrollbar in firefox when viewport < 960px wide */
-	   -moz-box-shadow: 0 0 0.3em #000000;
-	-webkit-box-shadow: 0 0 0.3em #000000;
-	        box-shadow: 0 0 0.3em #000000;
+	   -moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	        box-shadow: none;
 }
 
 #pPLogo {
-	background-color: #636363;
+	background-color: #515151;
+	margin:0 auto;
+	max-width:960px;
 }
 
 /* replace with .no-boxshadow body if you have modernizr available */
@@ -137,9 +137,9 @@ img {
 .nav {
 	background-color: #efefef;
 	padding: 0.5em 0.75em;
-	   -moz-box-shadow: 0 0 3px 1px #aaaaaa;
-	-webkit-box-shadow: 0 0 3px 1px #aaaaaa;
-	        box-shadow: 0 0 3px 1px #aaaaaa;
+	   -moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	        box-shadow: none;
 	zoom: 1;
 }
 
@@ -277,9 +277,9 @@ input:focus, select:focus, textarea:focus {
 	background-color: #ffffff;
 	border: 1px solid #eeeeee;
 	outline: 0;
-	   -moz-box-shadow: 0 0 0.5em #ffffff;
-	-webkit-box-shadow: 0 0 0.5em #ffffff;
-	        box-shadow: 0 0 0.5em #ffffff;
+	   -moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	        box-shadow: none;
 }
 
 .required-indicator {
@@ -338,18 +338,18 @@ fieldset.embedded legend {
 	background: #f3f3ff;
 	border: 1px solid #b2d1ff;
 	color: #006dba;
-	   -moz-box-shadow: 0 0 0.25em #b2d1ff;
-	-webkit-box-shadow: 0 0 0.25em #b2d1ff;
-	        box-shadow: 0 0 0.25em #b2d1ff;
+	   -moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	        box-shadow: none;
 }
 
 .errors {
 	background: #fff3f3;
 	border: 1px solid #ffaaaa;
 	color: #cc0000;
-	   -moz-box-shadow: 0 0 0.25em #ff8888;
-	-webkit-box-shadow: 0 0 0.25em #ff8888;
-	        box-shadow: 0 0 0.25em #ff8888;
+	   -moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	        box-shadow: none;
 }
 
 .errors ul,
@@ -377,9 +377,9 @@ fieldset.embedded legend {
 }
 
 .error input:focus, .error select:focus, .error textarea:focus {
-	   -moz-box-shadow: 0 0 0.5em #ffaaaa;
-	-webkit-box-shadow: 0 0 0.5em #ffaaaa;
-	        box-shadow: 0 0 0.5em #ffaaaa;
+	   -moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	        box-shadow: none;
 }
 
 /* same effects for browsers that support HTML5 client-side validation (these have to be specified separately or IE will ignore the entire rule) */
@@ -391,9 +391,9 @@ input:invalid, select:invalid, textarea:invalid {
 }
 
 input:invalid:focus, select:invalid:focus, textarea:invalid:focus {
-	   -moz-box-shadow: 0 0 0.5em #ffaaaa;
-	-webkit-box-shadow: 0 0 0.5em #ffaaaa;
-	        box-shadow: 0 0 0.5em #ffaaaa;
+	   -moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	        box-shadow: none;
 }
 
 /* TABLES */
@@ -486,9 +486,9 @@ th:hover, tr:hover {
 	margin: 0;
 	padding: 0.3em 0.2em;
 	text-align: center;
-	   -moz-box-shadow: 0 0 3px 1px #AAAAAA;
-	-webkit-box-shadow: 0 0 3px 1px #AAAAAA;
-	        box-shadow: 0 0 3px 1px #AAAAAA;
+	   -moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	        box-shadow: none;
 	background-color: #EFEFEF;
 }
 
@@ -525,9 +525,9 @@ th:hover, tr:hover {
 	background-color: #efefef;
 	overflow: hidden;
 	padding: 0.3em;
-	   -moz-box-shadow: 0 0 3px 1px #aaaaaa;
-	-webkit-box-shadow: 0 0 3px 1px #aaaaaa;
-	        box-shadow: 0 0 3px 1px #aaaaaa;
+	   -moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	        box-shadow: none;
 	margin: 0.1em 0 0 0;
 	border: none;
 }

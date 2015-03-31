@@ -6,7 +6,6 @@
 		<style type="text/css" media="screen">
 			#status {
 				background-color: #eee;
-				border: .2em solid #fff;
 				margin: 2em 2em 1em;
 				padding: 1em;
 				width: 12em;
@@ -35,7 +34,6 @@
 			}
 
 			#status h1 {
-				text-transform: uppercase;
 				font-size: 1.1em;
 				margin: 0 0 0.3em;
 			}
@@ -87,7 +85,7 @@
 			<ul>
 				<li class="controller"><g:link controller="tournament" action="start">Make a new Tournament</g:link></li>
 				<li class="controller"><g:link controller="tournament">View existing Tournaments</g:link></li>
-				<li class="controller"><g:link controller="prediction">View existing Predictions</g:link></li>
+				<!-- <li class="controller"><g:link controller="prediction">View existing Predictions</g:link></li> -->
 			</ul>
 		</div>
 		<div id="page-body" role="main">
