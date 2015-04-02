@@ -28,17 +28,21 @@ class TournamentController {
 
             if(newTourny.hasSeeds == true){
                 for(int j = 1; j <= numTeams; j++) {
-                    newMatches[i].addToTeams(new Team(name: params["match"+matchId+"Team"+j], seed: params["match"+matchId+"Team"+j+"seed"]))
+                    if (params["match"+matchId+"Team"+j]){
+                        newMatches[i].addToTeams(new Team(name: params["match"+matchId+"Team"+j], seed: params["match"+matchId+"Team"+j+"seed"]))
+                    }
                 }
             }else {
                 for(int j = 1; j <= numTeams; j++) {
-                    newMatches[i].addToTeams(new Team(name: params["match"+matchId+"Team"+j]))
+                    if (params["match"+matchId+"Team"+j]){
+                        newMatches[i].addToTeams(new Team(name: params["match"+matchId+"Team"+j]))
+                    }
                 }
             }
-            if (params["match"+(char)matchId+"PosX"] && params["match"+(char)matchId+"PosY"]) {
+            /*if (params["match"+(char)matchId+"PosX"] && params["match"+(char)matchId+"PosY"]) {
                 newMatches[i].posX = params.int("match"+(char)matchId+"PosX")
                 newMatches[i].posY = params.int("match"+(char)matchId+"PosY")
-            }
+            }*/
         }
 
         //this loop sets the nextMatch attribute on each of the
