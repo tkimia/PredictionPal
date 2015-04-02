@@ -6,6 +6,7 @@ class Match {
 	Match nextMatch
 	WinTeam winner
 	int posX, posY
+	char orderchar
 	
 	static mappedBy = [ prevMatches: "nextMatch"] //prevmatches on this obj defined by next on other obj
 
@@ -40,6 +41,7 @@ class Match {
 		matchPredictions nullable: true
 		posX nullable: true
 		posY nullable: true
+		orderchar nullable: true
     }
 
 }

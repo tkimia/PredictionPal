@@ -45,7 +45,7 @@
 
 		#formMatches {
 			height: 550px;
-			width: 750px;
+			width: 1250px;
 			background: #fff;
 			border: 5px black;
 		}
@@ -56,9 +56,10 @@
 			$( "#formMatches fieldset" ).draggable({ containment: "parent", snap: true, grid: [20,20],
 				 stop: function() {
 					var mLetter = $(this).attr('id').slice(-1);
-					var pos = $("#match"+mLetter).position();
-					$("#match"+mLetter+"PosY").attr("value", pos.top);
-					$("#match"+mLetter+"PosX").attr("value", pos.left);
+					var posx = $("#match"+mLetter).css("left").replace(/[^-\d\.]/g, '');
+					var posy = $("#match"+mLetter).css("top").replace(/[^-\d\.]/g, '');
+					$("#match"+mLetter+"PosY").attr("value", posx);
+					$("#match"+mLetter+"PosX").attr("value", posy);
 					
 				}
 			 });
@@ -162,9 +163,10 @@
 			$( "#formMatches fieldset" ).draggable({ containment: "parent", snap: true, grid: [20,20],
 				 stop: function() {
 					var mLetter = $(this).attr('id').slice(-1);
-					var pos = $("#match"+mLetter).position();
-					$("#match"+mLetter+"PosY").attr("value", pos.top);
-					$("#match"+mLetter+"PosX").attr("value", pos.left);
+					var posx = $("#match"+mLetter).css("left").replace(/[^-\d\.]/g, '');
+					var posy = $("#match"+mLetter).css("top").replace(/[^-\d\.]/g, '');
+					$("#match"+mLetter+"PosY").attr("value", posx);
+					$("#match"+mLetter+"PosX").attr("value", posy);
 					
 				} });
 			}); //end add_button click
@@ -198,8 +200,8 @@
 				if (hasSeeds) {
 					$(this).parent('fieldset').append(
 						'<div> \
-							<input name="match'+mLetter+'Team'+teams+'seed" value="" id="match'+mLetter+'Team'+teams+'seed" type="number" placeholder="Team name"> \
-							<input name="match'+mLetter+'Team'+teams+'" value="" id="match'+mLetter+'Team'+teams+'" type="text"> \
+							<input name="match'+mLetter+'Team'+teams+'seed" value="" id="match'+mLetter+'Team'+teams+'seed" type="number" > \
+							<input name="match'+mLetter+'Team'+teams+'" value="" id="match'+mLetter+'Team'+teams+'" type="text" placeholder="Team name"> \
 						</div>'
 						 );
 				}

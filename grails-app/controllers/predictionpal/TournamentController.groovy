@@ -39,6 +39,7 @@ class TournamentController {
                     }
                 }
             }
+            newMatches[i].orderchar = (char)matchId;
             if (params["match"+(char)matchId+"PosX"] && params["match"+(char)matchId+"PosY"]) {
                 newMatches[i].posX = (int)params.double("match"+(char)matchId+"PosX")
                 newMatches[i].posY = (int)params.double("match"+(char)matchId+"PosY")
@@ -60,13 +61,15 @@ class TournamentController {
             }
 
             newTourny.addToMatches(newMatches[i])
+            
         }
+        newTourny.save(flush: true, failOnError:true)
 
         params.each() { key, value ->
             log.error key + ": " + value
         }
 
- 		newTourny.save(flush: true, failOnError:true)
+
     	redirect(action: 'index')
     }
 

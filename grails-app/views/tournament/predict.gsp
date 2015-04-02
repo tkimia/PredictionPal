@@ -4,57 +4,78 @@
 	Predict for ${ tournament.title }
 	</title>
 	<meta name="layout" content="main"/>
+	<style>
+		#matches-container {
+			overflow-x: scroll;
+			padding: 5px;
+
+		}
+
+		#formMatches {
+			height: 550px;
+			width: 750px;
+			background: #fff;
+			border: 5px black;
+		}
+	</style>
 </head>
 <body>
 	<g:if test="${tournament.state == 1}">
-	<g:form action="packPredictions" id="predictionForm">
-		<fieldset id="general-details">
-			<g:hiddenField name="tournamentName" value="${tournament.title}"/>
-			<legend>Predict for ${ tournament.title }</legend>
+		<g:form action="packPredictions" id="predictionForm">
 
-			<label for="name">Name</label>
-			<g:textField name="name" />
-			<br />
+			<fieldset id="general-details">
+				<g:hiddenField name="tournamentName" value="${tournament.title}"/>
+				<legend>Predict for ${ tournament.title }</legend>
 
-			<label for="email">Email</label>
-			<g:textField name="email" />
-			<br />
+				<label for="name">Name</label>
+				<g:textField name="name" />
+				<br />
 
-		</fieldset>
+				<label for="email">Email</label>
+				<g:textField name="email" />
+				<br />
 
-		<div id="formMatches">
-		<fieldset>
+			</fieldset>
 
-		<legend>Enter a Prediction</legend>
-		<g:each var="match" in="${tournament.matches.sort {it.id}}">
-			<div id="Match${match.id}">
-				<g:if test="${match.nextMatch}">
-					<p style="visiblity:hidden" class="nextinfo">${match.nextMatch.id}</p>
-				</g:if>
-				<g:else>
-					<p style="visiblity:hidden" class="nextinfo">NULL</p>
-				</g:else>
-				<g:each var="team" in="${match.teams.sort {it.id}}">
-					<input type="radio" name="${match.id}"
-						value="${team.name}">${team.name}<br/>
-					<g:if test="${tournament.hasScores}">
-						<g:textField name="scores${match.id}" />
-					<br/>
-					</g:if>
-				</g:each>
-				<br/>
+			<div id="formMatches">
+				<div id="matches-container">
+				<fieldset>
+
+					<legend>Enter a Prediction</legend>
+					<g:each var="match" in="${tournament.matches.sort {it.orderchar}}">
+			
+
+					<div id="Match${match.id}" >
+						
+						<g:if test="${match.nextMatch}">
+						<p style="visiblity:hidden" class="nextinfo">${match.nextMatch.id}</p>
+						</g:if>
+						<g:else>
+							<p style="visiblity:hidden" class="nextinfo">NULL</p>
+						</g:else>
+							<p>${match.posX}</p>
+							<p>${match.posY}</p>
+						<g:each var="team" in="${match.teams.sort {it.id}}">
+							<input type="radio" name="${match.id}"
+							value="${team.name}">${team.name}<br/>
+							<g:if test="${tournament.hasScores}">
+								<g:textField name="scores${match.id}" /><br/>
+							</g:if>
+						</g:each>
+					</div><br/>
+					</g:each>
+				
+				<g:submitButton name="post" value="Make Predictions"/>
+
+				</fieldset>
+				</div>
 			</div>
-			<br/>
-		</g:each>
-		<g:submitButton name="post" value="Make Predictions"/>
-
-		</fieldset>
-		</div>
-	</g:form>
+		</g:form>
 	</g:if>
 	<g:else>
-	<h1>Sorry! This tournament is no longer accepting predictions.</h1>
+		<h1>Sorry! This tournament is no longer accepting predictions.</h1>
 	</g:else>
+
 	<script type="text/javascript">
 		jQuery(document).ready( function() {
 
