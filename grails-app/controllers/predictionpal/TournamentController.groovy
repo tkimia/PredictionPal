@@ -39,10 +39,10 @@ class TournamentController {
                     }
                 }
             }
-            /*if (params["match"+(char)matchId+"PosX"] && params["match"+(char)matchId+"PosY"]) {
-                newMatches[i].posX = params.int("match"+(char)matchId+"PosX")
-                newMatches[i].posY = params.int("match"+(char)matchId+"PosY")
-            }*/
+            if (params["match"+(char)matchId+"PosX"] && params["match"+(char)matchId+"PosY"]) {
+                newMatches[i].posX = (int)params.double("match"+(char)matchId+"PosX")
+                newMatches[i].posY = (int)params.double("match"+(char)matchId+"PosY")
+            }
         }
 
         //this loop sets the nextMatch attribute on each of the
