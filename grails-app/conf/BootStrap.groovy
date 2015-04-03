@@ -30,7 +30,7 @@ class BootStrap {
 			.addToTeams(team7)
 			.addToTeams(team8)
 
-		Tournament tourny = new Tournament(sid:"color", title:"Ruby Rumble", owner:"Oz", hasSeeds:false, hasScores:false, state: 1, acceptingPredictions:true) 
+		Tournament tourny = new Tournament(sid:"color", title:"Ruby Rumble", owner:"Oz", hasSeeds:false, hasScores:false, state: 1, acceptingPredictions:true)
 			.addToMatches(match1)
 			.addToMatches(match2)
 			.addToMatches(match3)
@@ -44,10 +44,10 @@ class BootStrap {
 		Match rpsMatch = new Match()
 			.addToTeams(new Team(name: "Julian"))
 			.addToTeams(new Team(name: "Ricky"))
-		Tournament rps = new Tournament(sid: "rps", title: "Rock Paper Scissors", owner: "Me", hasSeeds:false, hasScores:false, state: 1)
+		Tournament rps = new Tournament(sid: "rps", title: "Rock Paper Scissors", owner: "Me", hasSeeds:false, hasScores:false, state: 3)
 			.addToMatches(rpsMatch)
 			.save(flush: true, failOnError: true)
-		
+
 		Prediction rpsPred = new Prediction(name: "Bobby", email:"flashexe3@yahoo.com.hk")
 		TeamPrediction win = new TeamPrediction(name: "Ricky")
 		MatchPrediction mPred = new MatchPrediction(correspondingMatch: rpsMatch, predictedWinner: win)

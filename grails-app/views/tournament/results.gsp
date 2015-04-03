@@ -11,7 +11,7 @@
 		<fieldset id="general-details">
 			<g:hiddenField name="tournamentName" value="${tournament.title}"/>
 			<legend>Results for ${ tournament.title }</legend>
-			<a href="http://localhost:8080/PredictionPal/tournament/tournamentResults/${tournament.sid}">Tournament Results</a>
+			<a href="/PredictionPal/tournament/tournamentResults/${tournament.sid}">Tournament Results</a>
 			<g:hiddenField name="sid" value="${tournament.sid}"/>
 			<g:hiddenField name="toLookAt" value="0"/>
 			<br />
@@ -43,8 +43,9 @@
 				//e.preventDefault();
 				var parentDiv = $(this).parent("div");
 				var predictionId = parentDiv.find(".predId").text();
-				var url = "http://localhost:8080/PredictionPal/tournament/viewPrediction/" + predictionId;
-				window.location = url;
+				/*var url = "http://localhost:8080/PredictionPal/tournament/viewPrediction/" + predictionId;
+				window.location = url;*/
+				window.location.href = '/PredictionPal/tournament/viewPrediction/' + predictionId;
 			}); //End remove button
 
 		}); //End script

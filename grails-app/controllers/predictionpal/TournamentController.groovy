@@ -61,7 +61,7 @@ class TournamentController {
             }
 
             newTourny.addToMatches(newMatches[i])
-            
+
         }
         newTourny.save(flush: true, failOnError:true)
 
@@ -79,7 +79,7 @@ class TournamentController {
     		response.sendError(404)
     	else
             [tournament : tournament]
-    		
+
     }
 
     def packPredictions() {
@@ -120,7 +120,7 @@ class TournamentController {
         def prediction = Prediction.findById(params.id);
         if (!prediction)
             response.sendError(404)
-        else 
+        else
             [prediction : prediction]
     }
 
@@ -213,7 +213,7 @@ class TournamentController {
             }
         }
     }
-	
+
 	def results() {
 		def tournament = Tournament.findBySid(params.id);
 		if (!tournament)
@@ -234,7 +234,7 @@ class TournamentController {
         def prediction = Prediction.findById(params.id);
         if (!prediction)
             response.sendError(404)
-        else 
+        else
             [prediction : prediction]
     }
 	def portal(){
