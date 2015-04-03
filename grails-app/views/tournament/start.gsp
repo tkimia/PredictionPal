@@ -165,8 +165,8 @@
 					var mLetter = $(this).attr('id').slice(-1);
 					var posx = $("#match"+mLetter).css("left").replace(/[^-\d\.]/g, '');
 					var posy = $("#match"+mLetter).css("top").replace(/[^-\d\.]/g, '');
-					$("#match"+mLetter+"PosY").attr("value", posx);
-					$("#match"+mLetter+"PosX").attr("value", posy);
+					$("#match"+mLetter+"PosY").attr("value", posy);
+					$("#match"+mLetter+"PosX").attr("value", posx);
 					
 				} });
 			}); //end add_button click

@@ -12,10 +12,10 @@ class BootStrap {
 		Team team7 = new Team(name:"Tornadoes")
 		Team team8 = new Team(name:"Lollipop Gang")
 
-		Match match7 = new Match(posX:-587, posY:697,orderchar:'G')
+		Match match7 = new Match(posX:657, posY:-457,orderchar:'G')
 
-		Match match5 = new Match(nextMatch: match7, posX:-231, posY:421,orderchar:'E')
-		Match match6 = new Match(nextMatch: match7, posX:-622, posY:421,orderchar:'F')
+		Match match5 = new Match(nextMatch: match7, posX:350, posY:-115,orderchar:'E')
+		Match match6 = new Match(nextMatch: match7, posX:350, posY:-450,orderchar:'F')
 
 		Match match1 = new Match(nextMatch:match5, posX:5, posY:0,orderchar:'A')
 			.addToTeams(team1)
