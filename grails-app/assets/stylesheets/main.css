@@ -8,6 +8,49 @@ h1, h2, h3, h4, h5, h6 {
 	line-height: 1.1;
 }
 
+/*Added css*/
+
+ul.nav-root {
+	background-color:#928a8a;
+	height: 20px;
+	width: 1170px;
+	z-index:1000;
+	background-repeat: no-repeat;
+	position: fixed;
+}
+
+ul.nav-root li.current > a
+{
+  background-color: #74a8db;
+  background-image: none;
+  height: 18px;
+  z-index: 1010;
+  position: absolute;
+  bottom: 2px;
+  width: 100px;
+  display: block;
+  min-width:100px;
+}
+
+ul.nav-root li > a
+{
+  background-color: #74a8db;
+  background-image: none;
+  z-index: 1010;
+  position: absolute;
+  bottom: -2px;
+  width: 100px;
+  min-width:100px;
+}
+
+
+.nav-button{
+	background-color:#636363;
+	height: 80%;
+	width: 30%;
+	margin: 2px;
+}
+
 /* BASE LAYOUT */
 
 html {

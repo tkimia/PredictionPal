@@ -19,6 +19,17 @@
 		<g:layoutHead/>
 	</head>
 	<body>
+	<ul id="navigation-bar" class="nav-root">
+		<li class="current">
+			<a href="/PredictionPal/">Home</a>
+		</li>
+		<li>
+			<a href="PredictionPal/portal">Portal</a>
+		</li>
+		<li>
+			<a href="PredictionPal/login">Login</a>
+		</li>
+	</ul>
 		<div id="pPLogo" role="banner"><a href="/PredictionPal/"><asset:image src="pPLogo3.png" alt="Grails"/></a></div>
 		<div class="main-container">
 			<g:layoutBody/>		
