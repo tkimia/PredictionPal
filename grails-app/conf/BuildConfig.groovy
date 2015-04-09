@@ -62,6 +62,7 @@ grails.project.dependency.resolution = {
         compile ':cache:1.1.8'
         compile ":asset-pipeline:1.9.9"
         compile ":mail:1.0.7"
+		compile ':cookie:1.4'
 
 
         // plugins needed at runtime but not for compilation
