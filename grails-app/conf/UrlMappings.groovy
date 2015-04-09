@@ -11,7 +11,6 @@ class UrlMappings {
 		"/help"(view:"/helppage")
 		"/portal"(view:"/portal")
 		"500"(view:'/error')
-		"/tournament/frontpage"(view:'/tournament/frontpage')
         "/tournament/create"(redirect:'/tournament/start')
 	}
 }

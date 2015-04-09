@@ -38,7 +38,7 @@ body {
 	background: #7c88a7;
 	color: #333333;
 	margin: 0 auto;
-	max-width: 1240px;
+	max-width: 0 auto;
 	overflow-x: hidden; /* prevents box-shadow causing a horizontal scrollbar in firefox when viewport < 960px wide */
 	   -moz-box-shadow: none;
 	-webkit-box-shadow: none;
