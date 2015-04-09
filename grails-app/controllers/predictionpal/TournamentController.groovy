@@ -73,12 +73,13 @@ class TournamentController {
     	redirect(action: 'index')
     }
 
+
+    /**
+    *   Redirect to the predict page, which is also the manage page,
+    *   NOTE: Most of the logic happens on the predict.gsp page
+    */
     def predict() {
         boolean isManager = false;
-
-        params.each() { key, value ->
-            log.error key + ": " + value
-        }
 
     	def tournament = Tournament.findBySid(params.id);
     	if (!tournament)
