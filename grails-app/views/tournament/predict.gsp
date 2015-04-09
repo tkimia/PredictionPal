@@ -51,10 +51,10 @@
 
 
 	<g:if test="${tournament.state == 1 || isManager}">
-
 		<g:form action="packPredictions" id="predictionForm">
 
 		<g:if test="${!isManager}">
+			<h2> Enter your Prediction </h2>
 			<fieldset id="general-details">
 				<g:hiddenField name="tournamentName" value="${tournament.title}"/>
 				<legend>Predict for ${ tournament.title }</legend>
@@ -69,6 +69,9 @@
 
 			</fieldset>
 		</g:if>
+		<g:else>
+			<h2> Update the results of this tournament </h2>
+		</g:else>
 
 			<div id="matches-container">
 			<div id="formMatches">
@@ -108,30 +111,20 @@
 		<h1>Sorry! This tournament is no longer accepting predictions.</h1>
 	</g:else>
 
-	<g:form action="lookAtPredictions" id="currentPredicionsForm">
-		<fieldset id="general-details">
-			<g:hiddenField name="tournamentName" value="${tournament.title}"/>
-			<legend>Current Predictions For ${ tournament.title }</legend>
-			<g:hiddenField name="sid" value="${tournament.sid}"/>
-			<g:hiddenField name="toBeRemoved" value="0"/>
-			<br />
+	
+	<div id="remove-predictions">
+		<h2> Current Predictions for this Tournament </h2>
 
-		</fieldset>
-
-		<div id="listPreds">
-		<fieldset>
-
-			<legend>Participants</legend>
+		<ul id="listPreds">
 			<g:each var="Preds" in="${tournament.predictions.sort {it.id}}">
-				<div id="Pred${Preds.id}">
-				${Preds.name} <a class="removePred">Remove Prediction</a>
-				<p hidden=true class="predId">${Preds.id}</p>
-				<p hidden=true class="TournSid">${tournament.sid}</p>
-				</div>
+				<li id="Pred${Preds.id}">
+					${Preds.name} <a class="removePred">Remove Prediction</a>
+					<p hidden=true class="predId">${Preds.id}</p>
+					<p hidden=true class="TournSid">${tournament.sid}</p>
+				</li>
 			</g:each>
-			</fieldset>
-		</div>
-	</g:form>
+		</ul>
+	</div>
 
 
 	<script type="text/javascript">
@@ -166,12 +159,11 @@
 				}
 			});
 
+			//code for removing predictions
 			var remove_button = $(".removePred");
-
-
 			$(remove_button).click(function(e) {
 				//e.preventDefault();
-				var parentDiv = $(this).parent("div");
+				var parentDiv = $(this).parent("li");
 				var predictionId = parentDiv.find(".predId").text();
 				var tournamentSid = parentDiv.find(".TournSid").text();
 				console.log("here");
