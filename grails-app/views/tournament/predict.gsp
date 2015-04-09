@@ -41,8 +41,13 @@
 	</style>
 </head>
 <body>
-	<g:if test="${tournament.state == 1}">
+	<g:if test="${isManager}">
+		<h2> Welcome back ${tournament.owner} </h2>
+	</g:if>
+	<g:if test="${tournament.state == 1 || isManager}">
+
 		<g:form action="packPredictions" id="predictionForm">
+
 
 			<fieldset id="general-details">
 				<g:hiddenField name="tournamentName" value="${tournament.title}"/>

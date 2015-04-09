@@ -12,7 +12,7 @@ class TournamentController {
     def packTournament() {
  		def newTourny = new Tournament(sid: generateSid(),
  			owner: params.owner, title: params.title,
- 			state: 1, acceptingPredictions: true);
+ 			state: 1, acceptingPredictions: true, pass: generateSid());
 
  		newTourny.hasSeeds = (params.hasSeeds) ? true : false;
  		newTourny.hasScores =  (params.hasScores) ? true : false;
@@ -74,12 +74,21 @@ class TournamentController {
     }
 
     def predict() {
+        boolean isManager = false;
+
+        params.each() { key, value ->
+            log.error key + ": " + value
+        }
+
     	def tournament = Tournament.findBySid(params.id);
     	if (!tournament)
     		response.sendError(404)
-    	else
-            [tournament : tournament]
-
+    	else {
+            if (params.pass == tournament.pass) {
+                isManager = true
+            }
+            [tournament : tournament, isManager : isManager]
+        }
     }
 
     def packPredictions() {
