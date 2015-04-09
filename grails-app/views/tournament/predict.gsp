@@ -42,13 +42,19 @@
 </head>
 <body>
 	<g:if test="${isManager}">
-		<h2> Welcome back ${tournament.owner} </h2>
+		<div id="owner-box">
+			<h2> Welcome back ${tournament.owner} </h2>
+
+			<p> On this page you can update the actual tournament status and see predictions that users have submitted </p>
+		</div>
 	</g:if>
+
+
 	<g:if test="${tournament.state == 1 || isManager}">
 
 		<g:form action="packPredictions" id="predictionForm">
 
-
+		<g:if test="${!isManager}">
 			<fieldset id="general-details">
 				<g:hiddenField name="tournamentName" value="${tournament.title}"/>
 				<legend>Predict for ${ tournament.title }</legend>
@@ -62,6 +68,7 @@
 				<br />
 
 			</fieldset>
+		</g:if>
 
 			<div id="matches-container">
 			<div id="formMatches">
@@ -92,16 +99,40 @@
 					</fieldset>
 					</g:each>
 				
-				<g:submitButton name="post" value="Make Predictions"/>
-
-					
 				</div>
+					<g:submitButton name="post" value="Make Predictions"/>
 			</div>
 		</g:form>
 	</g:if>
 	<g:else>
 		<h1>Sorry! This tournament is no longer accepting predictions.</h1>
 	</g:else>
+
+	<g:form action="lookAtPredictions" id="currentPredicionsForm">
+		<fieldset id="general-details">
+			<g:hiddenField name="tournamentName" value="${tournament.title}"/>
+			<legend>Current Predictions For ${ tournament.title }</legend>
+			<g:hiddenField name="sid" value="${tournament.sid}"/>
+			<g:hiddenField name="toBeRemoved" value="0"/>
+			<br />
+
+		</fieldset>
+
+		<div id="listPreds">
+		<fieldset>
+
+			<legend>Participants</legend>
+			<g:each var="Preds" in="${tournament.predictions.sort {it.id}}">
+				<div id="Pred${Preds.id}">
+				${Preds.name} <a class="removePred">Remove Prediction</a>
+				<p hidden=true class="predId">${Preds.id}</p>
+				<p hidden=true class="TournSid">${tournament.sid}</p>
+				</div>
+			</g:each>
+			</fieldset>
+		</div>
+	</g:form>
+
 
 	<script type="text/javascript">
 		jQuery(document).ready( function() {
@@ -134,6 +165,19 @@
 				}
 				}
 			});
+
+			var remove_button = $(".removePred");
+
+
+			$(remove_button).click(function(e) {
+				//e.preventDefault();
+				var parentDiv = $(this).parent("div");
+				var predictionId = parentDiv.find(".predId").text();
+				var tournamentSid = parentDiv.find(".TournSid").text();
+				console.log("here");
+				jQuery.post("../../prediction/delPred?id="+predictionId+"&tou="+tournamentSid);
+				parentDiv.fadeOut();
+			}); //End remove button
 
 		});
 	</script>

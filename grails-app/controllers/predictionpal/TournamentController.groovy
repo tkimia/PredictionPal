@@ -32,7 +32,7 @@ class TournamentController {
                         newMatches[i].addToTeams(new Team(name: params["match"+matchId+"Team"+j], seed: params["match"+matchId+"Team"+j+"seed"]))
                     }
                 }
-            }else {
+            } else {
                 for(int j = 1; j <= numTeams; j++) {
                     if (params["match"+matchId+"Team"+j]){
                         newMatches[i].addToTeams(new Team(name: params["match"+matchId+"Team"+j]))
@@ -176,14 +176,6 @@ class TournamentController {
 		emailParticipants(t);
 		t.save(flush: true, failOnError:true)
 		redirect(action: 'index')
-	}
-
-	def predictions(){
-		def tournament = Tournament.findBySid(params.id);
-		if(!tournament)
-			response.sendError(404)
-		else
-			[tournament : tournament]
 	}
 
 	def stopAcceptingPredicts() {
