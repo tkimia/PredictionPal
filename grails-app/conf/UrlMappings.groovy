@@ -13,5 +13,6 @@ class UrlMappings {
 		"500"(view:'/error')
         "/index_display"(view:"/tournament/index_display")
         "/tournament/create"(redirect:'/tournament/start')
-	}
+	    "404"(view:'/404')
+    }
 }

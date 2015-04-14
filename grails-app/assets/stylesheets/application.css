@@ -11,3 +11,8 @@
 *= require mobile
 *= require_self
 */
+
+.main-container {
+	max-width: 1248px;
+	margin: 0 auto;
+}

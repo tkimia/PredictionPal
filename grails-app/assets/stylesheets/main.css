@@ -4,14 +4,56 @@ input, select, textarea {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
+/* COLOR PALETTE
+
+color 1: 7691BF
+color 2: 4F617F
+color 3: 9DC1FF
+color 4: 273040
+color 5: 8EAEE5
+
+*/
+
+
 h1, h2, h3, h4, h5, h6 {
 	line-height: 1.1;
+}
+
+/*Added css*/
+
+ul.nav-root {
+	background-color:#4F617F; /*color 2*/
+	height: 20px;
+	width: 100%;
+	height: 3%;
+	z-index:1000;
+	background-repeat: no-repeat;
+	position: fixed;
+}
+
+li.nav-buttons
+{
+	background-color:#9DC1FF; /*color 3*/
+	margin-top: 2px;
+	margin-left:3%;
+	float: left;
+	width: 5%;
+	height: 80%;
+	text-align:center;
+	align:center;
+}
+
+.nav-button{
+	background-color:#9DC1FF; /*color 3*/
+	height: 80%;
+	width: 30%;
+	margin: 2px;
 }
 
 /* BASE LAYOUT */
 
 html {
-	background-color: #636363;
+	background-color: #9DC1FF; /*color 3*/
 
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#aaaaaa', EndColorStr = '#dddddd');
 	background-repeat: no-repeat;
@@ -23,7 +65,7 @@ html {
 }
 
 html.no-cssgradients {
-	background-color: #aaa;
+	background-color: #9DC1FF; /*color 3*/
 }
 
 .ie6 html {
@@ -35,7 +77,7 @@ html * {
 }
 
 body {
-	background: #7c88a7;
+	background: #9CA8C7; /*color 4*/
 	color: #333333;
 	margin: 0 auto;
 	max-width: 0 auto;
@@ -46,7 +88,7 @@ body {
 }
 
 #pPLogo {
-	background-color: #515151;
+	background-color: #515151; /*color 5*/
 	margin:0 auto;
 	max-width:960px;
 }
@@ -55,7 +97,7 @@ body {
 .ie6 body,
 .ie7 body,
 .ie8 body {
-	border-color: #ffffff;
+	border-color: #ffffff; /*color 3*/
 	border-style: solid;
 	border-width: 0 1px;
 }
@@ -65,7 +107,7 @@ body {
 }
 
 a:link, a:visited, a:hover {
-	color: #674a40;
+	color: #000000;
 }
 
 a:hover, a:active {
@@ -73,10 +115,12 @@ a:hover, a:active {
 }
 
 h1 {
-	color: #eaeaea;
-	font-weight: normal;
-	font-size: 1.25em;
-	margin: 0.8em 0 0.3em 0;
+	color: #fafafa;
+	font-weight: bold;
+	text-transform: capitalize;
+	font-size: 48px;
+	text-align: center;
+	text-shadow: 0px 0px 5px #000000;
 }
 
 ul {
@@ -108,7 +152,7 @@ img {
 }
 
 .footer {
-	background: #515151;
+	background: #273040; /*color 4*/
 	color: #000;
 	clear: both;
 	font-size: 0.8em;
@@ -135,7 +179,7 @@ img {
 /* NAVIGATION MENU */
 
 .nav {
-	background-color: #efefef;
+	background-color: #efefef; 
 	padding: 0.5em 0.75em;
 	   -moz-box-shadow: none;
 	-webkit-box-shadow: none;

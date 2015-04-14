@@ -4,53 +4,8 @@
 	<meta name="layout" content="main" />
 	
 	<!-- TODO: Move this externally -->
-	<style>
-		fieldset {
-		    font-family: sans-serif;
-		    border: 5px solid #a34949;
-		    background: #ddd;
-		    border-radius: 5px;
-		    padding: 15px;
-		}
-
-		#overview-fieldset legend {
-		    background: #000;
-		    color: #fff;
-		    padding: 5px 10px ;
-		    font-size: 32px;
-		    border-radius: 5px;
-		    box-shadow: 0 0 0 5px #a34949;
-		    margin-left: 20px;
-		}
-
-		#formMatches fieldset{
-			width: 250px;
-			border: 3px solid #a34949;
-		    padding: 10px;
-		    height: 75px;
-		    margin: 5px;
-		}
-
-		#formMatches fieldset legend{
-			background: #000;
-		    color: #fff;
-		    box-shadow: 0 0 0 3px #a34949;
-		}
-
-		#matches-container {
-			overflow-x: scroll;
-			padding: 5px;
-
-		}
-
-		#formMatches {
-			height: 550px;
-			width: 1250px;
-			background: #fff;
-			border: 5px black;
-		}
-
-	</style>
+	<asset:stylesheet href="tournament_form.css" />
+	
 	 <script>
 		$(function() {
 			$( "#formMatches fieldset" ).draggable({ containment: "parent", snap: true, grid: [20,20],
