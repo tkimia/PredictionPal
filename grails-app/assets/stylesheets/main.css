@@ -146,10 +146,12 @@ a:hover, a:active {
 }
 
 h1 {
-	color: #eaeaea;
-	font-weight: normal;
-	font-size: 1.25em;
-	margin: 0.8em 0 0.3em 0;
+	color: #fafafa;
+	font-weight: bold;
+	text-transform: capitalize;
+	font-size: 48px;
+	text-align: center;
+	text-shadow: 0px 0px 5px #000000;
 }
 
 ul {
