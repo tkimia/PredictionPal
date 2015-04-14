@@ -22,7 +22,7 @@ h1, h2, h3, h4, h5, h6 {
 /*Added css*/
 #navigation-bar{
 	background-color:#4f617F; /*color 2*/
-	height:20px;
+	height:50px;
 	width:100%;
 	z-index:1000;
 	position: fixed;
@@ -45,12 +45,11 @@ h1, h2, h3, h4, h5, h6 {
 	z-index:1005;
 	position:absolute;
 	text-align:center;
-	text-size:90vh;
 }
 
 #logo{
 	color:#000000;
-	height:100%;
+	height:10px;
 }
 
 ul.nav-root {
@@ -64,14 +63,13 @@ ul.nav-root {
 li.nav-buttons
 {
 	background-color:#9DC1FF; /*color 3*/
-	margin-top: 1px;
+	margin-top: 10px;
 	margin-left:3px;
 	float: left;
 	width: 30%;
 	height: 80%;
 	text-align:center;
-	text-size:90vw;
-	text-size:95vh;
+	font-size: 25px;
 }
 
 .nav-button{
