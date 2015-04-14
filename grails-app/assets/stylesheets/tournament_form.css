@@ -48,6 +48,10 @@ fieldset {
 	border: 5px black;
 }
 
+input[type="number"] {
+    width: 30px;
+}
+
 
 /* Buttons */
 #add-remove-match-buttons {
