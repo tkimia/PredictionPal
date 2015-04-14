@@ -5,7 +5,7 @@
 	
 	<!-- TODO: Move this externally -->
 	<asset:stylesheet href="tournament_form.css" />
-	
+
 	 <script>
 		$(function() {
 			$( "#formMatches fieldset" ).draggable({ containment: "parent", snap: true, grid: [20,20],
@@ -198,7 +198,7 @@
 					$("input:text").filter(function() {
         				return this.id.match(/match[A-Z]Team[0-9]*/);
     				}).before(
-    					'<input name="'+$(this).prop('name')+'seed" value="" id="'+$(this).prop('name')+'seed" type="number" size="4" style="font-family:monospace">'
+    					'<input name="'+$(this).prop('name')+'seed" value="" id="'+$(it).parent('fieldset').prop('id')+'seed" type="number" size="4" style="font-family:monospace">'
     				);
 				} else {
 					$("input:text").filter(function() {
