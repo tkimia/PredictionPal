@@ -20,27 +20,58 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*Added css*/
+#navigation-bar{
+	background-color:#4f617F; /*color 2*/
+	height:20px;
+	width:100%;
+	z-index:1000;
+	position: fixed;
+}
+
+
+#list-holder{
+	background-color:#9DC1FF; /*color 3*/
+	height:100%;
+	width:33%;
+	z-index:1005;
+	position:absolute;
+}
+
+#logo-holder{
+	background-color:#8EAEE5; /*color 5*/
+	margin-left:33%;
+	height:100%;
+	width:33%;
+	z-index:1005;
+	position:absolute;
+	text-align:center;
+	text-size:90vh;
+}
+
+#logo{
+	color:#000000;
+	height:100%;
+}
 
 ul.nav-root {
-	background-color:#4F617F; /*color 2*/
-	height: 20px;
+	height: 100%;;
 	width: 100%;
-	height: 3%;
 	z-index:1000;
 	background-repeat: no-repeat;
-	position: fixed;
+	position: absolute;
 }
 
 li.nav-buttons
 {
 	background-color:#9DC1FF; /*color 3*/
-	margin-top: 2px;
-	margin-left:3%;
+	margin-top: 1px;
+	margin-left:3px;
 	float: left;
-	width: 5%;
+	width: 30%;
 	height: 80%;
 	text-align:center;
-	align:center;
+	text-size:90vw;
+	text-size:95vh;
 }
 
 .nav-button{
