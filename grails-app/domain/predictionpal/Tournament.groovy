@@ -12,6 +12,8 @@ class Tournament {
 	boolean hasScores  //whether or not users enter scores in predictions
 	boolean acceptingPredictions //at some point stop accepting predictions
 
+	boolean promotions //whether or not it will be promoted on the frontpage
+
     static constraints = {
     	title blank: false
     	owner blank: false

@@ -86,8 +86,10 @@
 				<li class="controller"><g:link controller="tournament" action="start">Make a new Tournament</g:link></li>
 				<li class="controller"><g:link controller="tournament">View existing Tournaments</g:link></li>
 				<li class="controller"><g:link controller="tournament" action="portal">Enter a tournament code</g:link>
+				<li class="controller"><g:link controller="tournament" action="index_display">View Promotions</g:link>
+				<!--<li class="controller"><g:link controller="tournament" action="index_display">View Promotions</g:link>-->
 				<!-- <li class="controller"><g:link controller="prediction">View existing Predictions</g:link></li> -->
-			</ul>
+			</ul>			
 		</div>
 		<div id="page-body" role="main">
 			<h1>Welcome to Prediction Pal!</h1>
