@@ -13,6 +13,8 @@ class Tournament {
 	boolean acceptingPredictions //at some point stop accepting predictions
 	String pass
 
+	boolean promotions //whether or not it will be promoted on the frontpage
+
     static constraints = {
     	title blank: false
     	owner blank: false

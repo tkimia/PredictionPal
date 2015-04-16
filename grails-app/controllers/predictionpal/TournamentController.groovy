@@ -9,6 +9,11 @@ class TournamentController {
 
     }
 
+    def index_display(){
+        def tournaments = Tournament.list()
+        [tournaments:tournaments]
+    }
+
     def packTournament() {
  		def newTourny = new Tournament(sid: generateSid(),
  			owner: params.owner, title: params.title,
