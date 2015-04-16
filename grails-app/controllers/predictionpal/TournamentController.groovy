@@ -247,8 +247,7 @@ class TournamentController {
 	def portal(){
 		def code = params.code
 		def tournament = Tournament.findBySid(code);
-		if(!tournament)
-			redirect(uri: '/portal' )
+		if(!tournament){}
 		else{
 			if(tournament.state==1){ //accepting predictions
 				redirect(action: 'predict', params:[id:code])
