@@ -34,6 +34,7 @@
 	</g:form>
 
 	<script type="text/javascript">
+	
 		jQuery(document).ready(function(){
 			var form_ref = $("#listPreds");
 			var view_button = $(".goTo");
