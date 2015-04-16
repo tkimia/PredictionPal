@@ -74,14 +74,14 @@
 		</g:else>
 
 			<div id="matches-container">
+					<h1>Enter a Prediction</h1>
 			<div id="formMatches">
 	
 
-					<h1>Enter a Prediction</h1>
 					
 					<g:each var="match" in="${tournament.matches.sort {it.orderchar}}">
 
-					<g:set var="hgh" value="${75 + match.teams.size() * 25} "/> 
+					<g:set var="hgh" value="${75 + match.teams.size() * 25}"/> 
 
 					<fieldset id="Match${match.id}" class="ui-draggable" style="right: auto; bottom: auto; top: ${match.posY}px; left: ${match.posX}px; position: relative; height: ${hgh}px;">
 						<legend> Match ${match.orderchar} </legend>
