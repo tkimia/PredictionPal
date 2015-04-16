@@ -31,7 +31,6 @@ class BootStrap {
 			.addToTeams(team8)
 
 
-
 		Tournament tourny = new Tournament(sid:"color", title:"Ruby Rumble", owner:"Oz", hasSeeds:false, hasScores:false, state: 1, acceptingPredictions:true, pass: "password", promotions:true)
 			.addToMatches(match1)
 			.addToMatches(match2)

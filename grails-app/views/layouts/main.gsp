@@ -19,12 +19,28 @@
 		<g:layoutHead/>
 	</head>
 	<body>
-	<ul id="navigation-bar" class="nav-root">
-		<li class="nav-buttons"><a href="/PredictionPal/">Home</a></li>
-		<li class="nav-buttons"><a href="PredictionPal/portal">Portal</a></li>
-		<li class="nav-buttons"><a href="PredictionPal/login">Login</a>	</li>
-	</ul>
-		<div id="pPLogo" role="banner"><a href="/PredictionPal/"><asset:image src="pPLogo3.png" alt="Grails"/></a></div>
+	<div id="navigation-bar">
+		<div id="list-holder">
+			<ul id="navigation-list" class="nav-root">
+				<li class="nav-buttons"><a href="/PredictionPal/" class="button-text">Home</a></li>
+				<li class="nav-buttons"><a href="PredictionPal/login" class="button-text">Login</a>	</li>
+			</ul>
+		</div>
+		<div id="logo-holder" class="logo-hold">
+			<h1 id="logo">PredictionPal</h1>
+		</div>
+		<div id="portal-holder" class="portal-hold">
+			<g:form controller="tournament" action="portal">
+				<fieldset id="code_fieldset">	
+					<label for="title"></label>
+					<g:textField name="code" placeholder="input tournament code" value="${code}"/>
+					<g:submitButton name="portal" value="Go" />
+			</fieldset>
+			</g:form>
+		</div>
+	</div>
+	<br/>
+	<br/>
 		<div class="main-container">
 			<g:layoutBody/>		
 		</div>
