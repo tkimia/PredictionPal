@@ -14,6 +14,11 @@ class TournamentController {
         [tournaments:tournaments]
     }
 
+    def updatePromotion(){
+        def tournaments = Tournament.list()
+        [tournaments:tournaments]
+    }
+
     def packTournament() {
  		def newTourny = new Tournament(sid: generateSid(),
  			owner: params.owner, title: params.title,

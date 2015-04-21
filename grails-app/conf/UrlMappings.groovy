@@ -11,6 +11,7 @@ class UrlMappings {
 		"/help"(view:"/helppage")
 		"/portal"(view:"/portal")
 		"500"(view:'/error')
+        "/updatePromotion"(view:"/tournament/updatePromotion")
         "/index_display"(view:"/tournament/index_display")
         "/tournament/create"(redirect:'/tournament/start')
 	    "404"(view:'/404')
