@@ -51,12 +51,12 @@
 
 
 	<g:if test="${tournament.state == 1 || isManager}">
-		<g:form action="packPredictions" id="predictionForm">
+
+		<g:form action="${isManager ? 'updateTournament' : 'packPredictions'}" id="predictionForm">
 
 		<g:if test="${!isManager}">
 			<h2> Enter your Prediction </h2>
 			<fieldset id="general-details">
-				<g:hiddenField name="tournamentName" value="${tournament.title}"/>
 				<legend>Predict for ${ tournament.title }</legend>
 
 				<label for="name">Name</label>
@@ -72,9 +72,9 @@
 		<g:else>
 			<h2> Update the results of this tournament </h2>
 		</g:else>
+							<g:hiddenField name="tournamentName" value="${tournament.title}"/>
 
 			<div id="matches-container">
-					<h1>Enter a Prediction</h1>
 			<div id="formMatches">
 	
 
