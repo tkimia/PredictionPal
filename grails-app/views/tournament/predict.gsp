@@ -92,11 +92,13 @@
 							<p style="display: none;" class="nextinfo">NULL</p>
 						</g:else>
 						<g:each var="team" in="${match.teams.sort {it.id}}">
+							<div>
 							<input type="radio" name="${match.id}"
-							value="${team.name}">${team.name}<br/>
+							value="${team.name}">${team.name}
 							<g:if test="${tournament.hasScores}">
-								<g:textField name="scores${match.id}" /><br/>
+								<g:textField name="scores${match.id}" />
 							</g:if>
+							</div>
 						</g:each>
 
 					</fieldset>
@@ -132,30 +134,47 @@
 
 			$('body').on('click', 'input:radio', function() {
     			var team_name_str = $(this).attr('value');
-				var parentMatch = $(this).parent("fieldset");
+				var parentMatch = $(this).parent().parent();
 				var curname = $(this).attr('name');
 
-				console.log(curname)
+				
 				var child = parentMatch.find(".nextinfo").text();
+				console.log(child);
 
 				if(child!="NULL"){
-					var teamName = $(this).val();
-					if(${tournament.hasScores} == true){
-					$("#Match"+child).append(
-						'<input name="'+child+'" value="'+team_name_str+'" type="radio">' +
-						team_name_str + '<br/>' +
-						'<input name= scores'+child+'" value="'+""+ '"type="text">'+
-						'<br/>'
+					if ($("#Match"+child).has("#from"+curname).length)
+					{
+						console.log("boom");
+						if (${tournament.hasScores})
+							$("#from"+curname).html(							
+							'<input name="'+child+'" value="'+team_name_str+'" type="radio">' +
+							team_name_str +
+							'<input name= scores'+child+'" value="'+""+ '"type="text">');
+						else
+							$("#from"+curname).html(							
+							'<input name="'+child+'" value="'+team_name_str+'" type="radio">' +
+							team_name_str );
+					}
+					else {
+						if(${tournament.hasScores} == true){
+							$("#Match"+child).append(
+								'<div id="from'+curname+'">' +
+								'<input name="'+child+'" value="'+team_name_str+'" type="radio">' +
+								team_name_str +
+								'<input name= scores'+child+'" value="'+""+ '"type="text">'+
+								'</div>'
 
-					);
-				}else{
-					$("#Match"+child).append(
-						'<input name="'+child+'" value="'+team_name_str+'" type="radio">' +
-						team_name_str +
-						'<br/>'
+							);
+						}else{
+							$("#Match"+child).append(
+								'<div id="from'+curname+'">' +
+								'<input name="'+child+'" value="'+team_name_str+'" type="radio">' +
+								team_name_str +
+								'</div>'
 
-					);
-				}
+							);
+						}
+					}
 				}
 			});
 
