@@ -46,6 +46,10 @@
 			<h2> Welcome back ${tournament.owner} </h2>
 
 			<p> On this page you can update the actual tournament status and see predictions that users have submitted </p>
+
+			<h2> Links </h2>
+			<p> Send this link to your participants: </p>
+			<p> Keep this link for yourself to upodate the tournament with the real winners: </p>
 		</div>
 	</g:if>
 

@@ -80,7 +80,7 @@ class TournamentController {
         }
 
 
-    	redirect(action: 'index')
+    	redirect(action: 'predict', params: [id: newTourny.sid, pass: newTourny.pass]);
     }
 
 
