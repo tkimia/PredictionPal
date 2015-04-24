@@ -6,34 +6,67 @@
 <body>
 	<h1>${prediction.name}'s Predictions</h1>
 
-	<g:each var="matchPrediction" in="${prediction.matchPredictions.sort {it.id}}">
+	<g:set var="traversedMatches" value="${new ArrayList()}"/>
+	<g:each var="match" in="${prediction.tournament.matches.sort{it.id}}">
+		<g:set var="actualWinner" value="${match.winner.name}" />
+		<g:set var="predictedWinner" value="${match.matchPredictions.find{it.prediction.id == prediction.id}.predictedWinner.name}"/>
 
-		<g:set var="match" value="${matchPrediction.correspondingMatch}"/>
+		<!--If it's a first round match-->
 		<g:if test="${match.prevMatches.isEmpty()}" >
+
+			<!--Set font color to identify correctness-->
+			<g:if test="${predictedWinner == actualWinner}">
+				<font color="green">
+			</g:if>
+			<g:else>
+				<font color="red">
+			</g:else>
+			<br />
+
+			<!--Display teams in match-->
 			<g:each var="team" in="${match.teams}">
-				<g:if test="${team.name == matchPrediction.predictedWinner.name}">
-				<b>${team.name}</b>
+
+				<g:if test="${team.name == predictedWinner}">
+					<b>${team.name}</b>
 				</g:if>
 				<g:else>
-	   				${team.name}
+					${team.name}
 				</g:else>
+
 				<br />
 			</g:each>
+			</font>
 			<br />
 		</g:if>
 		<g:else>
-			<g:set var="nextMatch1" value="${match.nextMatch}" />
-			<g:each var="matchPrediction2" in="${prediction.matchPredictions.sort {it.id}}">
-				<g:set var="match2" value="${matchPrediction2.correspondingMatch}"/>
-				<g:set var="nextMatch2" value="${match2.nextMatch}" />
-				<g:if test="${nextMatch1 != null && nextMatch2 != null && nextMatch1.id == nextMatch2.id && match.id != match2.id}">
-					
-					${matchPrediction.predictedWinner} <br />
-					${matchPrediction2.predictedWinner} <br />
-					<br />
-				</g:if>
 
+			<g:if test="${predictedWinner==actualWinner}">
+				<font color="green">
+			</g:if>
+			<g:else>
+				<font color="red">
+			</g:else>
+			<g:each var="previousMatch" in="${match.prevMatches}">
+				<g:if test="${traversedMatches.contains(previousMatch)}">
+
+				</g:if>
+				<g:else>
+
+				<g:set var="fakeBool" value="${traversedMatches.add(previousMatch)}" />
+				<g:set var="matchPrediction" value="${previousMatch.matchPredictions.find{it.prediction.id == prediction.id}.predictedWinner.name}" />
+
+				<g:if test="${matchPrediction == predictedWinner}">
+					<b>${matchPrediction}</b>
+				</g:if>
+				<g:else>
+					${matchPrediction}
+				</g:else>
+				<br />
+			</g:else>
 			</g:each>
+			<br />
+			</font>
+
 		</g:else>
 	</g:each>
 </body>
