@@ -7,9 +7,12 @@ class UrlMappings {
             }
         }
 
-        "/"(view:"/index")
+        "/"(controller:"index")
+		"/home"(view:"/index")
 		"/help"(view:"/helppage")
 		"/portal"(view:"/portal")
+		"/register"(view:"/register")
+		"/logout"(controller:"user", action:"logout")
 		"500"(view:'/error')
         "/updatePromotion"(view:"/tournament/updatePromotion")
         "/index_display"(view:"/tournament/index_display")

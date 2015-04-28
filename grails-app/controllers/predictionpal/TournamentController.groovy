@@ -22,17 +22,17 @@ class TournamentController {
     def packTournament() {
  		def newTourny = new Tournament(sid: generateSid(),
  			owner: params.owner, title: params.title,
- 			state: 1, acceptingPredictions: true, pass: generateSid());
+ 			state: 1, acceptingPredictions: true, pass: generateSid())
 
  		newTourny.hasSeeds = (params.hasSeeds) ? true : false;
- 		newTourny.hasScores =  (params.hasScores) ? true : false;
-        Match[] newMatches = new Match[params.numMatches];
+ 		newTourny.hasScores =  (params.hasScores) ? true : false
+        Match[] newMatches = new Match[params.numMatches]
 
         //this loop initializes all of the matches to be put into the
         //new tournament
  		for (int i = 0; i < params.int("numMatches"); i++) {
             char matchId = 65 + i
-            int numTeams = params.int("match"+(char)matchId+"Teams");
+            int numTeams = params.int("match"+(char)matchId+"Teams")
 
             newMatches[i] = new Match()
 

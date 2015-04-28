@@ -6,11 +6,11 @@ input, select, textarea {
 
 /* COLOR PALETTE
 
-color 1: 7691BF
-color 2: 4F617F
-color 3: 9DC1FF
-color 4: 273040
-color 5: 8EAEE5
+color 1: #7691BF
+color 2: #4F617F
+color 3: #9DC1FF
+color 4: #273040
+color 5: #8EAEE5
 
 */
 
@@ -39,13 +39,122 @@ a.button-text{
 	box-shadow: 3px 3px 4px #6c6c6c
 }
 
-
 #list-holder{
 	background-color:#9DC1FF; /*color 3*/
 	height:100%;
 	width:33%;
 	z-index:1005;
 	position:absolute;
+}
+
+#home-button{
+	height:50px;
+	width:10%;
+	z-index:1005;
+	position: absolute;
+	margin-left:5%;
+	margin-top:5px;
+}
+
+#regi-button{
+	height:50px;
+	width:10%;
+	z-index:1005;
+	position: absolute;
+	margin-left:20%;
+	margin-top:5px;
+}
+
+#profile-button{
+	height:50px;
+	width:10%;
+	z-index:1005;
+	position: absolute;
+	margin-left:30%;
+	margin-top:5px;
+}
+
+#logout-button{
+	height:50px;
+	width:10%;
+	z-index:1005;
+	position: absolute;
+	margin-left:60%;
+	margin-top:5px;
+}
+
+#log-field{
+	height:50px;
+	width:70%;
+	z-index:1005;
+	position: absolute;
+	margin-left:30%;
+}
+#user-name{
+	position:absolute;
+	width:30%;
+}
+
+#log-in{
+	position: absolute;
+	width:20%;
+	margin-left:70%;
+	background: #8EAEE5; 
+  	border: solid 1px #273040; /*color 4*/
+  	border-radius:5px;
+  	text-decoration: none; 
+}
+
+#uname_pword_err{
+	position: absolute;
+	width:100%;
+	z-index:2000;
+	margin-botton:90%;
+	margin-left:40%;
+	color: #740202;
+	font-size: 15px;
+}
+
+#reg-form{
+	width:50%;
+	z-index:1005;
+	margin-top:10%;
+	margin-left:25%;
+	border: solid 1px #273040; /*color 4*/
+  	border-radius:5px;
+	background-color:#8EAEE5;
+}
+
+.reg-button{
+	width:75%;
+	z-index:1010;
+	margin:.1em;
+	border: solid 1px #273040; /*color 4*/
+  	border-radius:5px;
+}
+
+#pass-word{
+	position:absolute;
+	width:30%;
+	margin-left:35%;
+}
+#log-field input[type="text"]{
+	padding: .2em .2em .2em;
+	color:#9DC1FF;
+	font-weight:bold;
+	border: solid 1px #9DC1FF;
+	border-radius:5px;
+  	transition: box-shadow 0.3s, border 0.3s;
+  	background-color: #273040;
+}
+
+.btn {
+  background: #8EAEE5; 
+  border: solid 1px #273040; /*color 4*/
+  border-radius:5px;
+  line-height: 2.5em;
+  padding: 0 .3em;
+  text-decoration: none; 
 }
 
 #logo-holder{
@@ -77,6 +186,7 @@ a.button-text{
 	border-radius:5px;
   	transition: box-shadow 0.3s, border 0.3s;
   	background-color: #273040;
+  	width:65%;
 }
 #portal-holder input[type="text"]:focus,
 #portal-holder input[type="text"].focus {

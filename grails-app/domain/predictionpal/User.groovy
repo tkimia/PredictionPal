@@ -7,6 +7,8 @@ class User {
 	
     static constraints = {
 		password blank: false
-		username unique: true, blank: false
+		username blank: false
+		tournaments nullable: true
+		predictions nullable: true
     }
 }

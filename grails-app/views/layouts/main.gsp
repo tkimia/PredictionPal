@@ -21,10 +21,26 @@
 	<body>
 	<div id="navigation-bar">
 		<div id="list-holder">
-			<ul id="navigation-list" class="nav-root">
-				<li class="nav-buttons"><a href="/PredictionPal/" class="button-text">Home</a></li>
-				<li class="nav-buttons"><a href="PredictionPal/login" class="button-text">Login</a>	</li>
-			</ul>
+			<div class="nav-buttons" id="home-button"><a href="/PredictionPal/" class="btn">Home</a></div>
+			<g:if test="${cookie(name:'username')=='null' || cookie(name:'username')=='error' || !cookie(name:'username')}">
+			<div class="nav-buttons" id="regi-button"><a href="/PredictionPal/register" class="btn">Register</a></div>
+			<div id = "log-field">
+				<g:form controller="user" action="login">
+					<fieldset id="login_fieldset">	
+						<g:textField name="user_name" id="user-name" placeholder="username" required value="${user_name}"/>
+						<g:textField name="pass_word" id="pass-word" placeholder="password" required value="${pass_word}"/>
+						<g:submitButton name="login" id="log-in" value="Login" />
+					</fieldset>
+				</g:form>
+			</div>
+			</g:if>
+			<g:else>
+				<div class="nav-buttons" id="profile-button"><a href="/PredictionPal/user/profile" class="btn">Profile</a></div>
+				<div class="nav-buttons" id="logout-button"><a href="/PredictionPal/logout" class="btn">Logout</a></div>
+			</g:else>
+			<g:if test="${params.logged_in=='error'}">
+				<div id="uname_pword_err">Invalid Username or Password</div>
+			</g:if>
 		</div>
 		<div id="logo-holder" class="logo-hold">
 			<h1 id="logo">PredictionPal</h1>
