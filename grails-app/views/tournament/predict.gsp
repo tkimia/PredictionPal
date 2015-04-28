@@ -48,8 +48,8 @@
 			<p> On this page you can update the actual tournament status and see predictions that users have submitted </p>
 
 			<h2> Links </h2>
-			<p> Send this link to your participants: </p>
-			<p> Keep this link for yourself to upodate the tournament with the real winners: </p>
+			<p> Send this link to your participants: <em> predictionpal.com${request.forwardURI} </em></p>
+			<p> Keep this link for yourself to upodate the tournament with the real winners: <em> predictionpal.com${request.forwardURI}?pass=${tournament.pass}</em></p>
 		</div>
 	</g:if>
 
@@ -125,7 +125,7 @@
 			<g:if test="${tournament.predictions.size() == 0}">
 				<p> No predictions have been made for this tournament </p>
 			</g:if>
-			
+
 			<g:each var="Preds" in="${tournament.predictions.sort {it.id}}">
 				<li id="Pred${Preds.id}">
 					${Preds.name} <a class="removePred">Remove Prediction</a>

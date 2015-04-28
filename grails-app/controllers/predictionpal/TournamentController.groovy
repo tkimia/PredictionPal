@@ -98,7 +98,7 @@ class TournamentController {
             if (params.pass == tournament.pass) {
                 isManager = true
             }
-            [tournament : tournament, isManager : isManager]
+            [tournament : tournament, isManager : isManager, request : request]
         }
     }
 
