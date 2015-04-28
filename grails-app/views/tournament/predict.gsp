@@ -122,6 +122,10 @@
 		<h2> Current Predictions for this Tournament </h2>
 
 		<ul id="listPreds">
+			<g:if test="${tournament.predictions.size() == 0}">
+				<p> No predictions have been made for this tournament </p>
+			</g:if>
+			
 			<g:each var="Preds" in="${tournament.predictions.sort {it.id}}">
 				<li id="Pred${Preds.id}">
 					${Preds.name} <a class="removePred">Remove Prediction</a>
