@@ -16,23 +16,28 @@ class TournamentController {
 
     def updatePromotion(){
         def tournaments = Tournament.list()
+
         [tournaments:tournaments]
+    }
+
+    def changePromotion(){
+        redirect(action: 'updatePromotion')
     }
 
     def packTournament() {
  		def newTourny = new Tournament(sid: generateSid(),
  			owner: params.owner, title: params.title,
- 			state: 1, acceptingPredictions: true, pass: generateSid())
+ 			state: 1, acceptingPredictions: true, pass: generateSid());
 
  		newTourny.hasSeeds = (params.hasSeeds) ? true : false;
- 		newTourny.hasScores =  (params.hasScores) ? true : false
-        Match[] newMatches = new Match[params.numMatches]
+ 		newTourny.hasScores =  (params.hasScores) ? true : false;
+        Match[] newMatches = new Match[params.numMatches];
 
         //this loop initializes all of the matches to be put into the
         //new tournament
  		for (int i = 0; i < params.int("numMatches"); i++) {
             char matchId = 65 + i
-            int numTeams = params.int("match"+(char)matchId+"Teams")
+            int numTeams = params.int("match"+(char)matchId+"Teams");
 
             newMatches[i] = new Match()
 
@@ -98,7 +103,7 @@ class TournamentController {
             if (params.pass == tournament.pass) {
                 isManager = true
             }
-            [tournament : tournament, isManager : isManager, request : request]
+            [tournament : tournament, isManager : isManager]
         }
     }
 
@@ -178,7 +183,7 @@ class TournamentController {
 		for(Match m: t.matches){ //Look at all matches for completion.
 			if(m.getWinner()==null){ //If any match has not completed
 				t.save(flush: true, failOnError:true)
-				redirect(action: 'predict', params: [id: t.sid, pass: t.pass])
+				redirect(action: 'index')
 				return;
 			}
 		}
@@ -186,7 +191,7 @@ class TournamentController {
 		t.state = 3;
 		emailParticipants(t);
 		t.save(flush: true, failOnError:true)
-		redirect(action: 'predict', params: [id: t.sid, pass: t.pass])
+		redirect(action: 'index')
 	}
 
 	def stopAcceptingPredicts() {

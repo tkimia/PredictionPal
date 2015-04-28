@@ -10,4 +10,9 @@ class IndexController {
 		}
 		redirect(uri:'/home', params:[logged_in:uname]);
 	}
+
+	def index_display() {
+		def tournaments = Tournament.list()
+    	[tournaments:tournaments]
+	}
 }

@@ -88,7 +88,18 @@
 				<li class="controller"><g:link controller="tournament" action="index_display">View Promotions</g:link>
 				<!--<li class="controller"><g:link controller="tournament" action="index_display">View Promotions</g:link>-->
 				<!-- <li class="controller"><g:link controller="prediction">View existing Predictions</g:link></li> -->
-			</ul>			
+			</ul>	
+			<h1>Promotions</h1>
+				<g:form controller="index" action="index_display">
+				<g:each in="${tournaments}" var="tournament">
+				<g:if test="${tournament.promotions == true}">
+				<a href="/PredictionPal/tournament/predict/${tournament.sid}">
+					${tournament.title}
+				</a>
+				</g:if>
+					<br/>
+				</g:each>
+	</g:form>		
 		</div>
 		<div id="page-body" role="main">
 			<h1>Welcome to Prediction Pal!</h1>

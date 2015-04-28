@@ -8,7 +8,10 @@ class UrlMappings {
         }
 
         "/"(controller:"index")
-		"/home"(view:"/index")
+		"/home"(view:"/index"){
+            controller = "tournament"
+            action = "index_display"
+        }
 		"/help"(view:"/helppage")
 		"/portal"(view:"/portal")
 		"/register"(view:"/register")

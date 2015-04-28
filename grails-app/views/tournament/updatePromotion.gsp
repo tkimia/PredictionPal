@@ -14,12 +14,14 @@
 	<a href="/PredictionPal/tournament/predict/${tournament.sid}">
 	${tournament.title}
 </a>
-	<g:if test="${tournament.promotions == true}">
-	<g:checkBox name="${tournament.sid}Checkbox" value ="${tournament.sid}Value" checked="true"/> 
+	<g:checkBox name="${tournament.sid}Checkbox" value ="${tournament.sid}Value" checked= "${tournament.promotions}" /> 
+	<g:if test = "${tournament.promotions == true}">
+	<g:link controller="tournament" action="changePromotion">Promoted</g:link>
 </g:if>
 <g:else>
-	<g:checkBox name="${tournament.sid}Checkbox" value ="${tournament.sid}Value" checked="false"/> 
+	<g:link controller="tournament" action="changePromotion">Not Promoted</g:link>
 </g:else>
+	
 </br>
 	</g:each>
 
