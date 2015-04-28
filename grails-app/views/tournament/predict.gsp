@@ -76,7 +76,7 @@
 		<g:else>
 			<h2> Update the results of this tournament </h2>
 		</g:else>
-							<g:hiddenField name="tournamentName" value="${tournament.title}"/>
+			<g:hiddenField name="tournamentName" value="${tournament.title}"/>
 
 			<div id="matches-container">
 			<div id="formMatches">
@@ -89,27 +89,42 @@
 
 					<fieldset id="Match${match.id}" class="ui-draggable" style="right: auto; bottom: auto; top: ${match.posY}px; left: ${match.posX}px; position: relative; height: ${hgh}px;">
 						<legend> Match ${match.orderchar} </legend>
+
 						<g:if test="${match.nextMatch}">
 						<p style="display: none;" class="nextinfo">${match.nextMatch.id}</p>
 						</g:if>
 						<g:else>
 							<p style="display: none;" class="nextinfo">NULL</p>
 						</g:else>
-						<g:each var="team" in="${match.teams.sort {it.id}}">
+						<g:if test="${match.getWinner() != null}">
+							<g:each var="team" in="${match.teams.sort {it.id}}">
 							<div>
-							<input type="radio" name="${match.id}"
-							value="${team.name}">${team.name}
-							<g:if test="${tournament.hasScores}">
-								<g:textField name="scores${match.id}" />
+							<g:if test="${match.getWinner().name == team.name}">
+								<b>Winner: ${team.name}</b>
 							</g:if>
+							<g:else>
+								${team.name}
+							</g:else>
 							</div>
-						</g:each>
+							</g:each>
+						</g:if>
+						<g:else>
+							<g:each var="team" in="${match.teams.sort {it.id}}">
+								<div>
+								<input type="radio" name="${match.id}"
+								value="${team.name}">${team.name}
+								<g:if test="${tournament.hasScores}">
+									<g:textField name="scores${match.id}" />
+								</g:if>
+								</div>
+							</g:each>
+						</g:else>
 
 					</fieldset>
 					</g:each>
 				
 				</div>
-					<g:submitButton name="post" value="Make Predictions"/>
+					<g:submitButton name="post" value="${isManager ? 'Update Tournament' : 'Make Prediction' }"/>
 			</div>
 		</g:form>
 	</g:if>
