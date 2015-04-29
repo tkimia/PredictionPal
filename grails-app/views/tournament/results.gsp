@@ -8,8 +8,8 @@
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
 
-      // Load the Visualization API and the piechart package.
-      google.load('visualization', '1.0', {'packages':['corechart']});
+      // Load the Visualization API and the piechart package
+	  google.load("visualization", "1", {packages: ["corechart"]});
 
       // Set a callback to run when the Google Visualization API is loaded.
       google.setOnLoadCallback(drawChart);
@@ -21,23 +21,51 @@
 
         // Create the data table.
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
-        data.addRows([
-          ['${tournament.title}', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
-        ]);
+		data.addColumn('string', 'Match')
+		<g:each var="prediction" in="${tournament.predictions.sort{it.id}}">
+			data.addColumn('number', '${prediction.name}');
+		</g:each>
+		var row = 0;
+		<g:each var="match" in="${tournament.matches.sort {it.orderchar}}">
+			data.addRow();
+			<g:set var="matchName" value="${match.teams.join(' vs. ')}" />
+
+			data.setCell(row, 0, '${matchName}');
+			var column = 1;
+			<g:set var="winnerName" value="${match.winner.name}" />
+			<g:each var="matchPrediction" in="${match.matchPredictions.sort{it.id}}">
+				<g:if test="${matchPrediction.predictedWinner.name == winnerName}">
+					if (row == 0){
+						data.setCell(row, column, 1);
+					}
+					else {
+						data.setCell(row, column, data.getValue(row-1, column) + 1);
+					}
+				</g:if>
+				<g:else>
+					if (row == 0){
+						data.setCell(row, column, 0);
+					}
+					else {
+						data.setCell(row, column, data.getValue(row-1, column));
+					}
+				</g:else>
+				column++;
+			</g:each>
+			row++;
+		</g:each>
 
         // Set chart options
-        var options = {'title':'How Much Pizza I Ate Last Night',
-                       'width':400,
-                       'height':300};
+        var options = {
+			title:'Prediction Scores Over Time',
+			vAxis: {title: 'Accumulated Score'},
+			isStacked: false,
+			animation: {startup: true}
+		};
+
 
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+		var chart = new google.visualization.SteppedAreaChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
     </script>
@@ -45,6 +73,10 @@
 </head>
 
 <body>
+	<g:if test="${tournament.state==3}">
+	<table border = 0>
+	<tr>
+	<td>
 	<g:form action="getResults" id="ResultsForm">
 		<fieldset id="general-details">
 			<g:hiddenField name="tournamentName" value="${tournament.title}"/>
@@ -70,11 +102,20 @@
 			</fieldset>
 		</div>
 	</g:form>
-	<div id="chart_div"></div>
+	</td>
+	<td>
 
+	<div id="chart_div" style="width: 700px; height: 400px;"></div>
+	</td>
+	</tr>
+	</table>
+	</g:if>
+	<g:else>
+		<h3>Results unavailable until tournament is finished</h3>
+	</g:else>
 
 	<script type="text/javascript">
-	
+
 		jQuery(document).ready(function(){
 			var form_ref = $("#listPreds");
 			var view_button = $(".goTo");
