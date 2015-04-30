@@ -113,6 +113,8 @@
 
 				//newTextBox.appendTo(form_ref);
 				$(hidden_num_matches).val(matches);
+
+				$("#formMatches").height($("#formMatches").height()+100);
 				
 			$( "#formMatches fieldset" ).draggable({ containment: "parent", snap: true, grid: [20,20],
 				 stop: function() {
