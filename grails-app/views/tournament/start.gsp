@@ -4,6 +4,11 @@
 	<meta name="layout" content="main" />
 	
 	<asset:stylesheet href="tournament_form.css" />
+	<style>
+		#matches-container {
+			max-height: 600px;
+		}
+	</style>
 
 	 <script>
 		$(function() {
