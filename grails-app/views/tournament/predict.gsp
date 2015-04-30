@@ -5,6 +5,13 @@
 	</title>
 	<meta name="layout" content="main"/>
 	<asset:stylesheet href="tournament_form.css" />
+	<style>
+		.removePred {
+			color: red;
+			font-style: italic;
+			cursor: pointer;
+		}
+	</style>
 </head>
 <body>
 	<g:if test="${isManager}">
@@ -29,7 +36,7 @@
 
 				<g:each var="Preds" in="${tournament.predictions.sort {it.id}}">
 					<li id="Pred${Preds.id}">
-						${Preds.name} <a class="removePred">Remove Prediction</a>
+						<a href="/PredictionPal/tournament/viewPrediction/${Preds.id}">${Preds.name}</a>  |  <a class="removePred">delete</a>
 						<p hidden=true class="predId">${Preds.id}</p>
 						<p hidden=true class="TournSid">${tournament.sid}</p>
 					</li>
@@ -47,15 +54,24 @@
 			<h2> Enter your Prediction </h2>
 			<fieldset id="general-details">
 				<legend>Predict for ${ tournament.title }</legend>
+				<g:if test="${cookie(name:'username')=='null' || cookie(name:'username')=='error' || !cookie(name:'username')}">
+					<label for="name">Name</label>
+					<g:textField name="name" />
+					<br />
 
-				<label for="name">Name</label>
-				<g:textField name="name" />
-				<br />
-
-				<label for="email">Email</label>
-				<g:textField name="email" />
-				<br />
-
+					<label for="email">Email</label>
+					<g:textField name="email" />
+					<br />
+				</g:if>
+				<g:else>
+					<label for="name">Name</label>
+					<g:textField name="name" value="${cookie(name:'username')}"/>
+					<br />
+					
+					<label for="email">Email</label>
+					<g:textField name="email" value="${user.emails}" />
+					<br />
+				</g:else>
 			</fieldset>
 		</g:if>
 		<g:else>
