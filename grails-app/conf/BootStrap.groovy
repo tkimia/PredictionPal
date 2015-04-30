@@ -107,23 +107,84 @@ class BootStrap {
 			.addToMatches(bestActress)
 			.save(flush:true, failOnError:true)
 
-		TeamPrediction winner = new TeamPrediction(name: "No Country for Old Men")
-		MatchPrediction amPred = new MatchPrediction(correspondingMatch: bestPicture, predictedWinner: winner)
-		
-		TeamPrediction winner2 = new TeamPrediction(name: "Joel and Ethan Coen")
-		MatchPrediction bmPred = new MatchPrediction(correspondingMatch: bestDirector, predictedWinner: winner2)
 
-		TeamPrediction winner3 = new TeamPrediction(name: "Johnny Depp")
-		MatchPrediction cmPred = new MatchPrediction(correspondingMatch: bestActor, predictedWinner: winner3)
-
-		TeamPrediction winner4 = new TeamPrediction(name: "Ellen Page")
-		MatchPrediction dmPred = new MatchPrediction(correspondingMatch: bestActress, predictedWinner: winner4)
+		Prediction pred1 = new Prediction(name: "Bobby")
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestPicture, predictedWinner: new TeamPrediction(name: "No Country for Old Men")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestDirector, predictedWinner: new TeamPrediction(name: "Joel and Ethan Coen")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestActor, predictedWinner: new TeamPrediction(name: "Johnny Depp")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestActress, predictedWinner: new TeamPrediction(name: "Ellen Page")))
 
 
-		Prediction pred1 = new Prediction(name: "Bobby", email:"bobby@yopmail.com")
-		pred1.addToMatchPredictions(amPred).addToMatchPredictions(bmPred).addToMatchPredictions(cmPred).addToMatchPredictions(dmPred)
-		pred1.save()
-		tourn.addToPredictions(pred1).save(flush: true, failOnError: true)
+		Prediction pred2 = new Prediction(name: "Tommy")
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestPicture, predictedWinner: new TeamPrediction(name: "No Country for Old Men")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestDirector, predictedWinner: new TeamPrediction(name: "Julian Schnable")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestActor, predictedWinner: new TeamPrediction(name: "Daniel Day-Lewis")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestActress, predictedWinner: new TeamPrediction(name: "Ellen Page")))
+
+		Prediction pred3 = new Prediction(name: "Marisa")
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestPicture, predictedWinner: new TeamPrediction(name: "Juno")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestDirector, predictedWinner: new TeamPrediction(name: "Tony Gilroy")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestActor, predictedWinner: new TeamPrediction(name: "Tommy Lee Jones")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestActress, predictedWinner: new TeamPrediction(name: "Ellen Page")))
+
+		Prediction pred4 = new Prediction(name: "Alex")
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestPicture, predictedWinner: new TeamPrediction(name: "There Will Be Blood")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestDirector, predictedWinner: new TeamPrediction(name: "Jason Reitman")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestActor, predictedWinner: new TeamPrediction(name: "Johnny Depp")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestActress, predictedWinner: new TeamPrediction(name: "Marion Cotillard")))
+
+		Prediction pred5 = new Prediction(name: "Mark")
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestPicture, predictedWinner: new TeamPrediction(name: "Atonement")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestDirector, predictedWinner: new TeamPrediction(name: "Joel and Ethan Coen")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestActor, predictedWinner: new TeamPrediction(name: "Viggo Mortensen")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestActress, predictedWinner: new TeamPrediction(name: "Cate Blanchett")))	
+
+		Prediction pred6 = new Prediction(name: "Cindy")
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestPicture, predictedWinner: new TeamPrediction(name: "Michael Clayton")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestDirector, predictedWinner: new TeamPrediction(name: "Jason Reitman")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestActor, predictedWinner: new TeamPrediction(name: "George Clooney")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestActress, predictedWinner: new TeamPrediction(name: "Laura Linney")))
+
+		Prediction pred7 = new Prediction(name: "Abigail")
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestPicture, predictedWinner: new TeamPrediction(name: "No Country for Old Men")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestDirector, predictedWinner: new TeamPrediction(name: "Paul Thomas Anderson")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestActor, predictedWinner: new TeamPrediction(name: "Johnny Depp")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestActress, predictedWinner: new TeamPrediction(name: "Julie Christie")))
+
+		Prediction pred8 = new Prediction(name: "Elizabeth")
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestPicture, predictedWinner: new TeamPrediction(name: "There Will Be Blood")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestDirector, predictedWinner: new TeamPrediction(name: "Tony Gilroy")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestActor, predictedWinner: new TeamPrediction(name: "Daniel Day-Lewis")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestActress, predictedWinner: new TeamPrediction(name: "Laura Linney")))
+
+		Prediction pred9 = new Prediction(name: "Tony")
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestPicture, predictedWinner: new TeamPrediction(name: "There Will Be Blood")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestDirector, predictedWinner: new TeamPrediction(name: "Joel and Ethan Coen")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestActor, predictedWinner: new TeamPrediction(name: "Daniel Day-Lewis")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestActress, predictedWinner: new TeamPrediction(name: "Ellen Page")))
+
+		Prediction pred10 = new Prediction(name: "Jim")
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestPicture, predictedWinner: new TeamPrediction(name: "No Country for Old Men")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestDirector, predictedWinner: new TeamPrediction(name: "Julian Schnable")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestActor, predictedWinner: new TeamPrediction(name: "Daniel Day-Lewis")))
+			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestActress, predictedWinner: new TeamPrediction(name: "Ellen Page")))
+
+
+
+
+	
+		tourn
+			.addToPredictions(pred1)
+			.addToPredictions(pred2)
+			.addToPredictions(pred3)
+			.addToPredictions(pred4)
+			.addToPredictions(pred5)
+			.addToPredictions(pred6)
+			.addToPredictions(pred7)
+			.addToPredictions(pred8)
+			.addToPredictions(pred9)
+			.addToPredictions(pred10)
+			.save(flush: true, failOnError: true)
 
     }
 
