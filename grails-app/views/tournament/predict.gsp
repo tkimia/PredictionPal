@@ -17,7 +17,9 @@
 	<g:if test="${isManager}">
 		<div id="owner-box">
 			<h2> Welcome back ${tournament.owner} </h2>
-
+			<g:if test="${tournament.state == 3}">
+			<b>Thr tournament has finished! <g:link action="results" id="${tournament.sid}">CLICK HERE</g:link> to see the results! </b><br />
+			</g:if>
 			<p> On this page you can update the actual tournament status and see predictions that users have submitted </p>
 
 			<h2> Links </h2>
@@ -48,12 +50,12 @@
 
 	<g:if test="${tournament.state == 1 || isManager}">
 
-		<g:form action="${isManager ? 'updateTournament' : 'packPredictions'}" id="predictionForm">
+		<g:form action="${isManager ? 'updateTournament' : 'packPredictions'}" >
 
 		<g:if test="${!isManager}">
 			<h2> Enter your Prediction </h2>
 			<fieldset id="general-details">
-				<legend>Predict for ${ tournament.title }</legend>
+				<p><b>Predict for ${ tournament.title }</b></p>
 				<g:if test="${cookie(name:'username')=='null' || cookie(name:'username')=='error' || !cookie(name:'username')}">
 					<label for="name">Name</label>
 					<g:textField name="name" />
