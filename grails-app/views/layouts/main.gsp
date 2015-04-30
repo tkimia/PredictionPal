@@ -28,7 +28,7 @@
 				<g:form controller="user" action="login">
 					<fieldset id="login_fieldset">	
 						<g:textField name="user_name" id="user-name" placeholder="username" required value="${user_name}"/>
-						<g:textField name="pass_word" id="pass-word" placeholder="password" required value="${pass_word}"/>
+						<g:passwordField name="pass_word" id="pass-word" placeholder="password" required value="${pass_word}"/>
 						<g:submitButton name="login" id="log-in" value="Login" />
 					</fieldset>
 				</g:form>

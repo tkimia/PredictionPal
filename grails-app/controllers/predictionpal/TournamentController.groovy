@@ -32,6 +32,7 @@ class TournamentController {
  		newTourny.hasSeeds = (params.hasSeeds) ? true : false;
  		newTourny.hasScores =  (params.hasScores) ? true : false;
         Match[] newMatches = new Match[params.numMatches];
+		def u = User.findByUsername(request.getCookie('username'));
 
         //this loop initializes all of the matches to be put into the
         //new tournament
@@ -79,7 +80,11 @@ class TournamentController {
 
         }
         newTourny.save(flush: true, failOnError:true)
-
+		if(u){
+			u.addToTournaments(newTourny);
+			u.save(flush:true, failOnError:true);
+		}
+		
         params.each() { key, value ->
             log.error key + ": " + value
         }
@@ -109,6 +114,7 @@ class TournamentController {
 
     def packPredictions() {
         def t = Tournament.findByTitle(params.tournamentName)
+		def u = User.findByUsername(request.getCookie('username'))
         if (t.state != 1){
             //The prediction is no longer accepting predictions, show an error to the user
             return;
@@ -127,8 +133,10 @@ class TournamentController {
 
         }
         t.addToPredictions(newPrediction);
-
-
+		if(u){
+			u.addToPredictions(newPrediction);
+			u.save(flush: true, failOnError:true);
+		}
         t.save(flush: true, failOnError:true)
 
         redirect(action: 'viewPrediction', params : [id: newPrediction.id])
