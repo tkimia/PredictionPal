@@ -51,6 +51,7 @@ class TournamentController {
  		newTourny.hasSeeds = (params.hasSeeds) ? true : false;
  		newTourny.hasScores =  (params.hasScores) ? true : false;
         Match[] newMatches = new Match[params.numMatches];
+        def u = User.findByUsername(request.getCookie('username')); 
 
         //this loop initializes all of the matches to be put into the
         //new tournament
@@ -97,6 +98,13 @@ class TournamentController {
             newTourny.addToMatches(newMatches[i])
 
         }
+
+        if(u){  
+            u.addToTournaments(newTourny);  
+            u.save(flush:true, failOnError:true);  
+        }  
+
+
         newTourny.save(flush: true, failOnError:true)
 
         params.each() { key, value ->
@@ -114,7 +122,7 @@ class TournamentController {
     */
     def predict() {
         boolean isManager = false;
-
+        def u = User.findByUsername(request.getCookie('username')); 
     	def tournament = Tournament.findBySid(params.id);
     	if (!tournament)
     		response.sendError(404)
@@ -128,6 +136,7 @@ class TournamentController {
 
     def packPredictions() {
         def t = Tournament.findByTitle(params.tournamentName)
+        [tournament : tournament, user: u, isManager : isManager] 
         if (t.state != 1){
             //The prediction is no longer accepting predictions, show an error to the user
             return;
@@ -137,6 +146,10 @@ class TournamentController {
             name: params.name, email: params.email);
 
         for (Match m: t.matches){
+            if(!params[m.id.toString()]){  
+                redirect(action: 'predict', params:[id: t.sid]);  
+                return;  
+              }  
 
             def matchWinner = params[m.id.toString()]
 
@@ -146,10 +159,12 @@ class TournamentController {
 
         }
         t.addToPredictions(newPrediction);
+        if(u){  
+                u.addToPredictions(newPrediction);  
+                u.save(flush: true, failOnError:true);  
+        }  
+        t.save(flush: true, failOnError:true)  
 
-
-        t.save(flush: true, failOnError:true)
-        redirect(action: 'index')
     }
 
 	def update() {
