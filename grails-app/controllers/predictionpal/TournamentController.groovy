@@ -130,13 +130,13 @@ class TournamentController {
             if (params.pass == tournament.pass) {
                 isManager = true
             }
-            [tournament : tournament, isManager : isManager]
+            [tournament : tournament, user: u, isManager : isManager] 
         }
     }
 
     def packPredictions() {
         def t = Tournament.findByTitle(params.tournamentName)
-        [tournament : tournament, user: u, isManager : isManager] 
+        def u = User.findByUsername(request.getCookie('username')) 
         if (t.state != 1){
             //The prediction is no longer accepting predictions, show an error to the user
             return;
