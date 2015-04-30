@@ -164,6 +164,7 @@ class TournamentController {
                 u.save(flush: true, failOnError:true);  
         }  
         t.save(flush: true, failOnError:true)  
+         redirect(action: 'viewPrediction', params : [id: newPrediction.id]) 
 
     }
 
