@@ -15,7 +15,24 @@ class TournamentController {
     }
 
     def updatePromotion(){
-        def tournaments = Tournament.list()
+        def tournaments = Tournament.list(sort:"sid")
+        def promotions = params.list('promotions')
+        def ids = params.list('id')
+        def idt = params.list('id')
+        ids.sort()
+        idt.sort()
+
+        ids.eachWithIndex { id, idx ->
+            if(promotions[idx]){
+                    def tor = Tournament.findBySid(idt[idx]);
+                    tor.promotions = true;
+                    tor.save(flush: true, failOnError:true)
+                }else{
+                    def tor = Tournament.findBySid(idt[idx]);
+                    tor.promotions = false;
+                    tor.save(flush: true, failOnError:true)
+                }
+        }
 
         [tournaments:tournaments]
     }
