@@ -4,6 +4,23 @@
 		<meta name="layout" content="main"/>
 		<title>Prediction Pal</title>
 		<style type="text/css" media="screen">
+			.btn {
+			  -webkit-border-radius: 28;
+			  -moz-border-radius: 28;
+			  border-radius: 28px;
+			  font-family: Arial;
+			  color: #ffffff;
+			  font-size: 20px;
+			  background: #3498db;
+			  padding: 10px 20px 10px 20px;
+			  text-decoration: none;
+			}
+
+			.btn:hover {
+			  background: #3cb0fd;
+			  text-decoration: none;
+			}
+
 			#status {
 				background-color: #eee;
 				margin: 2em 2em 1em;
@@ -83,7 +100,7 @@
 		<div id="status" role="complementary">
 			<h1>Where to?</h1>
 			<ul>
-				<li class="controller"><g:link controller="tournament" action="start">Make a new Tournament</g:link></li>
+				<li class="controller"><g:link  class="btn" controller="tournament" action="start">Make a new Tournament</g:link></li>
 				<li class="controller"><g:link controller="tournament">View existing Tournaments</g:link></li>
 				<li class="controller"><g:link controller="tournament" action="index_display">View Promotions</g:link>
 				<!--<li class="controller"><g:link controller="tournament" action="index_display">View Promotions</g:link>-->

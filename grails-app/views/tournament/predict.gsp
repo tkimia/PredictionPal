@@ -5,6 +5,13 @@
 	</title>
 	<meta name="layout" content="main"/>
 	<asset:stylesheet href="tournament_form.css" />
+	<style>
+		.removePred {
+			color: red;
+			font-style: italic;
+			cursor: pointer;
+		}
+	</style>
 </head>
 <body>
 	<g:if test="${isManager}">
@@ -17,6 +24,25 @@
 			<p> Send this link to your participants: <em> predictionpal.com${request.forwardURI} </em></p>
 			<p> Keep this link for yourself to upodate the tournament with the real winners: <em> predictionpal.com${request.forwardURI}?pass=${tournament.pass}</em></p>
 		</div>
+
+
+		<div id="remove-predictions">
+			<h2> Current Predictions for this Tournament </h2>
+
+			<ul id="listPreds">
+				<g:if test="${tournament.predictions.size() == 0}">
+					<p> No predictions have been made for this tournament </p>
+				</g:if>
+
+				<g:each var="Preds" in="${tournament.predictions.sort {it.id}}">
+					<li id="Pred${Preds.id}">
+						<a href="/PredictionPal/tournament/viewPrediction/${Preds.id}">${Preds.name}</a>  |  <a class="removePred">delete</a>
+						<p hidden=true class="predId">${Preds.id}</p>
+						<p hidden=true class="TournSid">${tournament.sid}</p>
+					</li>
+				</g:each>
+			</ul>
+		</div>
 	</g:if>
 
 
@@ -28,15 +54,24 @@
 			<h2> Enter your Prediction </h2>
 			<fieldset id="general-details">
 				<legend>Predict for ${ tournament.title }</legend>
+				<g:if test="${cookie(name:'username')=='null' || cookie(name:'username')=='error' || !cookie(name:'username')}">
+					<label for="name">Name</label>
+					<g:textField name="name" />
+					<br />
 
-				<label for="name">Name</label>
-				<g:textField name="name" />
-				<br />
-
-				<label for="email">Email</label>
-				<g:textField name="email" />
-				<br />
-
+					<label for="email">Email</label>
+					<g:textField name="email" />
+					<br />
+				</g:if>
+				<g:else>
+					<label for="name">Name</label>
+					<g:textField name="name" value="${cookie(name:'username')}"/>
+					<br />
+					
+					<label for="email">Email</label>
+					<g:textField name="email" value="${user.emails}" />
+					<br />
+				</g:else>
 			</fieldset>
 		</g:if>
 		<g:else>
@@ -80,7 +115,7 @@
 								<input type="radio" name="${match.id}"
 								value="${team.name}">${team.name}
 								<g:if test="${tournament.hasScores}">
-									<g:textField name="scores${match.id}" />
+									<g:textField name="scores${match.id}" size="3" />
 								</g:if>
 								</div>
 							</g:each>
@@ -99,24 +134,6 @@
 		<h1>Sorry! This tournament is no longer accepting predictions.</h1>
 	</g:else>
 
-	
-	<div id="remove-predictions">
-		<h2> Current Predictions for this Tournament </h2>
-
-		<ul id="listPreds">
-			<g:if test="${tournament.predictions.size() == 0}">
-				<p> No predictions have been made for this tournament </p>
-			</g:if>
-
-			<g:each var="Preds" in="${tournament.predictions.sort {it.id}}">
-				<li id="Pred${Preds.id}">
-					${Preds.name} <a class="removePred">Remove Prediction</a>
-					<p hidden=true class="predId">${Preds.id}</p>
-					<p hidden=true class="TournSid">${tournament.sid}</p>
-				</li>
-			</g:each>
-		</ul>
-	</div>
 
 
 	<script type="text/javascript">
@@ -139,7 +156,7 @@
 							$("#from"+curname).html(							
 							'<input name="'+child+'" value="'+team_name_str+'" type="radio">' +
 							team_name_str +
-							'<input name= scores'+child+'" value="'+""+ '"type="text">');
+							'<input name= scores'+child+'" value="'+""+ '"type="text" size="3">');
 						else
 							$("#from"+curname).html(							
 							'<input name="'+child+'" value="'+team_name_str+'" type="radio">' +
@@ -151,7 +168,7 @@
 								'<div id="from'+curname+'">' +
 								'<input name="'+child+'" value="'+team_name_str+'" type="radio">' +
 								team_name_str +
-								'<input name= scores'+child+'" value="'+""+ '"type="text">'+
+								'<input name= scores'+child+'" value="'+""+ '"type="text" size="3">'+
 								'</div>'
 
 							);

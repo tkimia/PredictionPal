@@ -1,6 +1,6 @@
 fieldset {
     font-family: sans-serif;
-    border: 5px solid #a34949;
+    border: 5px solid #273040;
     background: #ddd;
     border-radius: 5px;
     padding: 15px;
@@ -18,12 +18,12 @@ fieldset {
     padding: 5px 10px ;
     font-size: 24px;
     border-radius: 5px;
-    box-shadow: 0 0 0 5px #a34949;
+    box-shadow: 0 0 0 5px #273040;
 }
 
 #formMatches fieldset{
 	width: 250px;
-	border: 3px solid #a34949;
+	border: 3px solid #273040;
     padding: 10px;
     height: 75px;
     margin: 5px;
@@ -32,7 +32,7 @@ fieldset {
 #formMatches fieldset legend{
 	background: #000;
     color: #fff;
-    box-shadow: 0 0 0 3px #a34949;
+    box-shadow: 0 0 0 3px #273040;
 }
 
 #matches-container {
