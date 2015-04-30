@@ -2,41 +2,8 @@
 <head>
 	<title>${prediction.name}'s Predictions</title>
 	<meta name="layout" content="main"/>
-		<style>
-		fieldset {
-	    font-family: sans-serif;
-	    border: 5px solid #A34949;
-	    background: none repeat scroll 0% 0% #DDD;
-	    border-radius: 5px;
-	    padding: 15px;
-		}
-		#formMatches fieldset{
-			width: 250px;
-			border: 3px solid #a34949;
-		    padding: 10px;
-		    height: 75px;
-		    margin: 5px;
-		}
-
-		#formMatches fieldset legend{
-			background: #000;
-		    color: #fff;
-		    box-shadow: 0 0 0 3px #a34949;
-		}
-
-		#matches-container {
-			overflow-x: scroll;
-			padding: 5px;
-
-		}
-
-		#formMatches {
-			height: 550px;
-			width: 1250px;
-			background: #fff;
-			border: 5px black;
-		}
-	</style>
+		
+	<asset:stylesheet href="tournament_form.css" />
 </head>
 <body>
 	<h1>${prediction.name}'s Predictions</h1>
@@ -44,9 +11,12 @@
 	<g:set var="traversedMatches" value="${new ArrayList()}"/>
 	<div id="matches-container">
 	<div id="formMatches">
+	<g:set var="finishedTournament" value="${prediction.tournament.state==3}" />
 	<g:each var="match" in="${prediction.tournament.matches.sort{it.orderchar}}">
 		<g:set var="hgh" value="${75 + match.teams.size() * 25}"/> 
-		<g:set var="actualWinner" value="${match.winner.name}" />
+		<g:if test="${finishedTournament}">
+			<g:set var="actualWinner" value="${match.winner.name}" />
+		</g:if>
 		<g:set var="predictedWinner" value="${match.matchPredictions.find{it.prediction.id == prediction.id}.predictedWinner.name}"/>
 		<fieldset id="Match${match.id}" class="ui-draggable" style="right: auto; bottom: auto; top: ${match.posY}px; left: ${match.posX}px; position: relative; height: ${hgh}px;">
 
@@ -54,12 +24,14 @@
 		<g:if test="${match.prevMatches.isEmpty()}" >
 
 			<!--Set font color to identify correctness-->
+			<g:if test="${finishedTournament}">
 			<g:if test="${predictedWinner == actualWinner}">
 				<font color="green">
 			</g:if>
 			<g:else>
 				<font color="red">
 			</g:else>
+			</g:if>
 			<br />
 
 			<!--Display teams in match-->
@@ -78,13 +50,14 @@
 			<br />
 		</g:if>
 		<g:else>
-
+			<g:if test="${finishedTournament}">
 			<g:if test="${predictedWinner==actualWinner}">
 				<font color="green">
 			</g:if>
 			<g:else>
 				<font color="red">
 			</g:else>
+			</g:if>
 			<g:each var="previousMatch" in="${match.prevMatches}">
 				<g:if test="${traversedMatches.contains(previousMatch)}">
 

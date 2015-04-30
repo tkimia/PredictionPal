@@ -17,6 +17,25 @@
 			<p> Send this link to your participants: <em> predictionpal.com${request.forwardURI} </em></p>
 			<p> Keep this link for yourself to upodate the tournament with the real winners: <em> predictionpal.com${request.forwardURI}?pass=${tournament.pass}</em></p>
 		</div>
+
+
+		<div id="remove-predictions">
+			<h2> Current Predictions for this Tournament </h2>
+
+			<ul id="listPreds">
+				<g:if test="${tournament.predictions.size() == 0}">
+					<p> No predictions have been made for this tournament </p>
+				</g:if>
+
+				<g:each var="Preds" in="${tournament.predictions.sort {it.id}}">
+					<li id="Pred${Preds.id}">
+						${Preds.name} <a class="removePred">Remove Prediction</a>
+						<p hidden=true class="predId">${Preds.id}</p>
+						<p hidden=true class="TournSid">${tournament.sid}</p>
+					</li>
+				</g:each>
+			</ul>
+		</div>
 	</g:if>
 
 
@@ -89,7 +108,7 @@
 								<input type="radio" name="${match.id}"
 								value="${team.name}">${team.name}
 								<g:if test="${tournament.hasScores}">
-									<g:textField name="scores${match.id}" />
+									<g:textField name="scores${match.id}" size="3" />
 								</g:if>
 								</div>
 							</g:each>
@@ -108,24 +127,6 @@
 		<h1>Sorry! This tournament is no longer accepting predictions.</h1>
 	</g:else>
 
-	
-	<div id="remove-predictions">
-		<h2> Current Predictions for this Tournament </h2>
-
-		<ul id="listPreds">
-			<g:if test="${tournament.predictions.size() == 0}">
-				<p> No predictions have been made for this tournament </p>
-			</g:if>
-
-			<g:each var="Preds" in="${tournament.predictions.sort {it.id}}">
-				<li id="Pred${Preds.id}">
-					${Preds.name} <a class="removePred">Remove Prediction</a>
-					<p hidden=true class="predId">${Preds.id}</p>
-					<p hidden=true class="TournSid">${tournament.sid}</p>
-				</li>
-			</g:each>
-		</ul>
-	</div>
 
 
 	<script type="text/javascript">
@@ -148,7 +149,7 @@
 							$("#from"+curname).html(							
 							'<input name="'+child+'" value="'+team_name_str+'" type="radio">' +
 							team_name_str +
-							'<input name= scores'+child+'" value="'+""+ '"type="text">');
+							'<input name= scores'+child+'" value="'+""+ '"type="text" size="3">');
 						else
 							$("#from"+curname).html(							
 							'<input name="'+child+'" value="'+team_name_str+'" type="radio">' +
@@ -160,7 +161,7 @@
 								'<div id="from'+curname+'">' +
 								'<input name="'+child+'" value="'+team_name_str+'" type="radio">' +
 								team_name_str +
-								'<input name= scores'+child+'" value="'+""+ '"type="text">'+
+								'<input name= scores'+child+'" value="'+""+ '"type="text" size="3">'+
 								'</div>'
 
 							);
