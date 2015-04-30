@@ -28,6 +28,7 @@ class UserController {
 	
 	def register(){
 		def name = params.user_name
+		def email = params.email_addr
 		def pass1 = params.pass_word1
 		def pass2 = params.pass_word2
 		if(pass1 == '' || pass1.length() < 6 || pass1.length() > 30){
@@ -45,7 +46,11 @@ class UserController {
 			redirect(uri:"/register", params:[s:'3'])
 			return
 		}else{
-			def u = new User(username: name, password: pass1)
+			def u = new User(username: name, password: pass1, emails: email)
+			if(!u.validate()&&email){
+				redirect(uri:"/register", params:[s:'5'])
+				return
+			}
 			u.save(flush:true, failonError: true)
 			response.setCookie('username', name, -1)
 			redirect(uri:'/')

@@ -22,8 +22,12 @@
 		<g:elseif test="${params.s=='4'}">
 			<h3 align="center"> Username must be between 4 and 20 characters</h3>
 		</g:elseif>
+		<g:elseif test="${params.s=='5'}">
+			<h3 align="center">Please enter a valid email</h3>
+		</g:elseif>
 			<fieldset id="login_fieldset">	
 				<g:textField name="user_name" class="reg-button" placeholder="username" required value="${user_name}"/>
+				<g:textField name="email_address" class="reg-button" placeholder="email (optional)" required value="${email_addr}"/>
 				<g:passwordField name="pass_word1" class="reg-button" placeholder="password" required value="${pass_word1}"/>
 				<g:passwordField name="pass_word2" class="reg-button" placeholder="repeat password" required value="${pass_word2}"/>
 				<g:submitButton name="register" id="regi-ster" value="register" />

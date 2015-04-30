@@ -28,15 +28,24 @@
 			<h2> Enter your Prediction </h2>
 			<fieldset id="general-details">
 				<legend>Predict for ${ tournament.title }</legend>
+				<g:if test="${cookie(name:'username')=='null' || cookie(name:'username')=='error' || !cookie(name:'username')}">
+					<label for="name">Name</label>
+					<g:textField name="name" />
+					<br />
 
-				<label for="name">Name</label>
-				<g:textField name="name" />
-				<br />
-
-				<label for="email">Email</label>
-				<g:textField name="email" />
-				<br />
-
+					<label for="email">Email</label>
+					<g:textField name="email" />
+					<br />
+				</g:if>
+				<g:else>
+					<label for="name">Name</label>
+					<g:textField name="name" value="${cookie(name:'username')}"/>
+					<br />
+					
+					<label for="email">Email</label>
+					<g:textField name="email" value="${user.emails}" />
+					<br />
+				</g:else>
 			</fieldset>
 		</g:if>
 		<g:else>

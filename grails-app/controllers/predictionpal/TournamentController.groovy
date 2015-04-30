@@ -100,7 +100,7 @@ class TournamentController {
     */
     def predict() {
         boolean isManager = false;
-
+		def u = User.findByUsername(request.getCookie('username'));
     	def tournament = Tournament.findBySid(params.id);
     	if (!tournament)
     		response.sendError(404)
@@ -108,7 +108,7 @@ class TournamentController {
             if (params.pass == tournament.pass) {
                 isManager = true
             }
-            [tournament : tournament, isManager : isManager]
+            [tournament : tournament, user: u, isManager : isManager]
         }
     }
 
@@ -124,9 +124,11 @@ class TournamentController {
             name: params.name, email: params.email);
 
         for (Match m: t.matches){
-
+			if(!params[m.id.toString()]){
+				redirect(action: 'predict', params:[id: t.sid]);
+				return;
+			}
             def matchWinner = params[m.id.toString()]
-
             TeamPrediction tp = new TeamPrediction(name: matchWinner)
             MatchPrediction mp = new MatchPrediction(correspondingMatch: m, predictedWinner: tp)
             newPrediction.addToMatchPredictions(mp)
