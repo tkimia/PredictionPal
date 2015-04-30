@@ -23,60 +23,40 @@
 
         // Create the data table.
 		<g:if test="${tournament.state==3}">
-        var data = new google.visualization.DataTable();
-		data.addColumn('string', 'Match')
-		<g:each var="prediction" in="${tournament.predictions.sort{it.id}}">
-			data.addColumn('number', '${prediction.name}');
-		</g:each>
-		var row = 0;
-		<g:each var="match" in="${tournament.matches.sort {it.orderchar}}">
-			data.addRow();
-			<g:set var="matchName" value="${match.teams.join(' vs. ')}" />
-
-			data.setCell(row, 0, '${matchName}');
-			var column = 1;
-			<g:set var="winnerName" value="${match.winner.name}" />
-			<g:each var="matchPrediction" in="${match.matchPredictions.sort{it.id}}">
-				<g:if test="${matchPrediction.predictedWinner.name == winnerName}">
-					if (row == 0){
-						data.setCell(row, column, 1);
-					}
-					else {
-						data.setCell(row, column, data.getValue(row-1, column) + 1);
-					}
+		
+		<g:set var="counter" value="${0}" />
+		<g:each var="match" in="${tournament.matches.sort{it.orderchar}}">
+			<g:set var="keys" value="${new ArrayList()}" />
+			var map${counter} = {};
+			<g:each var="matchPrediction" in="${match.matchPredictions}">
+				<g:set var="predictedWinnerName" value="${matchPrediction.predictedWinner.name}" />
+				<g:if test="${!keys.contains(predictedWinnerName)}">
+					map${counter}["${predictedWinnerName}"] = 1;
+					<g:set var="fakeVariable" value="${keys.add(predictedWinnerName)}" />
 				</g:if>
 				<g:else>
-					if (row == 0){
-						data.setCell(row, column, 0);
-					}
-					else {
-						data.setCell(row, column, data.getValue(row-1, column));
-					}
+					map${counter}["${predictedWinnerName}"] = map${counter}["${predictedWinnerName}"] + 1;
 				</g:else>
-				column++;
 			</g:each>
-			row++;
+			var data${counter} = new google.visualization.DataTable();
+			data${counter}.addColumn('string', 'Team');
+			data${counter}.addColumn('number', 'Populartiy');
+			<g:each var="key" in="${keys}">
+				data${counter}.addRow(['${key}', map${counter}["${key}"]]);
+			</g:each>
+			var options${counter} = {
+				title: "${match.teams.join(" vs. ")}",
+				chartArea: {width:'75%', height:'75%'},
+				pieSliceText:'label'
+			}
+			var chart${counter} = new google.visualization.PieChart(document.getElementById('chart_div${counter}'));
+			chart${counter}.draw(data${counter}, options${counter});
+			<g:set var="counter" value="${counter + 1}" />
+
 		</g:each>
-
-        // Set chart options
-        var options = {
-			title:'Prediction Scores Over Time',
-			vAxis: {title: 'Accumulated Score'},
-			hAxis: {title: 'Match'}
-		};
-
-
-        // Instantiate and draw our chart, passing in some options.
-		//var chart = new google.visualization.SteppedAreaChart(document.getElementById('chart_div'));
-		var visualization = new google.visualization.LineChart(document.getElementById('chart_div'));
-
-		visualization.draw(data, options);
-
-
-		<g:set var="keys" value="${new ArrayList()}" />
-		var map = {};
+		}
 		//SECOND GRAPH
-		<g:each var="prediction" in="${tournament.predictions}">
+		/*<g:each var="prediction" in="${tournament.predictions}">
 			<g:each var="matchPrediction" in="${prediction.matchPredictions}">
 				<g:set var="predictedWinnerName" value="${matchPrediction.predictedWinner.name}" />
 				<g:if test="${!keys.contains(predictedWinnerName)}">
@@ -107,7 +87,7 @@
       chart.draw(data2, options2);
 	  </g:if>
 
-      }
+      }*/
     </script>
 
 </head>
@@ -144,12 +124,18 @@
 	</g:form>
 	</td>
 	<td>
+	<table border=0>
+	<g:set var="counter2" value="${0}" />
+	<g:each var="match" in="${tournament.matches}">
 
-	<div id="chart_div" style="width: 500px; height: 300px;"></div>
-</td>
-<td>
-	<div id="chart_div2" style="width: 400px; height: 300px;"></div>
-
+	<tr>
+		<td>
+			<div id="chart_div${counter2}" style="width: 500px; height: 300px;"></div>
+		</td>
+	</tr>
+	<g:set var="counter2" value="${counter2 + 1}" />
+	</g:each>
+	</table>
 	</td>
 	</tr>
 	</table>
