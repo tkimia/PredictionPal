@@ -10,21 +10,18 @@
 	(Uncheck to undo a promotion)
 </br>
 </br>
-	<g:each in="${tournaments}" var="tournament">
+	<g:each in="${tournaments}" var="tournament" status="i">
+	<g:hiddenField name="id[${i}]" value="${tournament.sid}" />
 	<a href="/PredictionPal/tournament/predict/${tournament.sid}">
 	${tournament.title}
 </a>
-	<g:checkBox name="${tournament.sid}Checkbox" value ="${tournament.sid}Value" checked= "${tournament.promotions}" /> 
-	<g:if test = "${tournament.promotions == true}">
-	<g:link controller="tournament" action="changePromotion">Promoted</g:link>
-</g:if>
-<g:else>
-	<g:link controller="tournament" action="changePromotion">Not Promoted</g:link>
-</g:else>
+	<g:checkBox name="promotions[${i}]" value ="${tournament.promotions}" checked= "${tournament.promotions}" /> 
+
 	
 </br>
+	<g:hiddenField name="temp_value" value = "${i}" />
 	</g:each>
-
+	<g:hiddenField name="i_value" value = "${temp_value}" />
 	<g:submitButton name="update" value="Update" />
 </g:form>
 </body>
