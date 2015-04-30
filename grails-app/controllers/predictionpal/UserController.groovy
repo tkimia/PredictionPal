@@ -30,11 +30,14 @@ class UserController {
 		def name = params.user_name
 		def pass1 = params.pass_word1
 		def pass2 = params.pass_word2
-		if(pass1 == ''){
+		if(pass1 == '' || pass1.length() < 6 || pass1.length() > 30){
 			redirect(uri:"/register",params:[s:'1'])
 			return;
 		}else if(pass1 != pass2){
 			redirect(uri:"/register", params:[s:'2'])
+			return
+		}else if(name.length()<4||name.length()>20){
+			redirect(uri:"/register", params:[s:'4'])
 			return
 		}
 		def user = User.findByUsername(name);
@@ -52,6 +55,10 @@ class UserController {
 	def profile(){
 		def name = request.getCookie('username')
 		def user = User.findByUsername(name);
+		if(!user){
+			redirect(uri:'/')
+			return;
+		}
 		[user : user ]
 	}
 	
