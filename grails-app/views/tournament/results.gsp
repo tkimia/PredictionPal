@@ -9,6 +9,7 @@
     <script type="text/javascript">
 
       // Load the Visualization API and the piechart package
+	  //google.load("visualization", "1", {packages: ["corechart"]});
 	  google.load("visualization", "1", {packages: ["corechart"]});
 
       // Set a callback to run when the Google Visualization API is loaded.
@@ -19,7 +20,9 @@
       // draws it.
       function drawChart() {
 
+
         // Create the data table.
+		<g:if test="${tournament.state==3}">
         var data = new google.visualization.DataTable();
 		data.addColumn('string', 'Match')
 		<g:each var="prediction" in="${tournament.predictions.sort{it.id}}">
@@ -59,14 +62,51 @@
         var options = {
 			title:'Prediction Scores Over Time',
 			vAxis: {title: 'Accumulated Score'},
-			isStacked: false,
-			animation: {startup: true}
+			hAxis: {title: 'Match'}
 		};
 
 
         // Instantiate and draw our chart, passing in some options.
-		var chart = new google.visualization.SteppedAreaChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
+		//var chart = new google.visualization.SteppedAreaChart(document.getElementById('chart_div'));
+		var visualization = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+		visualization.draw(data, options);
+
+
+		<g:set var="keys" value="${new ArrayList()}" />
+		var map = {};
+		//SECOND GRAPH
+		<g:each var="prediction" in="${tournament.predictions}">
+			<g:each var="matchPrediction" in="${prediction.matchPredictions}">
+				<g:set var="predictedWinnerName" value="${matchPrediction.predictedWinner.name}" />
+				<g:if test="${!keys.contains(predictedWinnerName)}">
+					map["${predictedWinnerName}"] = 1;
+					<g:set var="fakeVariable" value="${keys.add(predictedWinnerName)}" />
+				</g:if>
+				<g:else>
+					map["${predictedWinnerName}"] = map["${predictedWinnerName}"] + 1;
+				</g:else>
+			</g:each>
+		</g:each>
+
+		var data2 = new google.visualization.DataTable();
+      	data2.addColumn('string', 'Team');
+      	data2.addColumn('number', 'Populartiy');
+		<g:each var="key" in="${keys}">
+			data2.addRow(['${key}', map["${key}"]]);
+		</g:each>
+
+
+      var options2 = {
+        title: 'Team Popularity',
+		chartArea: {width:'90%',height:'90%'},
+		pieSliceText: 'label'
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('chart_div2'));
+      chart.draw(data2, options2);
+	  </g:if>
+
       }
     </script>
 
@@ -105,7 +145,11 @@
 	</td>
 	<td>
 
-	<div id="chart_div" style="width: 700px; height: 400px;"></div>
+	<div id="chart_div" style="width: 500px; height: 300px;"></div>
+</td>
+<td>
+	<div id="chart_div2" style="width: 400px; height: 300px;"></div>
+
 	</td>
 	</tr>
 	</table>

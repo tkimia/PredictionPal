@@ -44,7 +44,7 @@
 	<div id="matches-container">
 	<div id="formMatches">
 	<g:each var="match" in="${tournament.matches.sort {it.orderchar}}">
-		<g:set var="hgh" value="${75 + match.teams.size() * 25}"/> 
+		<g:set var="hgh" value="${75 + match.teams.size() * 25}"/>
 		<g:set var="winnerName" value="${match.winner.name}" />
 
 		<fieldset id="Match${match.id}" class="ui-draggable" style="right: auto; bottom: auto; top: ${match.posY}px; left: ${match.posX}px; position: relative; height: ${hgh}px;">
@@ -55,11 +55,11 @@
 			<g:set var="correctCounter" value="${correctCounter+1}" />
 		</g:if>
 		</g:each>
-		<g:set var="percentage" value="${correctCounter/match.matchPredictions.size()*100}" />
+		<g:set var="percentage" value="${(correctCounter/match.matchPredictions.size()*100).intValue()}" />
 		${percentage}% Predicted Correctly <br />
 
 		<g:each var="team" in="${match.teams.sort {it.id}}">
-		
+
 			<g:if test="${team.name == winnerName}">
 			<b>${team.name}</b>
 			</g:if>
