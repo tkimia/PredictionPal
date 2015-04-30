@@ -191,7 +191,7 @@ class TournamentController {
 		for(Match m: t.matches){ //Look at all matches for completion.
 			if(m.getWinner()==null){ //If any match has not completed
 				t.save(flush: true, failOnError:true)
-				redirect(action: 'index')
+				redirect(action: 'predict', params: [id: t.sid, pass: t.pass])
 				return;
 			}
 		}
@@ -199,7 +199,7 @@ class TournamentController {
 		t.state = 3;
 		emailParticipants(t);
 		t.save(flush: true, failOnError:true)
-		redirect(action: 'index')
+		redirect(action: 'predict', params: [id: t.sid, pass: t.pass])
 	}
 
 	def stopAcceptingPredicts() {

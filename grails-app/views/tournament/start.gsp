@@ -3,7 +3,6 @@
 	<title> Create a new Tournament </title>
 	<meta name="layout" content="main" />
 	
-	<!-- TODO: Move this externally -->
 	<asset:stylesheet href="tournament_form.css" />
 
 	 <script>
