@@ -2,41 +2,8 @@
 <head>
 	<title>${prediction.name}'s Predictions</title>
 	<meta name="layout" content="main"/>
-		<style>
-		fieldset {
-	    font-family: sans-serif;
-	    border: 5px solid #A34949;
-	    background: none repeat scroll 0% 0% #DDD;
-	    border-radius: 5px;
-	    padding: 15px;
-		}
-		#formMatches fieldset{
-			width: 250px;
-			border: 3px solid #a34949;
-		    padding: 10px;
-		    height: 75px;
-		    margin: 5px;
-		}
-
-		#formMatches fieldset legend{
-			background: #000;
-		    color: #fff;
-		    box-shadow: 0 0 0 3px #a34949;
-		}
-
-		#matches-container {
-			overflow-x: scroll;
-			padding: 5px;
-
-		}
-
-		#formMatches {
-			height: 550px;
-			width: 1250px;
-			background: #fff;
-			border: 5px black;
-		}
-	</style>
+		
+	<asset:stylesheet href="tournament_form.css" />
 </head>
 <body>
 	<h1>${prediction.name}'s Predictions</h1>
