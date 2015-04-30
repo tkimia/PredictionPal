@@ -6,7 +6,15 @@
 	<asset:stylesheet href="tournament_form.css" />
 </head>
 <body>
-	<h1>${prediction.name}'s Predictions</h1>
+	<h1>${prediction.name}'s Prediction for ${prediction.tournament.title}</h1>
+
+	<g:if test="${prediction.tournament.state != 3}" >
+		<p> The tournament is ongoing. Please check back later for results or, if you've entered your email, look for an
+			email telling you that the match has finished </p>
+	</g:if>
+	<g:else>
+		<g:link controller="tournament" action="results" id="${prediction.tournament.sid}">Click here to view all results</g:link>
+	</g:else>
 
 	<g:set var="traversedMatches" value="${new ArrayList()}"/>
 	<div id="matches-container">
