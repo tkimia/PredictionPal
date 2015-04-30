@@ -11,7 +11,7 @@
 </br>
 </br>
 	<g:each in="${tournaments}" var="tournament" status="i">
-	<g:hiddenField name="id[${i}]" value="${tournament.sid}" />
+	<g:hiddenField name="id" value="${tournament.sid}" />
 	<a href="/PredictionPal/tournament/predict/${tournament.sid}">
 	${tournament.title}
 </a>

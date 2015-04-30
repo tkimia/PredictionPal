@@ -96,8 +96,8 @@
 				<a href="/PredictionPal/tournament/predict/${tournament.sid}">
 					${tournament.title}
 				</a>
+				<br/>
 				</g:if>
-					<br/>
 				</g:each>
 	</g:form>
 			</ul>			
