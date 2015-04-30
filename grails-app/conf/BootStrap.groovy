@@ -128,10 +128,21 @@ class BootStrap {
 
 		TeamPrediction winner = new TeamPrediction(name: "No Country for Old Men")
 		MatchPrediction amPred = new MatchPrediction(correspondingMatch: bestPicture, predictedWinner: winner)
+		
+		TeamPrediction winner2 = new TeamPrediction(name: "Joel and Ethan Coen")
+		MatchPrediction bmPred = new MatchPrediction(correspondingMatch: bestDirector, predictedWinner: winner2)
+
+		TeamPrediction winner3 = new TeamPrediction(name: "Johnny Depp")
+		MatchPrediction cmPred = new MatchPrediction(correspondingMatch: bestActor, predictedWinner: winner3)
+
+		TeamPrediction winner4 = new TeamPrediction(name: "Ellen Page")
+		MatchPrediction dmPred = new MatchPrediction(correspondingMatch: bestActress, predictedWinner: winner4)
+
+
 		Prediction pred1 = new Prediction(name: "Bobby", email:"bobby@yopmail.com")
-		pred1.addToMatchPredictions(amPred)
+		pred1.addToMatchPredictions(amPred).addToMatchPredictions(bmPred).addToMatchPredictions(cmPred).addToMatchPredictions(dmPred)
 		pred1.save()
-		tourn.addToPredictions(pred1)
+		tourn.addToPredictions(pred1).save(flush: true, failOnError: true)
 
     }
 
