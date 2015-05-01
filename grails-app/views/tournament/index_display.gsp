@@ -93,9 +93,16 @@
 				<g:form controller="tournament" action="index_display">
 				<g:each in="${tournaments}" var="tournament">
 				<g:if test="${tournament.promotions == true}">
-				<a href="/PredictionPal/tournament/predict/${tournament.sid}">
-					${tournament.title}
-				</a>
+				<g:if test="${tournament.state == 1}">
+					<a href="/PredictionPal/tournament/predict/${tournament.sid}">
+						${tournament.title}
+					</a>
+				</g:if>
+				<g:else>
+					<a href="/PredictionPal/tournament/results/${tournament.sid}">
+						${tournament.title}
+					</a>
+				</g:else>
 				<br/>
 				</g:if>
 				</g:each>
