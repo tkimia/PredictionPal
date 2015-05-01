@@ -99,10 +99,12 @@ a.button-text{
 	position: absolute;
 	width:20%;
 	margin-left:70%;
+	margin-top: 2px;
 	background: #8EAEE5; 
   	border: solid 1px #273040; /*color 4*/
   	border-radius:5px;
   	text-decoration: none; 
+  	padding: 0;
 }
 
 #uname_pword_err{

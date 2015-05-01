@@ -58,7 +58,7 @@ class BootStrap {
 		rpsPred.addToMatchPredictions(mPred)
 		rpsPred.save()
 
-		Prediction rpsPred2 = new Prediction(name: "Smitty")
+		Prediction rpsPred2 = new Prediction(name: "Tomer")
 		TeamPrediction win2 = new TeamPrediction(name: "Julian")
 		rpsPred2.addToMatchPredictions(new MatchPrediction(correspondingMatch: rpsMatch, predictedWinner: win2))
 		rpsPred2.save()
@@ -108,7 +108,7 @@ class BootStrap {
 			.save(flush:true, failOnError:true)
 
 
-		Prediction pred1 = new Prediction(name: "Bobby")
+		Prediction pred1 = new Prediction(name: "Tomer")
 			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestPicture, predictedWinner: new TeamPrediction(name: "No Country for Old Men")))
 			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestDirector, predictedWinner: new TeamPrediction(name: "Joel and Ethan Coen")))
 			.addToMatchPredictions(new MatchPrediction(correspondingMatch: bestActor, predictedWinner: new TeamPrediction(name: "Johnny Depp")))
@@ -185,6 +185,12 @@ class BootStrap {
 			.addToPredictions(pred9)
 			.addToPredictions(pred10)
 			.save(flush: true, failOnError: true)
+			
+			User newusr = new User(username: "Tomer", password: "password")
+			newusr.addToPredictions(pred1);
+			newusr.addToPredictions(rpsPred2);
+			newusr.addToTournaments(tourn);
+			newusr.save();
 
     }
 
